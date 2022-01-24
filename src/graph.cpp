@@ -1,14 +1,24 @@
 #include "../include/graph.h"
+#include "../include/utils.h"
 
 // Constructor: nr nodes and direction (default: undirected)
-Graph::Graph(int num, bool dir) : n(num), hasDir(dir), nodes(num) {}
+Graph::Graph(int num, bool dir) : n(num), hasDir(dir), nodes(num) {
 
-void Graph::addNode(std::string& stopCode, Stop& stop) {
+    auto lines = utils::file::readFile("./resources/stops.csv");
+
+    for (const auto& line : lines) {
+        Stop s = Stop::parseLine(line);
+
+        this->addNode(s.getStopCode(), s);
+    }
+}
+
+void Graph::addNode(const std::string& stopCode, Stop& stop) {
     nodes.insert({stopCode, {&stop,{},false}});
 }
 
 // Add edge from originStop to destinationStop with the distance between them as the edge weigth
-void Graph::addEdge(std::string& oStop, std::string& dStop) {
+void Graph::addEdge(const std::string& oStop, const std::string& dStop) {
     auto oItr = nodes.find(oStop); auto dItr = nodes.find(dStop);
 
     if (oItr == nodes.end() || dItr == nodes.end() || oItr == dItr) return;
@@ -22,7 +32,7 @@ void Graph::addEdge(std::string& oStop, std::string& dStop) {
 }
 
 // Depth-First Search: example implementation
-void Graph::dfs(std::string& cStop, bool firstIteration) {
+void Graph::dfs(const std::string& cStop, bool firstIteration) {
     if (firstIteration)
         for (auto& node : nodes) node.second.visited = false;
 
@@ -40,7 +50,7 @@ void Graph::dfs(std::string& cStop, bool firstIteration) {
 }
 
 // Breadth-First Search: example implementation
-void Graph::bfs(std::string& cStop) {
+void Graph::bfs(const std::string& cStop) {
     for (auto& node : nodes) node.second.visited = false;
 
     std::queue<std::string> q; // queue of unvisited nodes

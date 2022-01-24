@@ -27,19 +27,19 @@ class Graph {
 
 public:
     // Constructor: nr nodes and direction (default: directed)
-    Graph(int nodes, bool dir = true);
+    explicit Graph(int nodes, bool dir = true);
 
     // Add node
-    void addNode(std::string& stopCode, Stop& stop);
+    void addNode(const std::string& stopCode, Stop& stop);
 
     // Add edge from source to destination with a certain weight
-    void addEdge(std::string& oStop, std::string& dStop);
+    void addEdge(const std::string& oStop, const std::string& dStop);
 
     // Depth-First Search: example implementation
-    void dfs(std::string& cStop, bool firstIteration = true);
+    void dfs(const std::string& cStop, bool firstIteration = true);
 
     // Breadth-First Search: example implementation
-    void bfs(std::string& cStop);
+    void bfs(const std::string& cStop);
 };
 
 #endif //PROJECT2_GRAPH_H
