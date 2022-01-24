@@ -22,8 +22,9 @@ void Graph::addEdge(std::string& oStop, std::string& dStop) {
 }
 
 // Depth-First Search: example implementation
-void Graph::dfs(std::string& cStop) {
-    for (auto& node : nodes) node.second.visited = false;
+void Graph::dfs(std::string& cStop, bool firstIteration) {
+    if (firstIteration)
+        for (auto& node : nodes) node.second.visited = false;
 
     Node& cNode = nodes[cStop];
     std::cout << cStop << " - " << *(cNode.stop); // show node order
@@ -34,7 +35,7 @@ void Graph::dfs(std::string& cStop) {
         Node& dNode = nodes[dStop];
 
         if (!dNode.visited)
-            dfs(dStop);
+            dfs(dStop, false);
     }
 }
 

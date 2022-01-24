@@ -36,7 +36,7 @@ public:
     void addEdge(std::string& oStop, std::string& dStop);
 
     // Depth-First Search: example implementation
-    void dfs(std::string& cStop);
+    void dfs(std::string& cStop, bool firstIteration = true);
 
     // Breadth-First Search: example implementation
     void bfs(std::string& cStop);
