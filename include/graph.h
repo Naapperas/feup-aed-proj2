@@ -26,8 +26,8 @@ class Graph {
     std::unordered_map<std::string,Node> nodes; // The list of nodes being represented
 
 public:
-    // Constructor: nr nodes and direction (default: undirected)
-    Graph(int nodes = 2487, bool dir = true);
+    // Constructor: nr nodes and direction (default: directed)
+    Graph(int nodes, bool dir = true);
 
     // Add node
     void addNode(std::string& stopCode, Stop& stop);
