@@ -7,17 +7,18 @@ void Graph::addNode(std::string& stopCode, Stop& stop) {
     nodes.insert({stopCode, {&stop,{},false}});
 }
 
-// Add edge from currentStop to destinationStop with a certain distance
-void Graph::addEdge(std::string& cStop, std::string& dStop) {
-    auto cItr = nodes.find(cStop); auto dItr = nodes.find(dStop);
+// Add edge from originStop to destinationStop with the distance between them as the edge weigth
+void Graph::addEdge(std::string& oStop, std::string& dStop) {
+    auto oItr = nodes.find(oStop); auto dItr = nodes.find(dStop);
 
-    if (cItr == nodes.end() || dItr == nodes.end() || cItr == dItr) return;
+    if (oItr == nodes.end() || dItr == nodes.end() || oItr == dItr) return;
 
-    if (hasDir){
-        double distance = Stop::distance(*(cItr->second.stop), *(dItr->second.stop));
+    double distance = Stop::distance(*(oItr->second.stop), *(dItr->second.stop));
 
-        cItr->second.adj.push_back({dStop, distance});
-    }
+    oItr->second.adj.push_back({dStop, distance});
+
+    if (!this->hasDir)
+        dItr->second.adj.push_back({oStop, distance});
 }
 
 // Depth-First Search: example implementation

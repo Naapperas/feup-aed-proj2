@@ -33,7 +33,7 @@ public:
     void addNode(std::string& stopCode, Stop& stop);
 
     // Add edge from source to destination with a certain weight
-    void addEdge(std::string& cStop, std::string& dStop);
+    void addEdge(std::string& oStop, std::string& dStop);
 
     // Depth-First Search: example implementation
     void dfs(std::string& cStop);
