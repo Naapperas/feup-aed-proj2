@@ -14,7 +14,7 @@ void Graph::addEdge(std::string& cStop, std::string& dStop) {
     if (cItr == nodes.end() || dItr == nodes.end() || cItr == dItr) return;
 
     if (hasDir){
-        double distance = getDistance(*(cItr->second.stop), *(dItr->second.stop));
+        double distance = Stop::distance(*(cItr->second.stop), *(dItr->second.stop));
 
         cItr->second.adj.push_back({dStop, distance});
     }

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <cmath>
 
 class Stop{
     std::string const name, zone;
@@ -26,6 +27,10 @@ public:
     double getLongitude() const {
         return longitude;
     }
+
+    static double distance(const Stop& cStop, const Stop& dStop);
+
+    double distance(const Stop& s) const;
 };
 
 #endif //PROJECT2_STOP_H

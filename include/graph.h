@@ -7,33 +7,9 @@
 #include <queue>
 #include <iostream>
 #include <unordered_map>
-#include <cmath>
 #include "stop.h"
 
 class Graph {
-    static double getDistance(const Stop& cStop,const Stop& dStop){
-        {
-            // distance between latitudes
-            // and longitudes
-            double dLat = (dStop.getLatitude() - cStop.getLatitude()) *
-                          M_PI / 180.0;
-            double dLon = (dStop.getLongitude() - cStop.getLongitude()) *
-                          M_PI / 180.0;
-
-            // convert to radians
-            double cStopLat = (cStop.getLatitude()) * M_PI / 180.0;
-            double dStopLat = (dStop.getLatitude()) * M_PI / 180.0;
-
-            // apply formulae
-            double a = pow(sin(dLat / 2), 2) +
-                       pow(sin(dLon / 2), 2) *
-                       cos(cStopLat) * cos(dStopLat);
-            double rad = 6371;
-            double c = 2 * asin(sqrt(a));
-            return rad * c;
-        }
-    }
-
     struct Edge {
         std::string dest; // Stop destination
         double distance; // distance between stops
