@@ -28,9 +28,10 @@ class Graph {
 public:
     // Constructor: nr nodes and direction (default: directed)
     explicit Graph(int nodes, bool dir = true);
+    ~Graph();
 
     // Add node
-    void addNode(const std::string& stopCode, Stop& stop);
+    void addNode(const std::string& stopCode, Stop* stop);
 
     // Add edge from source to destination with a certain weight
     void addEdge(const std::string& oStop, const std::string& dStop);

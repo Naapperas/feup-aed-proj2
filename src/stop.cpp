@@ -1,4 +1,8 @@
+#include <vector>
+#include <string>
+
 #include "../include/stop.h"
+
 
 std::ostream& operator <<(std::ostream& out , const Stop& stop) {
     out << stop.getName() << std::endl;
@@ -26,16 +30,28 @@ double Stop::distance(const Stop &oStop, const Stop &dStop) {
     return rad * c;
 }
 
-Stop Stop::parseLine(const std::string& line) {
+Stop* Stop::parseLine(const std::string& line) {
     std::string stopCode, stopName, stopZone;
     double longitude, lattitude;
 
     std::stringstream ss(line);
-    char delim;
 
-    ss >> stopCode >> delim >> stopName >> delim >> stopZone >> delim >> lattitude >> delim >> longitude;
+    std::vector<std::string> lineTokens;
+    std::string token;
 
-    return Stop{stopCode, stopName, stopZone, lattitude, longitude};
+    while (std::getline(ss, token, ','))
+        lineTokens.push_back(token);
+
+    if (lineTokens.size() != 5)
+        return nullptr;
+
+    stopCode = lineTokens.at(0);
+    stopName = lineTokens.at(1);
+    stopZone = lineTokens.at(2);
+    lattitude = std::stod(lineTokens.at(3));
+    longitude = std::stod(lineTokens.at(4));
+
+    return new Stop{stopCode, stopName, stopZone, lattitude, longitude};
 }
 
 double Stop::distance(const Stop &s) const {

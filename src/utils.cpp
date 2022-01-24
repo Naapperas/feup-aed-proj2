@@ -13,6 +13,8 @@ std::vector<std::string> utils::file::readFile(const std::string& filePath) {
     if (!file.is_open())
         return {}; // error
 
+    file.ignore(INT32_MAX, '\n');
+
     std::vector<std::string> lines;
 
     std::string line;

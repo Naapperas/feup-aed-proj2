@@ -4,17 +4,22 @@
 // Constructor: nr nodes and direction (default: undirected)
 Graph::Graph(int num, bool dir) : n(num), hasDir(dir), nodes(num) {
 
-    auto lines = utils::file::readFile("./resources/stops.csv");
+    auto lines = utils::file::readFile("../resources/stops.csv");
 
     for (const auto& line : lines) {
-        Stop s = Stop::parseLine(line);
+        Stop* s = Stop::parseLine(line);
 
-        this->addNode(s.getStopCode(), s);
+        this->addNode(s->getStopCode(), s);
     }
 }
 
-void Graph::addNode(const std::string& stopCode, Stop& stop) {
-    nodes.insert({stopCode, {&stop,{},false}});
+Graph::~Graph() {
+    for (const auto& pair : nodes)
+        delete pair.second.stop;
+}
+
+void Graph::addNode(const std::string& stopCode, Stop* stop) {
+    nodes.insert({stopCode, {stop,{},false}});
 }
 
 // Add edge from originStop to destinationStop with the distance between them as the edge weigth
@@ -59,9 +64,12 @@ void Graph::bfs(const std::string& cStop) {
 
     while (!q.empty()) { // while there are still unvisited nodes
         std::string u = q.front(); q.pop();
-        std::cout << u << " - " << *(nodes[u].stop); // show node order
 
-        for (auto e : nodes[u].adj) {
+        auto node = nodes.at(u);
+
+        std::cout << u << " - " << *(node.stop); // show node order
+
+        for (auto e : node.adj) {
             std::string dStop = e.dest;
 
             if (!nodes[dStop].visited) {

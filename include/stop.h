@@ -37,7 +37,7 @@ public:
 
     double distance(const Stop& s) const;
 
-    static Stop parseLine(const std::string& line);
+    static Stop* parseLine(const std::string& line);
 };
 
 #endif //PROJECT2_STOP_H
