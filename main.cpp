@@ -2,7 +2,7 @@
 #include "include/graph.h"
 
 int main() {
-    Graph graph(2487, false);
+    Graph graph(2487);
     Stop stopA("AV.ALIADOS","PRT1",41.14954216,-8.610023615);
     std::string stopAcode = "1AL2";
     Stop stopB("ALIADOS","PRT1",41.14969203,-8.611312751);
