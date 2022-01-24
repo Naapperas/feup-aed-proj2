@@ -1,28 +1,45 @@
 #include "../include/graph.h"
+#include "../include/utils.h"
 
 // Constructor: nr nodes and direction (default: undirected)
-Graph::Graph(int num, bool dir) : n(num), hasDir(dir), nodes(num) {}
+Graph::Graph(int num, bool dir) : n(num), hasDir(dir), nodes(num) {
 
-void Graph::addNode(std::string& stopCode, Stop& stop) {
-    nodes.insert({stopCode, {&stop,{},false}});
-}
+    auto lines = utils::file::readFile("../resources/stops.csv");
 
-// Add edge from currentStop to destinationStop with a certain distance
-void Graph::addEdge(std::string& cStop, std::string& dStop) {
-    auto cItr = nodes.find(cStop); auto dItr = nodes.find(dStop);
+    for (const auto& line : lines) {
+        Stop* s = Stop::parseLine(line);
 
-    if (cItr == nodes.end() || dItr == nodes.end() || cItr == dItr) return;
-
-    if (hasDir){
-        double distance = getDistance(*(cItr->second.stop), *(dItr->second.stop));
-
-        cItr->second.adj.push_back({dStop, distance});
+        this->addNode(s->getStopCode(), s);
     }
 }
 
+Graph::~Graph() {
+    for (const auto& pair : nodes)
+        delete pair.second.stop;
+}
+
+void Graph::addNode(const std::string& stopCode, Stop* stop) {
+    nodes.insert({stopCode, {stop,{},false}});
+}
+
+// Add edge from originStop to destinationStop with the distance between them as the edge weigth
+void Graph::addEdge(const std::string& oStop, const std::string& dStop) {
+    auto oItr = nodes.find(oStop); auto dItr = nodes.find(dStop);
+
+    if (oItr == nodes.end() || dItr == nodes.end() || oItr == dItr) return;
+
+    double distance = Stop::distance(*(oItr->second.stop), *(dItr->second.stop));
+
+    oItr->second.adj.push_back({dStop, distance});
+
+    if (!this->hasDir)
+        dItr->second.adj.push_back({oStop, distance});
+}
+
 // Depth-First Search: example implementation
-void Graph::dfs(std::string& cStop) {
-    for (auto& node : nodes) node.second.visited = false;
+void Graph::dfs(const std::string& cStop, bool firstIteration) {
+    if (firstIteration)
+        for (auto& node : nodes) node.second.visited = false;
 
     Node& cNode = nodes[cStop];
     std::cout << cStop << " - " << *(cNode.stop); // show node order
@@ -33,12 +50,12 @@ void Graph::dfs(std::string& cStop) {
         Node& dNode = nodes[dStop];
 
         if (!dNode.visited)
-            dfs(dStop);
+            dfs(dStop, false);
     }
 }
 
 // Breadth-First Search: example implementation
-void Graph::bfs(std::string& cStop) {
+void Graph::bfs(const std::string& cStop) {
     for (auto& node : nodes) node.second.visited = false;
 
     std::queue<std::string> q; // queue of unvisited nodes
@@ -47,9 +64,12 @@ void Graph::bfs(std::string& cStop) {
 
     while (!q.empty()) { // while there are still unvisited nodes
         std::string u = q.front(); q.pop();
-        std::cout << u << " - " << *(nodes[u].stop); // show node order
 
-        for (auto e : nodes[u].adj) {
+        auto node = nodes.at(u);
+
+        std::cout << u << " - " << *(node.stop); // show node order
+
+        for (auto e : node.adj) {
             std::string dStop = e.dest;
 
             if (!nodes[dStop].visited) {
