@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <cmath>
+#include <sstream>
 
 class Stop{
     std::string const code, name, zone;
@@ -20,6 +21,10 @@ public:
         return zone;
     }
 
+    const std::string& getStopCode() const {
+        return code;
+    }
+
     double getLatitude() const {
         return latitude;
     }
@@ -31,6 +36,8 @@ public:
     static double distance(const Stop& oStop, const Stop& dStop);
 
     double distance(const Stop& s) const;
+
+    static Stop parseLine(const std::string& line);
 };
 
 #endif //PROJECT2_STOP_H

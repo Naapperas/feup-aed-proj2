@@ -3,9 +3,9 @@
 
 int main() {
     Graph graph(2487);
-    Stop stopA("AV.ALIADOS","PRT1",41.14954216,-8.610023615);
+    Stop stopA("1AL2", "AV.ALIADOS","PRT1",41.14954216,-8.610023615);
     std::string stopAcode = "1AL2";
-    Stop stopB("ALIADOS","PRT1",41.14969203,-8.611312751);
+    Stop stopB("1AL5", "ALIADOS","PRT1",41.14969203,-8.611312751);
     std::string stopBcode = "1AL5";
 
     graph.addNode(stopAcode, stopA);

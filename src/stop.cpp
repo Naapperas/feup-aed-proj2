@@ -26,6 +26,18 @@ double Stop::distance(const Stop &oStop, const Stop &dStop) {
     return rad * c;
 }
 
+Stop Stop::parseLine(const std::string& line) {
+    std::string stopCode, stopName, stopZone;
+    double longitude, lattitude;
+
+    std::stringstream ss(line);
+    char delim;
+
+    ss >> stopCode >> delim >> stopName >> delim >> stopZone >> delim >> lattitude >> delim >> longitude;
+
+    return Stop{stopCode, stopName, stopZone, lattitude, longitude};
+}
+
 double Stop::distance(const Stop &s) const {
     return Stop::distance(*this, s);
 }
