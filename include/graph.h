@@ -9,6 +9,8 @@
 #include <unordered_map>
 #include "stop.h"
 
+// should be templated in order to accept other kinds of data
+
 class Graph {
     struct Edge {
         std::string dest; // Stop destination

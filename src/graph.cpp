@@ -2,16 +2,7 @@
 #include "../include/utils.h"
 
 // Constructor: nr nodes and direction (default: undirected)
-Graph::Graph(int num, bool dir) : n(num), hasDir(dir), nodes(num) {
-
-    auto lines = utils::file::readFile("../resources/stops.csv");
-
-    for (const auto& line : lines) {
-        Stop* s = Stop::parseLine(line);
-
-        this->addNode(s->getStopCode(), s);
-    }
-}
+Graph::Graph(int num, bool dir) : n(num), hasDir(dir), nodes(num) {}
 
 Graph::~Graph() {
     for (const auto& pair : nodes)
