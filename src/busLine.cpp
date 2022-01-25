@@ -40,9 +40,6 @@ BusLine* BusLine::parseLine(const std::string& line) {
     code = lineTokens.at(0);
     name = lineTokens.at(1);
 
-    if (name.back() == 'M')
-        return new BusLine(code, name, true);
-    else
-        return new BusLine(code, name, false);
+    return new BusLine(code, name, name.back() == 'M');
 }
 
