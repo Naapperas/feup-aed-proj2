@@ -11,7 +11,7 @@ class BusLine{
     bool nocturn;
     std::list<std::string> stops0, stops1;  // both directions
 
-    std::list<std::string> readSequence(const std::string& filePath);
+    static std::list<std::string> readSequence(const std::string& filePath);
 
 public:
     BusLine(const std::string &code, const std::string &name, bool nocturn);
