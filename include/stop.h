@@ -9,8 +9,12 @@
 class Stop{
     std::string const code, name, zone;
     double latitude, longitude;
+
     friend std::ostream& operator <<(std::ostream& out ,const Stop& stop);
+
 public:
+    constexpr static double MAX_WALKING_DISTANCE = 0.100; // KMs
+
     Stop(const std::string& stopCode, const std::string& name, const std::string& zone, double latitude, double longitude) : code(stopCode), name(name), zone(zone), latitude(latitude), longitude(longitude) {}
 
     const std::string& getName() const {

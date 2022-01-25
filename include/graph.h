@@ -13,6 +13,7 @@ class Graph {
     struct Edge {
         std::string dest; // Stop destination
         double distance; // distance between stops
+        std::string lineCode;
     };
 
     struct Node {
@@ -34,7 +35,7 @@ public:
     void addNode(const std::string& stopCode, Stop* stop);
 
     // Add edge from source to destination with a certain weight
-    void addEdge(const std::string& oStop, const std::string& dStop);
+    void addEdge(const std::string& oStop, const std::string& dStop, const std::string& lineCode);
 
     // Depth-First Search: example implementation
     void dfs(const std::string& cStop, bool firstIteration = true);
