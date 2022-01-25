@@ -3,13 +3,30 @@
 BusCompany::BusCompany(const std::string& companyName) : companyName(companyName) {
 
     auto stopLines = utils::file::readFile("../resources/stops.csv");
+    std::vector<Stop*> stops;
 
     this->network = new Graph(stopLines.size());
 
     for (const auto& line : stopLines) {
         Stop* s = Stop::parseLine(line);
 
-        this->network->addNode(s->getStopCode(), s);
+        stops.push_back(s);
+    }
+
+    for (auto currentStop : stops)  {
+        this->network->addNode(currentStop->getStopCode(), currentStop);
+
+        for (auto otherStop : stops) {
+            if (otherStop == currentStop) continue;
+
+            auto distance = currentStop->distance(*otherStop);
+
+            if (distance <= Stop::MAX_WALKING_DISTANCE) {
+
+                this->network->addEdge(currentStop->getStopCode(), otherStop->getStopCode(), "FOOT");
+                this->network->addEdge(otherStop->getStopCode(), currentStop->getStopCode(), "FOOT");
+            }
+        }
     }
 
     auto lineLines = utils::file::readFile("../resources/lines.csv");
