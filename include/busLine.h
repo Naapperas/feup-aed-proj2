@@ -2,7 +2,6 @@
 #define PROJECT2_BUSLINE_H
 
 #include <fstream>
-#include <list>
 #include <sstream>
 #include <vector>
 
@@ -11,7 +10,7 @@
 class BusLine{
     std::string code, name;
     bool nocturn;
-    std::list<std::string> stops0, stops1;  // both directions
+    std::vector<std::string> stops, stopsReverse;  // both directions
 
 public:
     BusLine(const std::string &code, const std::string &name, bool nocturn);
@@ -26,6 +25,14 @@ public:
 
     bool isNocturn(){
         return nocturn;
+    }
+
+    const std::vector<std::string>& getStops() const {
+        return this->stops;
+    }
+
+    const std::vector<std::string>& getReverseStops() const {
+        return this->stopsReverse;
     }
 
     static BusLine* parseLine(const std::string& line);

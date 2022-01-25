@@ -2,11 +2,8 @@
 
 BusLine::BusLine(const std::string &code, const std::string &name, bool nocturn) : code(code), name(name), nocturn(nocturn) {
     // handle the actual sequence of stops here in constructor
-    std::vector<std::string> stops0Vector = utils::file::readFile("../resources/line_" + this->code + "_0.csv");
-    std::vector<std::string> stops1Vector = utils::file::readFile("../resources/line_" + this->code + "_1.csv");
-
-    stops0 = std::list<std::string>(stops0Vector.begin(), stops0Vector.end());
-    stops1 = std::list<std::string>(stops1Vector.begin(), stops1Vector.end());
+    stops = utils::file::readFile("../resources/line_" + this->code + "_0.csv");
+    stopsReverse = utils::file::readFile("../resources/line_" + this->code + "_1.csv");
 }
 
 BusLine* BusLine::parseLine(const std::string& line) {

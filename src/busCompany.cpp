@@ -17,17 +17,23 @@ BusCompany::BusCompany(const std::string& companyName) : companyName(companyName
     for (const auto& line : lineLines) {
         BusLine* l = BusLine::parseLine(line);
 
-        std::cout << l->getLineCode() << std::endl;
+        for (auto itr = l->getStops().begin(); itr < l->getStops().end()-1; itr++) {
+
+            auto currentStop = *itr, nextStop = *(itr+1);
+
+            this->network->addEdge(currentStop, nextStop);
+        }
+
+        if (!l->getReverseStops().empty())
+            for (auto itr = l->getReverseStops().begin(); itr < l->getReverseStops().end()-1; itr++) {
+
+                auto currentStop = *itr, nextStop = *(itr+1);
+
+                this->network->addEdge(currentStop, nextStop);
+            }
 
         this->lines.push_back(l);
     }
-
-    std::cout << std::endl;
-
-    std::string stopAcode = "1AL2";
-    std::string stopBcode = "1AL5";
-
-    network->addEdge(stopAcode, stopBcode);
 }
 
 BusCompany::~BusCompany() {
