@@ -21,10 +21,10 @@ void Graph::addEdge(const std::string& oStop, const std::string& dStop, const st
 
     double distance = Stop::distance(*(oItr->second.stop), *(dItr->second.stop));
 
-    oItr->second.adj.push_back({dStop, distance, lineCode});
+    oItr->second.adj.push_back({dStop, distance, {lineCode}});
 
     if (!this->hasDir)
-        dItr->second.adj.push_back({oStop, distance, lineCode});
+        dItr->second.adj.push_back({oStop, distance, {lineCode}});
 }
 
 // Depth-First Search: example implementation
