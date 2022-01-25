@@ -10,12 +10,13 @@ BusCompany::BusCompany(const std::string& companyName) : companyName(companyName
     for (const auto& line : stopLines) {
         Stop* s = Stop::parseLine(line);
 
+        this->network->addNode(s->getStopCode(), s);
+
         stops.push_back(s);
     }
 
+    // add walking edges
     for (auto currentStop : stops)  {
-        this->network->addNode(currentStop->getStopCode(), currentStop);
-
         for (auto otherStop : stops) {
             if (otherStop == currentStop) continue;
 
@@ -31,6 +32,7 @@ BusCompany::BusCompany(const std::string& companyName) : companyName(companyName
 
     auto lineLines = utils::file::readFile("../resources/lines.csv");
 
+    // add network edges
     for (const auto& line : lineLines) {
         BusLine* l = BusLine::parseLine(line);
 
