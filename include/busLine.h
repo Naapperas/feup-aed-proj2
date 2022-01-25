@@ -6,6 +6,8 @@
 #include <sstream>
 #include <vector>
 
+#include "utils.h"
+
 class BusLine{
     std::string code, name;
     bool nocturn;
