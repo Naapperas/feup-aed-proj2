@@ -21,7 +21,7 @@ BusCompany::BusCompany(const std::string& companyName) : companyName(companyName
 
             auto currentStop = *itr, nextStop = *(itr+1);
 
-            this->network->addEdge(currentStop, nextStop);
+            this->network->addEdge(currentStop, nextStop, l->getLineCode());
         }
 
         if (!l->getReverseStops().empty())
@@ -29,7 +29,7 @@ BusCompany::BusCompany(const std::string& companyName) : companyName(companyName
 
                 auto currentStop = *itr, nextStop = *(itr+1);
 
-                this->network->addEdge(currentStop, nextStop);
+                this->network->addEdge(currentStop, nextStop, l->getLineCode());
             }
 
         this->lines.push_back(l);

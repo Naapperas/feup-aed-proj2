@@ -14,17 +14,17 @@ void Graph::addNode(const std::string& stopCode, Stop* stop) {
 }
 
 // Add edge from originStop to destinationStop with the distance between them as the edge weigth
-void Graph::addEdge(const std::string& oStop, const std::string& dStop) {
+void Graph::addEdge(const std::string& oStop, const std::string& dStop, const std::string& lineCode) {
     auto oItr = nodes.find(oStop); auto dItr = nodes.find(dStop);
 
     if (oItr == nodes.end() || dItr == nodes.end() || oItr == dItr) return;
 
     double distance = Stop::distance(*(oItr->second.stop), *(dItr->second.stop));
 
-    oItr->second.adj.push_back({dStop, distance});
+    oItr->second.adj.push_back({dStop, distance, lineCode});
 
     if (!this->hasDir)
-        dItr->second.adj.push_back({oStop, distance});
+        dItr->second.adj.push_back({oStop, distance, lineCode});
 }
 
 // Depth-First Search: example implementation
