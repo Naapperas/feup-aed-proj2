@@ -16,16 +16,16 @@ BusCompany::BusCompany(const std::string& companyName) : companyName(companyName
     }
 
     // add walking edges
-    for (auto currentStop : stops)  {
-        for (auto otherStop : stops) {
-            if (otherStop == currentStop) continue;
+    for (auto it0 = stops.begin(); it0 != stops.end(); it0++)  {
+        for (auto it1 = it0; it1 != stops.end(); it1++) {
+            if (it0 == it1) continue;
 
-            auto distance = currentStop->distance(*otherStop);
+            auto distance = (*it0)->distance(*(*it1));
 
             if (distance <= Stop::MAX_WALKING_DISTANCE) {
 
-                this->network->addEdge(currentStop->getStopCode(), otherStop->getStopCode(), "FOOT");
-                this->network->addEdge(otherStop->getStopCode(), currentStop->getStopCode(), "FOOT");
+                this->network->addEdge((*it0)->getStopCode(), (*it1)->getStopCode(), "FOOT");
+                this->network->addEdge((*it1)->getStopCode(), (*it0)->getStopCode(), "FOOT");
             }
         }
     }

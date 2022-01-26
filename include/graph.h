@@ -3,6 +3,7 @@
 
 #include <utility>
 #include <vector>
+#include <set>
 #include <list>
 #include <queue>
 #include <iostream>
@@ -14,7 +15,7 @@ class Graph {
     struct Edge {
         std::string dest; // Stop destination
         double distance; // distance between stops
-        std::vector<std::string> lineCodes;
+        std::set<std::string> lineCodes;
     };
 
     struct Node {

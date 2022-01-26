@@ -23,9 +23,9 @@ void Graph::addEdge(const std::string& oStop, const std::string& dStop, const st
 
     auto existingEdge = std::find_if(oItr->second.adj.begin(), oItr->second.adj.end(), [dStop](const Edge &e){return e.dest==dStop;});
 
-    if (existingEdge != oItr->second.adj.end())
-        existingEdge->lineCodes.push_back(lineCode);
-    else {
+    if (existingEdge != oItr->second.adj.end()) {
+        existingEdge->lineCodes.insert(lineCode);
+    } else {
         oItr->second.adj.push_back({dStop, distance, {lineCode}});
         if (!this->hasDir)
             dItr->second.adj.push_back({oStop, distance, {lineCode}});
