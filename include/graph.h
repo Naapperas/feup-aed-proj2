@@ -7,13 +7,14 @@
 #include <queue>
 #include <iostream>
 #include <unordered_map>
+#include <algorithm>
 #include "stop.h"
 
 class Graph {
     struct Edge {
         std::string dest; // Stop destination
         double distance; // distance between stops
-        std::string lineCode;
+        std::vector<std::string> lineCodes;
     };
 
     struct Node {
