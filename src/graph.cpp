@@ -40,7 +40,7 @@ void Graph::dfs(const std::string& cStop, bool firstIteration) {
         this->visitedFalse();
 
     Node& cNode = nodes[cStop];
-    std::cout << cStop << " - " << *(cNode.stop); // show node order
+    std::cout << cStop << " - " << *(cNode.stop) << '\n'; // show node order
     cNode.visited = true;
 
     for (const auto& e : cNode.adj) {
@@ -65,7 +65,7 @@ void Graph::bfs(const std::string& cStop) {
 
         auto node = nodes.at(u);
 
-        std::cout << u << " - " << *(node.stop); // show node order
+        std::cout << u << " - " << *(node.stop) << '\n'; // show node order
 
         for (const auto& e : node.adj) {
             std::string dStop = e.dest;

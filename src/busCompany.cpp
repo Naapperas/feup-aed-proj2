@@ -103,11 +103,11 @@ std::list<std::pair<const Stop*, std::string>> BusCompany::minDistancePath(const
     if (network->nodeAt(destinyStop).distToSingleSource == INF) return {};
 
     std::list<std::pair<const Stop*, std::string>> path;
-    path.emplace_front(this->dayNetwork->nodeAt(destinyStop).stop, this->dayNetwork->nodeAt(destinyStop).lineCodeDijkstra);
+    path.emplace_front(network->nodeAt(destinyStop).stop, network->nodeAt(destinyStop).lineCodeDijkstra);
     std::string v = destinyStop;
     while (v != originStop) {
-        v = this->dayNetwork->nodeAt(v).parentStopCodeDijkstra;
-        path.emplace_front(this->dayNetwork->nodeAt(v).stop, this->dayNetwork->nodeAt(v).lineCodeDijkstra);
+        v = network->nodeAt(v).parentStopCodeDijkstra;
+        path.emplace_front(network->nodeAt(v).stop, network->nodeAt(v).lineCodeDijkstra);
     }
     return path;
 }
@@ -143,7 +143,7 @@ int BusCompany::minStops(const std::string& originStop, const std::string& desti
 }
 
 std::list<std::pair<const Stop*, std::string>> BusCompany::minStopsPath(const std::string& originStop, const std::string& destinyStop, bool night){
-    int aux = this->minStops(originStop, destinyStop);
+    int aux = this->minStops(originStop, destinyStop, night);
     if (aux <= 0) return {};  // maybe separate same stop from no path
 
     auto& network = night ? this->nightNetwork : this->dayNetwork;
