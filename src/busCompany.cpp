@@ -81,7 +81,7 @@ double BusCompany::minDistance(const std::string& originStop, const std::string&
     return this->network->nodeAt(destinyStop).distToSingleSource;
 }
 
-std::list<std::pair<const Stop*, std::string>> BusCompany::minPath(const std::string& originStop, const std::string& destinyStop) {
+std::list<std::pair<const Stop*, std::string>> BusCompany::minDistancePath(const std::string& originStop, const std::string& destinyStop) {
     if (lastOriginStop != originStop) {
         this->network->dijkstra(originStop);
         lastOriginStop = originStop;
