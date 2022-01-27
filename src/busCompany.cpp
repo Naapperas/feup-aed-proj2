@@ -1,6 +1,6 @@
 #include "../include/busCompany.h"
 
-BusCompany::BusCompany(const std::string& companyName) : companyName(companyName) {
+BusCompany::BusCompany(const std::string& companyName) : companyName(companyName), lastOriginStop("") {
 
     auto stopLines = utils::file::readFile("../resources/stops.csv");
     std::vector<Stop*> stops;
@@ -71,3 +71,29 @@ void BusCompany::dfs(const std::string& cStop) {
 void BusCompany::bfs(const std::string& cStop) {
     this->network->bfs(cStop);
 };
+
+double BusCompany::minDistance(const std::string& originStop, const std::string& destinyStop) {
+    if (lastOriginStop != originStop) {
+        this->network->dijkstra(originStop);
+        lastOriginStop = originStop;
+    }
+    if (this->network->nodeAt(destinyStop).distToSingleSource == INF) return -1;
+    return this->network->nodeAt(destinyStop).distToSingleSource;
+}
+
+std::list<const Stop*> BusCompany::minPath(const std::string& originStop, const std::string& destinyStop) {
+    if (lastOriginStop != originStop) {
+        this->network->dijkstra(originStop);
+        lastOriginStop = originStop;
+    }
+    if (this->network->nodeAt(destinyStop).distToSingleSource == INF) return {};
+
+    std::list<const Stop*> path;
+    path.push_back(this->network->nodeAt(destinyStop).stop);
+    std::string v = destinyStop;
+    while (v != originStop) {
+        v = this->network->nodeAt(v).parentStopCode;
+        path.push_front(this->network->nodeAt(v).stop);
+    }
+    return path;
+}

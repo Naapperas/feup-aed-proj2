@@ -11,6 +11,8 @@
 #include <algorithm>
 #include "stop.h"
 
+#define INF (INT64_MAX/2)
+
 class Graph {
     struct Edge {
         std::string dest; // Stop destination
@@ -22,6 +24,8 @@ class Graph {
         const Stop* stop; // Information about the stop
         std::list<Edge> adj; // The list of outgoing edges (to adjacent nodes)
         bool visited; // As the node been visited on a search?
+        std::string parentStopCode; // used in SSPS
+        double distToSingleSource; // used in SSPS
     };
 
     int n;
@@ -44,6 +48,10 @@ public:
 
     // Breadth-First Search: example implementation
     void bfs(const std::string& cStop);
+
+    void dijkstra(const std::string& origin);
+
+    const Node& nodeAt(const std::string& key);
 };
 
 #endif //PROJECT2_GRAPH_H
