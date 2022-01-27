@@ -4,7 +4,7 @@
 #include "../include/stop.h"
 
 std::ostream& operator <<(std::ostream& out , const Stop& stop) {
-    out << stop.getStopCode() << " - " << stop.getName() << std::endl;
+    out << stop.getStopCode() << " - " << stop.getName();
     return out;
 }
 

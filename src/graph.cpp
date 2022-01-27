@@ -1,3 +1,6 @@
+#include <algorithm>
+#include <queue>
+
 #include "../include/graph.h"
 #include "../include/utils.h"
 
@@ -41,7 +44,7 @@ void Graph::dfs(const std::string& cStop, bool firstIteration) {
     std::cout << cStop << " - " << *(cNode.stop); // show node order
     cNode.visited = true;
 
-    for (auto e : cNode.adj) {
+    for (const auto& e : cNode.adj) {
         std::string dStop = e.dest;
         Node& dNode = nodes[dStop];
 
@@ -65,7 +68,7 @@ void Graph::bfs(const std::string& cStop) {
 
         std::cout << u << " - " << *(node.stop); // show node order
 
-        for (auto e : node.adj) {
+        for (const auto& e : node.adj) {
             std::string dStop = e.dest;
 
             if (!nodes[dStop].visited) {
@@ -82,15 +85,16 @@ void Graph::dijkstra(const std::string &origin) {
         node.second.distToSingleSource = INF;
         q.insert({INF, node.second.stop->getStopCode()});
         node.second.visited = false;
+        node.second.lineCode = "";
     }
     nodes[origin].distToSingleSource = 0;
     q.erase({INF, nodes[origin].stop->getStopCode()});
     q.insert({0, nodes[origin].stop->getStopCode()});
     nodes[origin].parentStopCode = origin;
-    while (q.size()>0) {
+    nodes[origin].lineCode = "Begin";
+    while (!q.empty()) {
         std::string u = q.begin()->second;
         q.erase(q.begin());
-        // cout << "Node " << u << " with dist = " << nodes[u].dist << endl;
         nodes[u].visited = true;
         for (const auto& e : nodes[u].adj) {
             std::string v = e.dest;
@@ -99,6 +103,7 @@ void Graph::dijkstra(const std::string &origin) {
                 q.erase({nodes[v].distToSingleSource, v});
                 nodes[v].distToSingleSource = nodes[u].distToSingleSource + w;
                 nodes[v].parentStopCode = u;
+                nodes[v].lineCode = *e.lineCodes.begin();
                 q.insert({nodes[v].distToSingleSource, v});
             }
         }
