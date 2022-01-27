@@ -64,6 +64,7 @@ BusCompany::BusCompany(const std::string& companyName) : companyName(companyName
 
 BusCompany::~BusCompany() {
     delete dayNetwork;
+    nightNetwork->clear();
     delete nightNetwork;
 
     for (auto line : this->lines)
