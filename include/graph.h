@@ -22,7 +22,7 @@ class Graph {
         const Stop* stop; // Information about the stop
         std::list<Edge> adj; // The list of outgoing edges (to adjacent nodes)
         bool visited; // As the node been visited on a search?
-        std::string parentStopCode, lineCode; // used in SSPS
+        std::string parentStopCodeDijkstra, parentStopCodeBFS, lineCodeDijkstra, lineCodeBFS; // used to create paths
         double distToSingleSource; // used in SSPS
     };
 

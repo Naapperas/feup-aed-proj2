@@ -23,6 +23,13 @@ int main() {
 
     std::cout << company.minStops(stopAcode, stopBcode) << std::endl;
 
+    auto path1 = company.minStopsPath(stopAcode, stopBcode);
+
+    for (const auto& stop : path1)
+        std::cout << *stop.first << " " << stop.second << '\n';
+
+    std::cout << std::endl;
+
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }

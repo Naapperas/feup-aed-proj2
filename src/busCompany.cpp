@@ -89,11 +89,11 @@ std::list<std::pair<const Stop*, std::string>> BusCompany::minDistancePath(const
     if (this->network->nodeAt(destinyStop).distToSingleSource == INF) return {};
 
     std::list<std::pair<const Stop*, std::string>> path;
-    path.emplace_front(this->network->nodeAt(destinyStop).stop, this->network->nodeAt(destinyStop).lineCode);
+    path.emplace_front(this->network->nodeAt(destinyStop).stop, this->network->nodeAt(destinyStop).lineCodeDijkstra);
     std::string v = destinyStop;
     while (v != originStop) {
-        v = this->network->nodeAt(v).parentStopCode;
-        path.emplace_front(this->network->nodeAt(v).stop, this->network->nodeAt(v).lineCode);
+        v = this->network->nodeAt(v).parentStopCodeDijkstra;
+        path.emplace_front(this->network->nodeAt(v).stop, this->network->nodeAt(v).lineCodeDijkstra);
     }
     return path;
 }
@@ -117,8 +117,24 @@ int BusCompany::minStops(const std::string& originStop, const std::string& desti
                 }
                 q.push({w, u1 + 1});
                 this->network->nodeAt(w).visited = true;
+                this->network->nodeAt(w).parentStopCodeBFS = u;
+                this->network->nodeAt(w).lineCodeBFS = *e.lineCodes.begin();
             }
         }
     }
     return nStops;
+}
+
+std::list<std::pair<const Stop*, std::string>> BusCompany::minStopsPath(const std::string& originStop, const std::string& destinyStop){
+    int aux = this->minStops(originStop, destinyStop);
+    if (aux <= 0) return {};  // maybe separate same stop from no path
+
+    std::list<std::pair<const Stop*, std::string>> path;
+    path.emplace_front(this->network->nodeAt(destinyStop).stop, this->network->nodeAt(destinyStop).lineCodeBFS);
+    std::string v = destinyStop;
+    while (v != originStop) {
+        v = this->network->nodeAt(v).parentStopCodeBFS;
+        path.emplace_front(this->network->nodeAt(v).stop, this->network->nodeAt(v).lineCodeBFS);
+    }
+    return path;
 }
