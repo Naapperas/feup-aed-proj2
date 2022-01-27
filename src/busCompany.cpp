@@ -171,5 +171,12 @@ std::set<const Stop *> BusCompany::nearbyStops(double lattittude, double longitu
             ret.insert(stop);
     }
 
+    for (auto stop : ret) {
+        if (stop->getLatitude() == lattittude && stop->getLongitude() == longitude) {
+            ret.erase(stop);
+            break;
+        }
+    }
+
     return ret;
 }

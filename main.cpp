@@ -30,6 +30,11 @@ int main() {
 
     std::cout << std::endl;
 
+    auto stops = company.nearbyStops(41.14954216, -8.610023615);
+
+    for (auto stop : stops)
+        std::cout << *stop << std::endl;
+
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }
