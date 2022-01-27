@@ -85,15 +85,16 @@ void Graph::dijkstra(const std::string &origin) {
         node.second.distToSingleSource = INF;
         q.insert({INF, node.second.stop->getStopCode()});
         node.second.visited = false;
+        node.second.lineCode = "";
     }
     nodes[origin].distToSingleSource = 0;
     q.erase({INF, nodes[origin].stop->getStopCode()});
     q.insert({0, nodes[origin].stop->getStopCode()});
-    nodes[origin].parentStopCode = origin;\
-    while (q.size()>0) {
+    nodes[origin].parentStopCode = origin;
+    nodes[origin].lineCode = "Begin";
+    while (!q.empty()) {
         std::string u = q.begin()->second;
         q.erase(q.begin());
-        // cout << "Node " << u << " with dist = " << nodes[u].dist << endl;
         nodes[u].visited = true;
         for (const auto& e : nodes[u].adj) {
             std::string v = e.dest;
@@ -102,6 +103,7 @@ void Graph::dijkstra(const std::string &origin) {
                 q.erase({nodes[v].distToSingleSource, v});
                 nodes[v].distToSingleSource = nodes[u].distToSingleSource + w;
                 nodes[v].parentStopCode = u;
+                nodes[v].lineCode = *e.lineCodes.begin();
                 q.insert({nodes[v].distToSingleSource, v});
             }
         }

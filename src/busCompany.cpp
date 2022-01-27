@@ -81,19 +81,19 @@ double BusCompany::minDistance(const std::string& originStop, const std::string&
     return this->network->nodeAt(destinyStop).distToSingleSource;
 }
 
-std::list<const Stop*> BusCompany::minPath(const std::string& originStop, const std::string& destinyStop) {
+std::list<std::pair<const Stop*, std::string>> BusCompany::minPath(const std::string& originStop, const std::string& destinyStop) {
     if (lastOriginStop != originStop) {
         this->network->dijkstra(originStop);
         lastOriginStop = originStop;
     }
     if (this->network->nodeAt(destinyStop).distToSingleSource == INF) return {};
 
-    std::list<const Stop*> path;
-    path.push_back(this->network->nodeAt(destinyStop).stop);
+    std::list<std::pair<const Stop*, std::string>> path;
+    path.emplace_front(this->network->nodeAt(destinyStop).stop, this->network->nodeAt(destinyStop).lineCode);
     std::string v = destinyStop;
     while (v != originStop) {
         v = this->network->nodeAt(v).parentStopCode;
-        path.push_front(this->network->nodeAt(v).stop);
+        path.emplace_front(this->network->nodeAt(v).stop, this->network->nodeAt(v).lineCode);
     }
     return path;
 }

@@ -2,7 +2,7 @@
 #include "include/busCompany.h"
 
 int main() {
-    std::string stopAcode = "ZOID1";
+    std::string stopAcode = "TRD6";
     std::string stopBcode = "VN2";
 
     BusCompany company{"STCP"};
@@ -16,8 +16,8 @@ int main() {
 
     auto path = company.minPath(stopAcode, stopBcode);
 
-    for (auto stop : path)
-        std::cout << *stop;
+    for (const auto& stop : path)
+        std::cout << *stop.first << " " << stop.second << '\n';
 
     std::cout << std::endl;
 
