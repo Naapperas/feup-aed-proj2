@@ -52,6 +52,8 @@ public:
     Node& nodeAt(const std::string& key);
 
     void visitedFalse();
+
+    void clear();
 };
 
 #endif //PROJECT2_GRAPH_H

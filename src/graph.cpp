@@ -116,3 +116,7 @@ Graph::Node& Graph::nodeAt(const std::string &key) {
 void Graph::visitedFalse() {
     for (auto& node : nodes) node.second.visited = false;
 }
+
+void Graph::clear() {
+    this->nodes.clear();
+}
