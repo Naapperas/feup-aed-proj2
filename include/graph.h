@@ -51,6 +51,8 @@ public:
 
     Node& nodeAt(const std::string& key);
 
+    std::set<std::string> getStopCodes() const;
+
     void visitedFalse();
 
     void clear();

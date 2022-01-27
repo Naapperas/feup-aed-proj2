@@ -157,3 +157,32 @@ std::list<std::pair<const Stop*, std::string>> BusCompany::minStopsPath(const st
     }
     return path;
 }
+
+std::set<const Stop *> BusCompany::nearbyStops(double lattittude, double longitude) const {
+
+    Stop dummyStop{"", "", "", lattittude, longitude};
+    std::set<const Stop *> ret;
+
+    for (const auto& stopCode : this->dayNetwork->getStopCodes()) { // can be any of them, they both have the same stops
+
+        auto stop = this->dayNetwork->nodeAt(stopCode).stop;
+
+        if (stop->distance(dummyStop) <= BusCompany::MAX_NEARBY_DISTANCE)
+            ret.insert(stop);
+    }
+
+    for (auto stop : ret) {
+        if (stop->getLatitude() == lattittude && stop->getLongitude() == longitude) {
+            ret.erase(stop);
+            break;
+        }
+    }
+
+    return ret;
+}
+
+std::set<const Stop *> BusCompany::nearbyStops(const std::string& stopCode) const {
+    auto node = this->dayNetwork->nodeAt(stopCode);
+
+    return this->nearbyStops(node.stop->getLatitude(), node.stop->getLongitude());
+}
