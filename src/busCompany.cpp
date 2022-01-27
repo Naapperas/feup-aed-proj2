@@ -136,6 +136,8 @@ int BusCompany::minStops(const std::string& originStop, const std::string& desti
                 network->nodeAt(w).visited = true;
                 network->nodeAt(w).parentStopCodeBFS = u;
                 network->nodeAt(w).lineCodeBFS = *e.lineCodes.begin();
+                if (w == destinyStop)
+                    return nStops;
             }
         }
     }

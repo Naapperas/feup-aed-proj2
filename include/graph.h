@@ -47,7 +47,7 @@ public:
     // Breadth-First Search: example implementation
     void bfs(const std::string& cStop);
 
-    void dijkstra(const std::string& origin);
+    void dijkstra(const std::string& origin, const std::string& destiny = "");
 
     Node& nodeAt(const std::string& key);
 

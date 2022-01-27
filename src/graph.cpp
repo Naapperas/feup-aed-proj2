@@ -78,7 +78,7 @@ void Graph::bfs(const std::string& cStop) {
     }
 }
 
-void Graph::dijkstra(const std::string &origin) {
+void Graph::dijkstra(const std::string &origin, const std::string& destiny) {
     std::set<std::pair<double, std::string>> q;
     for (auto& node : nodes) {
         node.second.distToSingleSource = INF;
@@ -104,6 +104,8 @@ void Graph::dijkstra(const std::string &origin) {
                 nodes[v].parentStopCodeDijkstra = u;
                 nodes[v].lineCodeDijkstra = *e.lineCodes.begin();
                 q.insert({nodes[v].distToSingleSource, v});
+                if (v == destiny)
+                    return;
             }
         }
     }
