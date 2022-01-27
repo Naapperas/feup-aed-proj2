@@ -5,12 +5,14 @@ BusCompany::BusCompany(const std::string& companyName) : companyName(companyName
     auto stopLines = utils::file::readFile("../resources/stops.csv");
     std::vector<Stop*> stops;
 
-    this->network = new Graph(stopLines.size());
+    this->networkDayTime = new Graph(stopLines.size());
+    this->networkNocturnal = new Graph(stopLines.size());
 
     for (const auto& line : stopLines) {
         Stop* s = Stop::parseLine(line);
 
-        this->network->addNode(s->getStopCode(), s);
+        this->networkDayTime->addNode(s->getStopCode(), s);
+        this->networkNocturnal->addNode(s->getStopCode(), s);
 
         stops.push_back(s);
     }
@@ -24,8 +26,11 @@ BusCompany::BusCompany(const std::string& companyName) : companyName(companyName
 
             if (distance <= Stop::MAX_WALKING_DISTANCE) {
 
-                this->network->addEdge((*it0)->getStopCode(), (*it1)->getStopCode(), "FOOT");
-                this->network->addEdge((*it1)->getStopCode(), (*it0)->getStopCode(), "FOOT");
+                this->networkDayTime->addEdge((*it0)->getStopCode(), (*it1)->getStopCode(), "FOOT");
+                this->networkDayTime->addEdge((*it1)->getStopCode(), (*it0)->getStopCode(), "FOOT");
+
+                this->networkNocturnal->addEdge((*it0)->getStopCode(), (*it1)->getStopCode(), "FOOT");
+                this->networkNocturnal->addEdge((*it1)->getStopCode(), (*it0)->getStopCode(), "FOOT");
             }
         }
     }
@@ -36,27 +41,46 @@ BusCompany::BusCompany(const std::string& companyName) : companyName(companyName
     for (const auto& line : lineLines) {
         BusLine* l = BusLine::parseLine(line);
 
-        for (auto itr = l->getStops().begin(); itr < l->getStops().end()-1; itr++) {
+        if(l->isNocturn()) {
+            for (auto itr = l->getStops().begin(); itr < l->getStops().end() - 1; itr++) {
 
-            auto currentStop = *itr, nextStop = *(itr+1);
+                auto currentStop = *itr, nextStop = *(itr + 1);
 
-            this->network->addEdge(currentStop, nextStop, l->getLineCode());
-        }
-
-        if (!l->getReverseStops().empty())
-            for (auto itr = l->getReverseStops().begin(); itr < l->getReverseStops().end()-1; itr++) {
-
-                auto currentStop = *itr, nextStop = *(itr+1);
-
-                this->network->addEdge(currentStop, nextStop, l->getLineCode());
+                this->networkNocturnal->addEdge(currentStop, nextStop, l->getLineCode());
             }
+
+            if (!l->getReverseStops().empty())
+                for (auto itr = l->getReverseStops().begin(); itr < l->getReverseStops().end() - 1; itr++) {
+
+                    auto currentStop = *itr, nextStop = *(itr + 1);
+
+                    this->networkNocturnal->addEdge(currentStop, nextStop, l->getLineCode());
+                }
+        }
+        else {
+            for (auto itr = l->getStops().begin(); itr < l->getStops().end() - 1; itr++) {
+
+                auto currentStop = *itr, nextStop = *(itr + 1);
+
+                this->networkDayTime->addEdge(currentStop, nextStop, l->getLineCode());
+            }
+
+            if (!l->getReverseStops().empty())
+                for (auto itr = l->getReverseStops().begin(); itr < l->getReverseStops().end() - 1; itr++) {
+
+                    auto currentStop = *itr, nextStop = *(itr + 1);
+
+                    this->networkDayTime->addEdge(currentStop, nextStop, l->getLineCode());
+                }
+        }
 
         this->lines.push_back(l);
     }
 }
 
 BusCompany::~BusCompany() {
-    delete network;
+    delete networkDayTime;
+    delete networkNocturnal;
 
     for (auto line : this->lines)
         delete line;
@@ -64,36 +88,36 @@ BusCompany::~BusCompany() {
 
 // Depth-First Search: example implementation
 void BusCompany::dfs(const std::string& cStop) {
-    this->network->dfs(cStop);
+    this->networkDayTime->dfs(cStop);
 };
 
 // Breadth-First Search: example implementation
 void BusCompany::bfs(const std::string& cStop) {
-    this->network->bfs(cStop);
+    this->networkDayTime->bfs(cStop);
 };
 
 double BusCompany::minDistance(const std::string& originStop, const std::string& destinyStop) {
     if (lastOriginStop != originStop) {
-        this->network->dijkstra(originStop);
+        this->networkDayTime->dijkstra(originStop);
         lastOriginStop = originStop;
     }
-    if (this->network->nodeAt(destinyStop).distToSingleSource == INF) return -1;
-    return this->network->nodeAt(destinyStop).distToSingleSource;
+    if (this->networkDayTime->nodeAt(destinyStop).distToSingleSource == INF) return -1;
+    return this->networkDayTime->nodeAt(destinyStop).distToSingleSource;
 }
 
 std::list<std::pair<const Stop*, std::string>> BusCompany::minDistancePath(const std::string& originStop, const std::string& destinyStop) {
     if (lastOriginStop != originStop) {
-        this->network->dijkstra(originStop);
+        this->networkDayTime->dijkstra(originStop);
         lastOriginStop = originStop;
     }
-    if (this->network->nodeAt(destinyStop).distToSingleSource == INF) return {};
+    if (this->networkDayTime->nodeAt(destinyStop).distToSingleSource == INF) return {};
 
     std::list<std::pair<const Stop*, std::string>> path;
-    path.emplace_front(this->network->nodeAt(destinyStop).stop, this->network->nodeAt(destinyStop).lineCodeDijkstra);
+    path.emplace_front(this->networkDayTime->nodeAt(destinyStop).stop, this->networkDayTime->nodeAt(destinyStop).lineCodeDijkstra);
     std::string v = destinyStop;
     while (v != originStop) {
-        v = this->network->nodeAt(v).parentStopCodeDijkstra;
-        path.emplace_front(this->network->nodeAt(v).stop, this->network->nodeAt(v).lineCodeDijkstra);
+        v = this->networkDayTime->nodeAt(v).parentStopCodeDijkstra;
+        path.emplace_front(this->networkDayTime->nodeAt(v).stop, this->networkDayTime->nodeAt(v).lineCodeDijkstra);
     }
     return path;
 }
@@ -101,24 +125,24 @@ std::list<std::pair<const Stop*, std::string>> BusCompany::minDistancePath(const
 int BusCompany::minStops(const std::string& originStop, const std::string& destinyStop){
     if (originStop == destinyStop)
         return 0;
-    this->network->visitedFalse();
+    this->networkDayTime->visitedFalse();
     std::queue<std::pair<std::string ,int>> q; // queue of unvisited nodes with distance to v
     q.push({originStop, 0});
-    this->network->nodeAt(originStop).visited = true;
+    this->networkDayTime->nodeAt(originStop).visited = true;
     int nStops = -1;
     while (!q.empty()) { // while there are still unvisited nodes
         std::string u = q.front().first;
         int u1 = q.front().second; q.pop();
-        for (auto e : this->network->nodeAt(u).adj) {
+        for (auto e : this->networkDayTime->nodeAt(u).adj) {
             std::string w = e.dest;
-            if (!this->network->nodeAt(w).visited) {
+            if (!this->networkDayTime->nodeAt(w).visited) {
                 if (w == destinyStop) {
                     nStops = u1+1;
                 }
                 q.push({w, u1 + 1});
-                this->network->nodeAt(w).visited = true;
-                this->network->nodeAt(w).parentStopCodeBFS = u;
-                this->network->nodeAt(w).lineCodeBFS = *e.lineCodes.begin();
+                this->networkDayTime->nodeAt(w).visited = true;
+                this->networkDayTime->nodeAt(w).parentStopCodeBFS = u;
+                this->networkDayTime->nodeAt(w).lineCodeBFS = *e.lineCodes.begin();
             }
         }
     }
@@ -130,11 +154,11 @@ std::list<std::pair<const Stop*, std::string>> BusCompany::minStopsPath(const st
     if (aux <= 0) return {};  // maybe separate same stop from no path
 
     std::list<std::pair<const Stop*, std::string>> path;
-    path.emplace_front(this->network->nodeAt(destinyStop).stop, this->network->nodeAt(destinyStop).lineCodeBFS);
+    path.emplace_front(this->networkDayTime->nodeAt(destinyStop).stop, this->networkDayTime->nodeAt(destinyStop).lineCodeBFS);
     std::string v = destinyStop;
     while (v != originStop) {
-        v = this->network->nodeAt(v).parentStopCodeBFS;
-        path.emplace_front(this->network->nodeAt(v).stop, this->network->nodeAt(v).lineCodeBFS);
+        v = this->networkDayTime->nodeAt(v).parentStopCodeBFS;
+        path.emplace_front(this->networkDayTime->nodeAt(v).stop, this->networkDayTime->nodeAt(v).lineCodeBFS);
     }
     return path;
 }
