@@ -1,17 +1,14 @@
 #ifndef PROJECT2_GRAPH_H
 #define PROJECT2_GRAPH_H
 
-#include <utility>
-#include <vector>
 #include <set>
 #include <list>
-#include <queue>
-#include <iostream>
 #include <unordered_map>
-#include <algorithm>
+#include <limits>
+
 #include "stop.h"
 
-#define INF (INT64_MAX/2)
+#define INF (std::numeric_limits<double>::max()/2)
 
 class Graph {
     struct Edge {

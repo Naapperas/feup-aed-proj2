@@ -1,3 +1,6 @@
+#include <algorithm>
+#include <queue>
+
 #include "../include/graph.h"
 #include "../include/utils.h"
 
@@ -41,7 +44,7 @@ void Graph::dfs(const std::string& cStop, bool firstIteration) {
     std::cout << cStop << " - " << *(cNode.stop); // show node order
     cNode.visited = true;
 
-    for (auto e : cNode.adj) {
+    for (const auto& e : cNode.adj) {
         std::string dStop = e.dest;
         Node& dNode = nodes[dStop];
 
@@ -65,7 +68,7 @@ void Graph::bfs(const std::string& cStop) {
 
         std::cout << u << " - " << *(node.stop); // show node order
 
-        for (auto e : node.adj) {
+        for (const auto& e : node.adj) {
             std::string dStop = e.dest;
 
             if (!nodes[dStop].visited) {
@@ -86,7 +89,7 @@ void Graph::dijkstra(const std::string &origin) {
     nodes[origin].distToSingleSource = 0;
     q.erase({INF, nodes[origin].stop->getStopCode()});
     q.insert({0, nodes[origin].stop->getStopCode()});
-    nodes[origin].parentStopCode = origin;
+    nodes[origin].parentStopCode = origin;\
     while (q.size()>0) {
         std::string u = q.begin()->second;
         q.erase(q.begin());
