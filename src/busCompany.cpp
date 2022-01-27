@@ -163,5 +163,13 @@ std::set<const Stop *> BusCompany::nearbyStops(double lattittude, double longitu
     Stop dummyStop{"", "", "", lattittude, longitude};
     std::set<const Stop *> ret;
 
+    for (const auto& stopCode : this->dayNetwork->getStopCodes()) { // can be any of them, they both have the same stops
+
+        auto stop = this->dayNetwork->nodeAt(stopCode).stop;
+
+        if (stop->distance(dummyStop) <= BusCompany::MAX_NEARBY_DISTANCE)
+            ret.insert(stop);
+    }
+
     return ret;
 }

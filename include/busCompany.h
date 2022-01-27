@@ -12,6 +12,8 @@
 
 class BusCompany {
 
+    constexpr static double MAX_NEARBY_DISTANCE = 0.05;
+
     Graph* dayNetwork;
     Graph* nightNetwork;
     std::vector<BusLine*> lines;
