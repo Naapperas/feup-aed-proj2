@@ -22,16 +22,16 @@ public:
     ~BusCompany();
 
     // Depth-First Search: example implementation
-    void dfs(const std::string& cStop);
+    void dfs(const std::string& cStop, bool night = false);
 
     // Breadth-First Search: example implementation
-    void bfs(const std::string& cStop);
+    void bfs(const std::string& cStop, bool day = false);
 
-    double minDistance(const std::string& originStop, const std::string& destinyStop);
-    std::list<std::pair<const Stop*, std::string>> minDistancePath(const std::string& originStop, const std::string& destinyStop);
+    double minDistance(const std::string& originStop, const std::string& destinyStop, bool night = false);
+    std::list<std::pair<const Stop*, std::string>> minDistancePath(const std::string& originStop, const std::string& destinyStop, bool night = false);
 
-    int minStops(const std::string& originStop, const std::string& destinyStop);
-    std::list<std::pair<const Stop*, std::string>> minStopsPath(const std::string& originStop, const std::string& destinyStop);
+    int minStops(const std::string& originStop, const std::string& destinyStop, bool night = false);
+    std::list<std::pair<const Stop*, std::string>> minStopsPath(const std::string& originStop, const std::string& destinyStop, bool night = false);
 };
 
 #endif //PROJECT2_BUSCOMPANY_H
