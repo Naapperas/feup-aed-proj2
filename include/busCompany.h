@@ -25,7 +25,7 @@ public:
     void dfs(const std::string& cStop, bool night = false);
 
     // Breadth-First Search: example implementation
-    void bfs(const std::string& cStop, bool day = false);
+    void bfs(const std::string& cStop, bool night = false);
 
     double minDistance(const std::string& originStop, const std::string& destinyStop, bool night = false);
     std::list<std::pair<const Stop*, std::string>> minDistancePath(const std::string& originStop, const std::string& destinyStop, bool night = false);
