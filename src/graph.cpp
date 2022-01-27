@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <queue>
 
 #include "../include/graph.h"
 #include "../include/utils.h"
@@ -38,7 +37,7 @@ void Graph::addEdge(const std::string& oStop, const std::string& dStop, const st
 // Depth-First Search: example implementation
 void Graph::dfs(const std::string& cStop, bool firstIteration) {
     if (firstIteration)
-        for (auto& node : nodes) node.second.visited = false;
+        this->visitedFalse();
 
     Node& cNode = nodes[cStop];
     std::cout << cStop << " - " << *(cNode.stop); // show node order
@@ -55,7 +54,7 @@ void Graph::dfs(const std::string& cStop, bool firstIteration) {
 
 // Breadth-First Search: example implementation
 void Graph::bfs(const std::string& cStop) {
-    for (auto& node : nodes) node.second.visited = false;
+    this->visitedFalse();
 
     std::queue<std::string> q; // queue of unvisited nodes
     q.push(cStop);
@@ -85,13 +84,13 @@ void Graph::dijkstra(const std::string &origin) {
         node.second.distToSingleSource = INF;
         q.insert({INF, node.second.stop->getStopCode()});
         node.second.visited = false;
-        node.second.lineCode = "";
+        node.second.lineCodeDijkstra = "";
     }
     nodes[origin].distToSingleSource = 0;
     q.erase({INF, nodes[origin].stop->getStopCode()});
     q.insert({0, nodes[origin].stop->getStopCode()});
-    nodes[origin].parentStopCode = origin;
-    nodes[origin].lineCode = "Begin";
+    nodes[origin].parentStopCodeDijkstra = origin;
+    nodes[origin].lineCodeDijkstra = "Begin";
     while (!q.empty()) {
         std::string u = q.begin()->second;
         q.erase(q.begin());
@@ -102,14 +101,18 @@ void Graph::dijkstra(const std::string &origin) {
             if (!nodes[v].visited && nodes[u].distToSingleSource + w < nodes[v].distToSingleSource) {
                 q.erase({nodes[v].distToSingleSource, v});
                 nodes[v].distToSingleSource = nodes[u].distToSingleSource + w;
-                nodes[v].parentStopCode = u;
-                nodes[v].lineCode = *e.lineCodes.begin();
+                nodes[v].parentStopCodeDijkstra = u;
+                nodes[v].lineCodeDijkstra = *e.lineCodes.begin();
                 q.insert({nodes[v].distToSingleSource, v});
             }
         }
     }
 }
 
-const Graph::Node& Graph::nodeAt(const std::string &key) {
+Graph::Node& Graph::nodeAt(const std::string &key) {
     return this->nodes[key];
+}
+
+void Graph::visitedFalse() {
+    for (auto& node : nodes) node.second.visited = false;
 }

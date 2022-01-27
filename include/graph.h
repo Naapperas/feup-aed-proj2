@@ -2,6 +2,7 @@
 #define PROJECT2_GRAPH_H
 
 #include <set>
+#include <queue>
 #include <list>
 #include <unordered_map>
 #include <limits>
@@ -21,7 +22,7 @@ class Graph {
         const Stop* stop; // Information about the stop
         std::list<Edge> adj; // The list of outgoing edges (to adjacent nodes)
         bool visited; // As the node been visited on a search?
-        std::string parentStopCode, lineCode; // used in SSPS
+        std::string parentStopCodeDijkstra, parentStopCodeBFS, lineCodeDijkstra, lineCodeBFS; // used to create paths
         double distToSingleSource; // used in SSPS
     };
 
@@ -48,7 +49,9 @@ public:
 
     void dijkstra(const std::string& origin);
 
-    const Node& nodeAt(const std::string& key);
+    Node& nodeAt(const std::string& key);
+
+    void visitedFalse();
 };
 
 #endif //PROJECT2_GRAPH_H

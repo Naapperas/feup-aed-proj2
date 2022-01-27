@@ -14,9 +14,18 @@ int main() {
 
     std::cout << company.minDistance(stopAcode, stopBcode) << std::endl;
 
-    auto path = company.minPath(stopAcode, stopBcode);
+    auto path = company.minDistancePath(stopAcode, stopBcode);
 
     for (const auto& stop : path)
+        std::cout << *stop.first << " " << stop.second << '\n';
+
+    std::cout << std::endl;
+
+    std::cout << company.minStops(stopAcode, stopBcode) << std::endl;
+
+    auto path1 = company.minStopsPath(stopAcode, stopBcode);
+
+    for (const auto& stop : path1)
         std::cout << *stop.first << " " << stop.second << '\n';
 
     std::cout << std::endl;

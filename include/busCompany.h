@@ -27,7 +27,10 @@ public:
     void bfs(const std::string& cStop);
 
     double minDistance(const std::string& originStop, const std::string& destinyStop);
-    std::list<std::pair<const Stop*, std::string>> minPath(const std::string& originStop, const std::string& destinyStop);
+    std::list<std::pair<const Stop*, std::string>> minDistancePath(const std::string& originStop, const std::string& destinyStop);
+
+    int minStops(const std::string& originStop, const std::string& destinyStop);
+    std::list<std::pair<const Stop*, std::string>> minStopsPath(const std::string& originStop, const std::string& destinyStop);
 };
 
 #endif //PROJECT2_BUSCOMPANY_H
