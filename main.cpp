@@ -8,9 +8,9 @@ int main() {
     BusCompany company{"STCP"};
 
     std::cout << "Search by bfs :" << std::endl;
-    company.bfs(stopAcode);
+    //company.bfs(stopAcode);
     std::cout << "Search by dfs :" << std::endl;
-    company.dfs(stopAcode);
+    // company.dfs(stopAcode);
 
     std::cout << company.minDistance(stopAcode, stopBcode, true) << std::endl;
 

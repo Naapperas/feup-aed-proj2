@@ -157,3 +157,11 @@ std::list<std::pair<const Stop*, std::string>> BusCompany::minStopsPath(const st
     }
     return path;
 }
+
+std::set<const Stop *> BusCompany::nearbyStops(double lattittude, double longitude) const {
+
+    Stop dummyStop{"", "", "", lattittude, longitude};
+    std::set<const Stop *> ret;
+
+    return ret;
+}

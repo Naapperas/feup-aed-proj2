@@ -120,3 +120,13 @@ void Graph::visitedFalse() {
 void Graph::clear() {
     this->nodes.clear();
 }
+
+std::set<std::string> Graph::getStopCodes() const {
+
+    std::set<std::string> ret;
+
+    for (const auto& node : nodes)
+        ret.insert(node.first);
+
+    return ret;
+}
