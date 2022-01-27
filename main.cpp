@@ -3,7 +3,7 @@
 
 int main() {
     std::string stopAcode = "ZOID1";
-    std::string stopBcode = "CONT";
+    std::string stopBcode = "VN2";
 
     BusCompany company{"STCP"};
 
