@@ -75,3 +75,7 @@ void Graph::bfs(const std::string& cStop) {
         }
     }
 }
+
+void Graph::dijkstra(const std::string &origin, const std::string &destination) {
+
+}
