@@ -71,3 +71,23 @@ void BusCompany::dfs(const std::string& cStop) {
 void BusCompany::bfs(const std::string& cStop) {
     this->network->bfs(cStop);
 };
+
+double BusCompany::minDistance(const std::string& originStop, const std::string& destinyStop) {
+    this->network->dijkstra(originStop);
+    if (this->network->nodeAt(destinyStop).distToSingleSource == INF) return -1;
+    return this->network->nodeAt(destinyStop).distToSingleSource;
+}
+
+std::list<const Stop*> BusCompany::minPath(const std::string& originStop, const std::string& destinyStop) {
+    this->network->dijkstra(originStop);
+    if (this->network->nodeAt(destinyStop).distToSingleSource == INF) return {};
+
+    std::list<const Stop*> path;
+    path.push_back(this->network->nodeAt(destinyStop).stop);
+    std::string v = destinyStop;
+    while (v != originStop) {
+        v = this->network->nodeAt(v).parentStopCode;
+        path.push_front(this->network->nodeAt(v).stop);
+    }
+    return path;
+}

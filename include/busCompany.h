@@ -25,6 +25,9 @@ public:
 
     // Breadth-First Search: example implementation
     void bfs(const std::string& cStop);
+
+    double minDistance(const std::string& originStop, const std::string& destinyStop);
+    std::list<const Stop*> minPath(const std::string& originStop, const std::string& destinyStop);
 };
 
 #endif //PROJECT2_BUSCOMPANY_H

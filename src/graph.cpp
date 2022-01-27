@@ -76,6 +76,35 @@ void Graph::bfs(const std::string& cStop) {
     }
 }
 
-void Graph::dijkstra(const std::string &origin, const std::string &destination) {
+void Graph::dijkstra(const std::string &origin) {
+    std::set<std::pair<double, std::string>> q;
+    for (auto& node : nodes) {
+        node.second.distToSingleSource = INF;
+        q.insert({INF, node.second.stop->getStopCode()});
+        node.second.visited = false;
+    }
+    nodes[origin].distToSingleSource = 0;
+    q.erase({INF, nodes[origin].stop->getStopCode()});
+    q.insert({0, nodes[origin].stop->getStopCode()});
+    nodes[origin].parentStopCode = origin;
+    while (q.size()>0) {
+        std::string u = q.begin()->second;
+        q.erase(q.begin());
+        // cout << "Node " << u << " with dist = " << nodes[u].dist << endl;
+        nodes[u].visited = true;
+        for (const auto& e : nodes[u].adj) {
+            std::string v = e.dest;
+            double w = e.distance;
+            if (!nodes[v].visited && nodes[u].distToSingleSource + w < nodes[v].distToSingleSource) {
+                q.erase({nodes[v].distToSingleSource, v});
+                nodes[v].distToSingleSource = nodes[u].distToSingleSource + w;
+                nodes[v].parentStopCode = u;
+                q.insert({nodes[v].distToSingleSource, v});
+            }
+        }
+    }
+}
 
+const Graph::Node& Graph::nodeAt(const std::string &key) {
+    return this->nodes[key];
 }
