@@ -97,3 +97,28 @@ std::list<std::pair<const Stop*, std::string>> BusCompany::minDistancePath(const
     }
     return path;
 }
+
+int BusCompany::minStops(const std::string& originStop, const std::string& destinyStop){
+    if (originStop == destinyStop)
+        return 0;
+    this->network->visitedFalse();
+    std::queue<std::pair<std::string ,int>> q; // queue of unvisited nodes with distance to v
+    q.push({originStop, 0});
+    this->network->nodeAt(originStop).visited = true;
+    int nStops = -1;
+    while (!q.empty()) { // while there are still unvisited nodes
+        std::string u = q.front().first;
+        int u1 = q.front().second; q.pop();
+        for (auto e : this->network->nodeAt(u).adj) {
+            std::string w = e.dest;
+            if (!this->network->nodeAt(w).visited) {
+                if (w == destinyStop) {
+                    nStops = u1+1;
+                }
+                q.push({w, u1 + 1});
+                this->network->nodeAt(w).visited = true;
+            }
+        }
+    }
+    return nStops;
+}

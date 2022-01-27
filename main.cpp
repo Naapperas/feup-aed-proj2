@@ -21,6 +21,8 @@ int main() {
 
     std::cout << std::endl;
 
+    std::cout << company.minStops(stopAcode, stopBcode) << std::endl;
+
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }

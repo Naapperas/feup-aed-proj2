@@ -2,6 +2,7 @@
 #define PROJECT2_GRAPH_H
 
 #include <set>
+#include <queue>
 #include <list>
 #include <unordered_map>
 #include <limits>
@@ -48,7 +49,9 @@ public:
 
     void dijkstra(const std::string& origin);
 
-    const Node& nodeAt(const std::string& key);
+    Node& nodeAt(const std::string& key);
+
+    void visitedFalse();
 };
 
 #endif //PROJECT2_GRAPH_H

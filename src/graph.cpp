@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <queue>
 
 #include "../include/graph.h"
 #include "../include/utils.h"
@@ -38,7 +37,7 @@ void Graph::addEdge(const std::string& oStop, const std::string& dStop, const st
 // Depth-First Search: example implementation
 void Graph::dfs(const std::string& cStop, bool firstIteration) {
     if (firstIteration)
-        for (auto& node : nodes) node.second.visited = false;
+        this->visitedFalse();
 
     Node& cNode = nodes[cStop];
     std::cout << cStop << " - " << *(cNode.stop); // show node order
@@ -55,7 +54,7 @@ void Graph::dfs(const std::string& cStop, bool firstIteration) {
 
 // Breadth-First Search: example implementation
 void Graph::bfs(const std::string& cStop) {
-    for (auto& node : nodes) node.second.visited = false;
+    this->visitedFalse();
 
     std::queue<std::string> q; // queue of unvisited nodes
     q.push(cStop);
@@ -110,6 +109,10 @@ void Graph::dijkstra(const std::string &origin) {
     }
 }
 
-const Graph::Node& Graph::nodeAt(const std::string &key) {
+Graph::Node& Graph::nodeAt(const std::string &key) {
     return this->nodes[key];
+}
+
+void Graph::visitedFalse() {
+    for (auto& node : nodes) node.second.visited = false;
 }
