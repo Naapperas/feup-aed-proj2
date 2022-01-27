@@ -12,8 +12,8 @@
 
 class BusCompany {
 
-    Graph* networkDayTime;
-    Graph* networkNocturnal;
+    Graph* dayNetwork;
+    Graph* nightNetwork;
     std::vector<BusLine*> lines;
 
     std::string companyName, lastOriginStop;
