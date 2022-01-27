@@ -36,6 +36,7 @@ public:
     std::list<std::pair<const Stop*, std::string>> minStopsPath(const std::string& originStop, const std::string& destinyStop, bool night = false);
 
     std::set<const Stop*> nearbyStops(double lattittude, double longitude) const;
+    std::set<const Stop*> nearbyStops(const std::string& stopCode) const;
 };
 
 #endif //PROJECT2_BUSCOMPANY_H

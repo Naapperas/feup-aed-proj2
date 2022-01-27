@@ -180,3 +180,9 @@ std::set<const Stop *> BusCompany::nearbyStops(double lattittude, double longitu
 
     return ret;
 }
+
+std::set<const Stop *> BusCompany::nearbyStops(const std::string& stopCode) const {
+    auto node = this->dayNetwork->nodeAt(stopCode);
+
+    return this->nearbyStops(node.stop->getLatitude(), node.stop->getLongitude());
+}
