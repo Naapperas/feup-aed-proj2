@@ -15,7 +15,7 @@ class BusCompany {
     Graph* network;
     std::vector<BusLine*> lines;
 
-    std::string companyName;
+    std::string companyName, lastOriginStop;
 public:
     BusCompany(const std::string& companyName);
     ~BusCompany();

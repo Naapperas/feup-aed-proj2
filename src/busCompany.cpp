@@ -1,6 +1,6 @@
 #include "../include/busCompany.h"
 
-BusCompany::BusCompany(const std::string& companyName) : companyName(companyName) {
+BusCompany::BusCompany(const std::string& companyName) : companyName(companyName), lastOriginStop("") {
 
     auto stopLines = utils::file::readFile("../resources/stops.csv");
     std::vector<Stop*> stops;
@@ -73,13 +73,19 @@ void BusCompany::bfs(const std::string& cStop) {
 };
 
 double BusCompany::minDistance(const std::string& originStop, const std::string& destinyStop) {
-    this->network->dijkstra(originStop);
+    if (lastOriginStop != originStop) {
+        this->network->dijkstra(originStop);
+        lastOriginStop = originStop;
+    }
     if (this->network->nodeAt(destinyStop).distToSingleSource == INF) return -1;
     return this->network->nodeAt(destinyStop).distToSingleSource;
 }
 
 std::list<const Stop*> BusCompany::minPath(const std::string& originStop, const std::string& destinyStop) {
-    this->network->dijkstra(originStop);
+    if (lastOriginStop != originStop) {
+        this->network->dijkstra(originStop);
+        lastOriginStop = originStop;
+    }
     if (this->network->nodeAt(destinyStop).distToSingleSource == INF) return {};
 
     std::list<const Stop*> path;
