@@ -30,8 +30,14 @@ void Menu::init() {
                         case CLIENT_TRAVEL_DISTANCE:
                             Menu::travelMinDistance(stcp);
                             break;
+                        case CLIENT_TRAVEL_DISTANCE_NEARBY:
+                            Menu::travelMinDistanceCoord(stcp);
+                            break;
                         case CLIENT_TRAVEL_STOPS:
                             Menu::travelMinStops(stcp);
+                            break;
+                        case CLIENT_TRAVEL_STOPS_NEARBY:
+                            Menu::travelMinStopsCoord(stcp);
                             break;
                         case CLIENT_WALKING:
                             Menu::changeWalkingDistance(stcp);
@@ -102,7 +108,7 @@ int Menu::showClientMenu() {
     int option;
 
     std::cout << "\tHello client, what would you like to do?\n\n";
-    std::cout << "\t[1] List all stops\n\t[2] Find the shortest path for your travel\n\t[3] Find the path with less stops for your travel\n\t[4] Set your max walking distance\n\t[5] Back\n\n";
+    std::cout << "\t[1] List all stops\n\t[2] Find the shortest path for your travel\n\t[3] Find the shortest path for your travel (coordinates)(change this)\n\t[4] Find the path with less stops for your travel\n\t[5] Find the path with less stops for your travel (coordinates)(change this)\n\t[6] Set your max walking distance\n\t[7] Back\n\n";
     std::cout << "\t> ";
     std::cin >> option;
 
@@ -114,11 +120,11 @@ int Menu::showClientMenu() {
     return option;
 }
 
-int Menu::showInitialMenu(const std::string& airlineName) {
+int Menu::showInitialMenu(const std::string& busCompany) {
 
     int option;
 
-    std::cout << "\t\tWelcome to " << airlineName << "\n\n";
+    std::cout << "\t\tWelcome to " << busCompany << "\n\n";
     std::cout << "\t[1] Client\n\t[2] Admin\n\t[3] Exit\n\n";
     std::cout << "\t> ";
     std::cin >> option;
@@ -151,8 +157,18 @@ void Menu::travelMinDistance(BusCompany & busCompany) {
     Menu::waitForPrompt("\t[press ENTER to continue]");
 }
 
+void Menu::travelMinDistanceCoord(BusCompany & busCompany) {
+    busCompany.travelMinDistanceCoord(); // generate the call in menu, delegate it to BusCompany
+    Menu::waitForPrompt("\t[press ENTER to continue]");
+}
+
 void Menu::travelMinStops(BusCompany & busCompany) {
     busCompany.travelMinStops(); // generate the call in menu, delegate it to BusCompany
+    Menu::waitForPrompt("\t[press ENTER to continue]");
+}
+
+void Menu::travelMinStopsCoord(BusCompany & busCompany) {
+    busCompany.travelMinStopsCoord(); // generate the call in menu, delegate it to BusCompany
     Menu::waitForPrompt("\t[press ENTER to continue]");
 }
 

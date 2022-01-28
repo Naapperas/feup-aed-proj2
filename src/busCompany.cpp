@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "../include/busCompany.h"
 
 BusCompany::BusCompany(const std::string& companyName) : companyName(companyName), lastOriginStop("") {
@@ -306,33 +307,39 @@ void BusCompany::listStops() {
 void BusCompany::travelMinDistance() {
     bool night = inputNightDay();
 
-    char inputOption;
-    std::cout << "\t Would you like to select your departure/destination as stop codes (S/s) or coordinates (C/c)? ";
-    std::cin >> inputOption;
+    std::string origin, dest;
+    std::cout << "\n\tPlease indicate the stop codes: ";
+    std::cin >> origin >> dest;
+
+    std::cout << minDistance(origin, dest, night) << std::endl;
+
+    auto path = minDistancePath(origin, dest, night);
+
+    for (const auto& stop : path)
+        std::cout << *stop.first << " " << stop.second << '\n';
+}
+
+void BusCompany::travelMinDistanceCoord() {
+    bool night = inputNightDay();
+
     std::set<const Stop *> originStops, destStops;
-    std::string origin, dest; // cannot initialize inside case statement
-    double latitude0, longitude0, latitude1, longitude1; // cannot initialize inside case statement
-    switch (std::toupper(inputOption)){
-        case 'S':
-            std::cout << "\n\tPlease indicate the stop codes: ";
-            std::cin >> origin >> dest;
-            originStops = nearbyStops(origin);
-            destStops = nearbyStops(dest);
-            break;
-        case 'C':
-            std::cout << "\n\tPlease indicate your latitude and longitude: ";
-            std::cin >> latitude0 >> longitude0;
-            std::cout << "\n\tPlease indicate your destination latitude and longitude: ";
-            std::cin >> latitude1 >> longitude1;
-            originStops = nearbyStops(latitude0, longitude0);
-            destStops = nearbyStops(latitude1, longitude1);
-            break;
-        default:
-            originStops = {};
-            destStops = {};
-    }
+    double latitude0, longitude0, latitude1, longitude1;
+
+    std::cout << "\n\tPlease indicate your latitude and longitude: ";
+    std::cin >> latitude0 >> longitude0;
+    std::cout << "\n\tPlease indicate your destination latitude and longitude: ";
+    std::cin >> latitude1 >> longitude1;
+    originStops = nearbyStops(latitude0, longitude0);
+    destStops = nearbyStops(latitude1, longitude1);
+
     if (originStops.empty() || destStops.empty()){
         std::cout << "\tInvalid locations, unable to select stops";
+        return;
+    }
+    std::set<const Stop *> intersect;
+    std::set_intersection(originStops.begin(), originStops.end(), destStops.begin(), destStops.end(), std::inserter(intersect, intersect.begin()));
+    if (!intersect.empty()){
+        std::cout << "\tThis locations are to close, no travel needed :)";
         return;
     }
 }
@@ -340,33 +347,39 @@ void BusCompany::travelMinDistance() {
 void BusCompany::travelMinStops() {
     bool night = inputNightDay();
 
-    char inputOption;
-    std::cout << "\t Would you like to select your departure/destination as stop codes (S/s) or coordinates (C/c)? ";
-    std::cin >> inputOption;
+    std::string origin, dest;
+    std::cout << "\n\tPlease indicate the stop codes: ";
+    std::cin >> origin >> dest;
+
+    std::cout << minStops(origin, dest, night) << std::endl;
+
+    auto path = minStopsPath(origin, dest, night);
+
+    for (const auto& stop : path)
+        std::cout << *stop.first << " " << stop.second << '\n';
+}
+
+void BusCompany::travelMinStopsCoord() {
+    bool night = inputNightDay();
+
     std::set<const Stop *> originStops, destStops;
-    std::string origin, dest; // cannot initialize inside case statement
-    double latitude0, longitude0, latitude1, longitude1; // cannot initialize inside case statement
-    switch (std::toupper(inputOption)){
-        case 'S':
-            std::cout << "\n\tPlease indicate the stop codes: ";
-            std::cin >> origin >> dest;
-            originStops = nearbyStops(origin);
-            destStops = nearbyStops(dest);
-            break;
-        case 'C':
-            std::cout << "\n\tPlease indicate your latitude and longitude: ";
-            std::cin >> latitude0 >> longitude0;
-            std::cout << "\n\tPlease indicate your destination latitude and longitude: ";
-            std::cin >> latitude1 >> longitude1;
-            originStops = nearbyStops(latitude0, longitude0);
-            destStops = nearbyStops(latitude1, longitude1);
-            break;
-        default:
-            originStops = {};
-            destStops = {};
-    }
+    double latitude0, longitude0, latitude1, longitude1;
+
+    std::cout << "\n\tPlease indicate your latitude and longitude: ";
+    std::cin >> latitude0 >> longitude0;
+    std::cout << "\n\tPlease indicate your destination latitude and longitude: ";
+    std::cin >> latitude1 >> longitude1;
+    originStops = nearbyStops(latitude0, longitude0);
+    destStops = nearbyStops(latitude1, longitude1);
+
     if (originStops.empty() || destStops.empty()){
         std::cout << "\tInvalid locations, unable to select stops";
+        return;
+    }
+    std::set<const Stop *> intersect;
+    std::set_intersection(originStops.begin(), originStops.end(), destStops.begin(), destStops.end(), std::inserter(intersect, intersect.begin()));
+    if (!intersect.empty()){
+        std::cout << "\tThis locations are to close, no travel needed :)";
         return;
     }
 }

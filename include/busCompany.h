@@ -55,7 +55,9 @@ public:
 
     void listStops();
     void travelMinDistance();
+    void travelMinDistanceCoord();
     void travelMinStops();
+    void travelMinStopsCoord();
     void changeWalkingDistance();
 
 };

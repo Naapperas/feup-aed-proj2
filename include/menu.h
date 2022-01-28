@@ -23,7 +23,9 @@ class Menu {
     enum ClientMenuOption {
         CLIENT_LIST_ALL_STOPS = 1,
         CLIENT_TRAVEL_DISTANCE,
+        CLIENT_TRAVEL_DISTANCE_NEARBY,
         CLIENT_TRAVEL_STOPS,
+        CLIENT_TRAVEL_STOPS_NEARBY,
         CLIENT_WALKING,
         CLIENT_BACK
     };
@@ -64,7 +66,9 @@ public:
 
     static void listStops(BusCompany & busCompany);
     static void travelMinDistance(BusCompany & busCompany);
+    static void travelMinDistanceCoord(BusCompany & busCompany);
     static void travelMinStops(BusCompany & busCompany);
+    static void travelMinStopsCoord(BusCompany & busCompany);
     static void changeWalkingDistance(BusCompany & busCompany);
 };
 
