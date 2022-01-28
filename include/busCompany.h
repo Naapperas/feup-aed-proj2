@@ -36,6 +36,10 @@ public:
     int minStops(const std::string& originStop, const std::string& destinyStop, bool night = false);
     std::list<std::pair<const Stop*, std::string>> minStopsPath(const std::string& originStop, const std::string& destinyStop, bool night = false);
 
+    int minZones(const std::string& originStop, const std::string& destinyStop, bool night = false);
+    std::list<std::pair<const Stop*, std::string>> minZonesPath(const std::string& originStop, const std::string& destinyStop, bool night = false);
+
+
     std::set<const Stop*> nearbyStops(double lattittude, double longitude) const;
     std::set<const Stop*> nearbyStops(const std::string& stopCode) const;
 

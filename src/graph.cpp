@@ -144,7 +144,7 @@ void Graph::dijkstraMinZones(const std::string &origin) {
         nodes[u].visited = true;
         for (const auto& e : nodes[u].adj) {
             std::string v = e.dest;
-            double w = e.distance + (nodes[v].stop->getZone() != nodes[u].stop->getZone()) * 10; // ad zone change overhead
+            double w = e.distance + (nodes[v].stop->getZone() != nodes[u].stop->getZone()) * e.distance; // add zone change overhead
 
             if (!nodes[v].visited && nodes[u].distToSingleSource + w < nodes[v].distToSingleSource) {
                 q.erase({nodes[v].distToSingleSource, v});
