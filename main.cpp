@@ -12,18 +12,18 @@ int main() {
     std::cout << "Search by dfs :" << std::endl;
     // company.dfs(stopAcode);
 
-    std::cout << company.minDistance(stopAcode, stopBcode, true) << std::endl;
+    std::cout << company.minDistance(stopAcode, stopBcode) << std::endl;
 
-    auto path = company.minDistancePath(stopAcode, stopBcode, true);
+    auto path = company.minDistancePath(stopAcode, stopBcode);
 
     for (const auto& stop : path)
         std::cout << *stop.first << " " << stop.second << '\n';
 
     std::cout << std::endl;
 
-    std::cout << company.minStops(stopAcode, stopBcode, true) << std::endl;
+    std::cout << company.minStops(stopAcode, stopBcode) << std::endl;
 
-    auto path1 = company.minStopsPath(stopAcode, stopBcode, true);
+    auto path1 = company.minStopsPath(stopAcode, stopBcode);
 
     for (const auto& stop : path1)
         std::cout << *stop.first << " " << stop.second << '\n';
@@ -51,6 +51,17 @@ int main() {
     std::cout << "Recalculated" << std::endl;
 
     company.calculateWalkingEdges(0.01);
+
+    std::cout << std::endl;
+
+    std::cout << company.minZones(stopAcode, stopBcode) << std::endl;
+
+    auto path2 = company.minZonesPath(stopAcode, stopBcode);
+
+    for (const auto& stop : path2)
+        std::cout << *stop.first << " " << stop.second << '\n';
+
+    std::cout << std::endl;
 
     std::cout << "Hello, World!" << std::endl;
     return 0;

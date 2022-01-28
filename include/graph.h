@@ -15,7 +15,7 @@ class Graph {
     struct Edge {
         std::string dest; // Stop destination
         double distance; // distance between stops
-        std::set<std::string> lineCodes;
+        std::string lineCode;
     };
 
     struct Node {
@@ -47,7 +47,8 @@ public:
     // Breadth-First Search: example implementation
     void bfs(const std::string& cStop);
 
-    void dijkstra(const std::string& origin);
+    void dijkstraMinDistance(const std::string& origin);
+    void dijkstraMinZones(const std::string& origin);
 
     Node& nodeAt(const std::string& key);
 

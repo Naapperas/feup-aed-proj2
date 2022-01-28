@@ -66,9 +66,11 @@ void BusCompany::bfs(const std::string& cStop, bool night) {
 
 double BusCompany::minDistance(const std::string& originStop, const std::string& destinyStop, bool night) {
     auto &network =  night ? this->nightNetwork : this->dayNetwork;
-    if (lastOriginStop != originStop) {
-        network->dijkstra(originStop);
+    if (lastOriginStop != originStop || lastSearchOperation != "distance") {
+        network->dijkstraMinDistance(originStop);
         lastOriginStop = originStop;
+        lastSearchOperation = "distance";
+        lastSearchOperation = "distance";
     }
     if (network->nodeAt(destinyStop).distToSingleSource == INF) return -1;
     return network->nodeAt(destinyStop).distToSingleSource;
@@ -77,9 +79,10 @@ double BusCompany::minDistance(const std::string& originStop, const std::string&
 std::list<std::pair<const Stop*, std::string>> BusCompany::minDistancePath(const std::string& originStop, const std::string& destinyStop, bool night) {
     auto &network =  night ? this->nightNetwork : this->dayNetwork;
 
-    if (lastOriginStop != originStop) {
-        network->dijkstra(originStop);
+    if (lastOriginStop != originStop || lastSearchOperation != "distance") {
+        network->dijkstraMinDistance(originStop);
         lastOriginStop = originStop;
+        lastSearchOperation = "distance";
     }
     if (network->nodeAt(destinyStop).distToSingleSource == INF) return {};
 
@@ -96,6 +99,9 @@ std::list<std::pair<const Stop*, std::string>> BusCompany::minDistancePath(const
 int BusCompany::minStops(const std::string& originStop, const std::string& destinyStop, bool night){
     if (originStop == destinyStop)
         return 0;
+
+    lastOriginStop = originStop;
+    lastSearchOperation = "stops";
 
     auto &network = night ? this->nightNetwork : this->dayNetwork;
 
@@ -117,7 +123,7 @@ int BusCompany::minStops(const std::string& originStop, const std::string& desti
                 q.push({w, u1 + 1});
                 network->nodeAt(w).visited = true;
                 network->nodeAt(w).parentStopCodeBFS = u;
-                network->nodeAt(w).lineCodeBFS = *e.lineCodes.begin();
+                network->nodeAt(w).lineCodeBFS = e.lineCode;
             }
         }
     }
@@ -183,7 +189,7 @@ void BusCompany::calculateWalkingEdges(double walkingDistance) {
             auto edge = stopDayNode.adj.begin();
             while (edge != stopDayNode.adj.end()) {
 
-                if (edge->lineCodes.contains("FOOT")) {
+                if (edge->lineCode == "FOOT") {
                     edge = stopDayNode.adj.erase(edge);
                 } else
                     edge++;
@@ -192,7 +198,7 @@ void BusCompany::calculateWalkingEdges(double walkingDistance) {
             edge = stopNightNode.adj.begin();
             while (edge != stopNightNode.adj.end()) {
 
-                if (edge->lineCodes.contains("FOOT")) {
+                if (edge->lineCode == "FOOT") {
                     edge = stopNightNode.adj.erase(edge);
                 } else
                     edge++;
@@ -226,4 +232,53 @@ void BusCompany::addWalkingEdges() {
             }
         }
     }
+}
+
+int BusCompany::minZones(const std::string &originStop, const std::string &destinyStop, bool night) {
+    auto &network =  night ? this->nightNetwork : this->dayNetwork;
+    if (lastOriginStop != originStop || lastSearchOperation != "zones") {
+        network->dijkstraMinZones(originStop);
+        lastOriginStop = originStop;
+        lastSearchOperation = "zones";
+    }
+    if (network->nodeAt(destinyStop).distToSingleSource == INF) return -1;
+
+    if (network->nodeAt(destinyStop).stop->getZone() == network->nodeAt(originStop).stop->getZone())
+        return 1;
+
+    std::string lastZone = network->nodeAt(destinyStop).stop->getZone();
+    int numZones = 1;
+
+    std::string v = destinyStop;
+    while (v != originStop) {
+        auto node = network->nodeAt(v);
+        v = node.parentStopCodeBFS;
+
+        if (node.stop->getZone() != lastZone) {
+            numZones++;
+            lastZone = node.stop->getZone();
+        }
+    }
+
+    return numZones;
+}
+
+std::list<std::pair<const Stop *, std::string>> BusCompany::minZonesPath(const std::string &originStop, const std::string &destinyStop, bool night) {
+    auto &network =  night ? this->nightNetwork : this->dayNetwork;
+
+    if (lastOriginStop != originStop || lastSearchOperation != "zones") {
+        network->dijkstraMinZones(originStop);
+        lastOriginStop = originStop;
+        lastSearchOperation = "zones";
+    }
+    if (network->nodeAt(destinyStop).distToSingleSource == INF) return {};
+
+    std::list<std::pair<const Stop*, std::string>> path;
+    path.emplace_front(network->nodeAt(destinyStop).stop, network->nodeAt(destinyStop).lineCodeDijkstra);
+    std::string v = destinyStop;
+    while (v != originStop) {
+        v = network->nodeAt(v).parentStopCodeDijkstra;
+        path.emplace_front(network->nodeAt(v).stop, network->nodeAt(v).lineCodeDijkstra);
+    }
+    return path;
 }
