@@ -23,15 +23,9 @@ void Graph::addEdge(const std::string& oStop, const std::string& dStop, const st
 
     double distance = Stop::distance(*(oItr->second.stop), *(dItr->second.stop));
 
-    auto existingEdge = std::find_if(oItr->second.adj.begin(), oItr->second.adj.end(), [dStop](const Edge &e){return e.dest==dStop;});
-
-    if (existingEdge != oItr->second.adj.end()) {
-        existingEdge->lineCodes.insert(lineCode);
-    } else {
-        oItr->second.adj.push_back({dStop, distance, {lineCode}});
-        if (!this->hasDir)
-            dItr->second.adj.push_back({oStop, distance, {lineCode}});
-    }
+    oItr->second.adj.push_back({dStop, distance, lineCode});
+    if (!this->hasDir)
+        dItr->second.adj.push_back({oStop, distance, lineCode});
 }
 
 // Depth-First Search: example implementation
@@ -78,7 +72,7 @@ void Graph::bfs(const std::string& cStop) {
     }
 }
 
-void Graph::dijkstra(const std::string &origin) {
+void Graph::dijkstraMinDistance(const std::string &origin) {
     std::set<std::pair<double, std::string>> q;
     for (auto& node : nodes) {
         node.second.distToSingleSource = INF;
@@ -102,7 +96,7 @@ void Graph::dijkstra(const std::string &origin) {
                 q.erase({nodes[v].distToSingleSource, v});
                 nodes[v].distToSingleSource = nodes[u].distToSingleSource + w;
                 nodes[v].parentStopCodeDijkstra = u;
-                nodes[v].lineCodeDijkstra = *e.lineCodes.begin();
+                nodes[v].lineCodeDijkstra = e.lineCode;
                 q.insert({nodes[v].distToSingleSource, v});
             }
         }
@@ -129,4 +123,46 @@ std::set<std::string> Graph::getStopCodes() const {
         ret.insert(node.first);
 
     return ret;
+}
+
+void Graph::dijkstraMinLines(const std::string &origin) {
+    std::set<std::pair<double, std::string>> q;
+    for (auto& node : nodes) {
+        node.second.distToSingleSource = INF;
+        q.insert({INF, node.second.stop->getStopCode()});
+        node.second.visited = false;
+        node.second.lineCodeDijkstra = "";
+    }
+    nodes[origin].distToSingleSource = 0;
+    q.erase({INF, nodes[origin].stop->getStopCode()});
+    q.insert({0, nodes[origin].stop->getStopCode()});
+    nodes[origin].parentStopCodeDijkstra = origin;
+    nodes[origin].lineCodeDijkstra = "Begin";
+    while (!q.empty()) {
+        std::string u = q.begin()->second;
+        q.erase(q.begin());
+        nodes[u].visited = true;
+        for (const auto& e : nodes[u].adj) {
+            std::string v = e.dest;
+            std::string l = e.lineCode;
+            double w = e.distance;
+
+            if (!nodes[v].visited) {
+
+                if (nodes[u].lineCodeDijkstra == "Begin") {
+
+                } else {
+
+                }
+            }
+
+            if (!nodes[v].visited && nodes[u].distToSingleSource + w < nodes[v].distToSingleSource) {
+                q.erase({nodes[v].distToSingleSource, v});
+                nodes[v].distToSingleSource = nodes[u].distToSingleSource + w;
+                nodes[v].parentStopCodeDijkstra = u;
+                nodes[v].lineCodeDijkstra = e.lineCode;
+                q.insert({nodes[v].distToSingleSource, v});
+            }
+        }
+    }
 }

@@ -67,7 +67,7 @@ void BusCompany::bfs(const std::string& cStop, bool night) {
 double BusCompany::minDistance(const std::string& originStop, const std::string& destinyStop, bool night) {
     auto &network =  night ? this->nightNetwork : this->dayNetwork;
     if (lastOriginStop != originStop) {
-        network->dijkstra(originStop);
+        network->dijkstraMinDistance(originStop);
         lastOriginStop = originStop;
     }
     if (network->nodeAt(destinyStop).distToSingleSource == INF) return -1;
@@ -78,7 +78,7 @@ std::list<std::pair<const Stop*, std::string>> BusCompany::minDistancePath(const
     auto &network =  night ? this->nightNetwork : this->dayNetwork;
 
     if (lastOriginStop != originStop) {
-        network->dijkstra(originStop);
+        network->dijkstraMinDistance(originStop);
         lastOriginStop = originStop;
     }
     if (network->nodeAt(destinyStop).distToSingleSource == INF) return {};
@@ -117,7 +117,7 @@ int BusCompany::minStops(const std::string& originStop, const std::string& desti
                 q.push({w, u1 + 1});
                 network->nodeAt(w).visited = true;
                 network->nodeAt(w).parentStopCodeBFS = u;
-                network->nodeAt(w).lineCodeBFS = *e.lineCodes.begin();
+                network->nodeAt(w).lineCodeBFS = e.lineCode;
             }
         }
     }
@@ -183,7 +183,7 @@ void BusCompany::calculateWalkingEdges(double walkingDistance) {
             auto edge = stopDayNode.adj.begin();
             while (edge != stopDayNode.adj.end()) {
 
-                if (edge->lineCodes.contains("FOOT")) {
+                if (edge->lineCode == "FOOT") {
                     edge = stopDayNode.adj.erase(edge);
                 } else
                     edge++;
@@ -192,7 +192,7 @@ void BusCompany::calculateWalkingEdges(double walkingDistance) {
             edge = stopNightNode.adj.begin();
             while (edge != stopNightNode.adj.end()) {
 
-                if (edge->lineCodes.contains("FOOT")) {
+                if (edge->lineCode == "FOOT") {
                     edge = stopNightNode.adj.erase(edge);
                 } else
                     edge++;
