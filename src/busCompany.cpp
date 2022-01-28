@@ -162,9 +162,9 @@ std::list<std::pair<const Stop*, std::string>> BusCompany::minStopsPath(const st
     return path;
 }
 
-std::set<const Stop *> BusCompany::nearbyStops(double lattittude, double longitude) const {
+std::set<const Stop *> BusCompany::nearbyStops(double latitude, double longitude) const {
 
-    Stop dummyStop{"", "", "", lattittude, longitude};
+    Stop dummyStop{"", "", "", latitude, longitude};
     std::set<const Stop *> ret;
 
     for (const auto& stopCode : this->dayNetwork->getStopCodes()) { // can be any of them, they both have the same stops
@@ -176,7 +176,7 @@ std::set<const Stop *> BusCompany::nearbyStops(double lattittude, double longitu
     }
 
     for (auto stop : ret) {
-        if (stop->getLatitude() == lattittude && stop->getLongitude() == longitude) {
+        if (stop->getLatitude() == latitude && stop->getLongitude() == longitude) {
             ret.erase(stop);
             break;
         }
@@ -305,16 +305,76 @@ void BusCompany::listStops() {
 
 void BusCompany::travelMinDistance() {
     bool night = inputNightDay();
+
+    char inputOption;
+    std::cout << "\t Would you like to select your departure/destination as stop codes (S/s) or coordinates (C/c)? ";
+    std::cin >> inputOption;
+    std::set<const Stop *> originStops, destStops;
+    std::string origin, dest; // cannot initialize inside case statement
+    double latitude0, longitude0, latitude1, longitude1; // cannot initialize inside case statement
+    switch (std::toupper(inputOption)){
+        case 'S':
+            std::cout << "\n\tPlease indicate the stop codes: ";
+            std::cin >> origin >> dest;
+            originStops = nearbyStops(origin);
+            destStops = nearbyStops(dest);
+            break;
+        case 'C':
+            std::cout << "\n\tPlease indicate your latitude and longitude: ";
+            std::cin >> latitude0 >> longitude0;
+            std::cout << "\n\tPlease indicate your destination latitude and longitude: ";
+            std::cin >> latitude1 >> longitude1;
+            originStops = nearbyStops(latitude0, longitude0);
+            destStops = nearbyStops(latitude1, longitude1);
+            break;
+        default:
+            originStops = {};
+            destStops = {};
+    }
+    if (originStops.empty() || destStops.empty()){
+        std::cout << "\tInvalid locations, unable to select stops";
+        return;
+    }
 }
 
 void BusCompany::travelMinStops() {
     bool night = inputNightDay();
+
+    char inputOption;
+    std::cout << "\t Would you like to select your departure/destination as stop codes (S/s) or coordinates (C/c)? ";
+    std::cin >> inputOption;
+    std::set<const Stop *> originStops, destStops;
+    std::string origin, dest; // cannot initialize inside case statement
+    double latitude0, longitude0, latitude1, longitude1; // cannot initialize inside case statement
+    switch (std::toupper(inputOption)){
+        case 'S':
+            std::cout << "\n\tPlease indicate the stop codes: ";
+            std::cin >> origin >> dest;
+            originStops = nearbyStops(origin);
+            destStops = nearbyStops(dest);
+            break;
+        case 'C':
+            std::cout << "\n\tPlease indicate your latitude and longitude: ";
+            std::cin >> latitude0 >> longitude0;
+            std::cout << "\n\tPlease indicate your destination latitude and longitude: ";
+            std::cin >> latitude1 >> longitude1;
+            originStops = nearbyStops(latitude0, longitude0);
+            destStops = nearbyStops(latitude1, longitude1);
+            break;
+        default:
+            originStops = {};
+            destStops = {};
+    }
+    if (originStops.empty() || destStops.empty()){
+        std::cout << "\tInvalid locations, unable to select stops";
+        return;
+    }
 }
 
 void BusCompany::changeWalkingDistance() {
 
     double dist;
-    std::cout << "\t How much are you willing to walk between two stops (in kilometers)? ";
+    std::cout << "\tHow much are you willing to walk between two stops (in kilometers)? ";
     std::cin >> dist;
     calculateWalkingEdges(dist);
 }
