@@ -33,6 +33,9 @@ void Menu::init() {
                         case CLIENT_TRAVEL_STOPS:
                             Menu::travelMinStops(stcp);
                             break;
+                        case CLIENT_WALKING:
+                            Menu::changeWalkingDistance(stcp);
+                            break;
                         case CLIENT_BACK:
                             break;
                         default:
@@ -139,17 +142,22 @@ void Menu::endProgram() {
 }
 
 void Menu::listStops(BusCompany & busCompany) {
-    busCompany.listStops(); // generate the call in menu, delegate it to Airline
+    busCompany.listStops(); // generate the call in menu, delegate it to BusCompany
     Menu::waitForPrompt("\t[press ENTER to continue]");
 }
 
 void Menu::travelMinDistance(BusCompany & busCompany) {
-    busCompany.travelMinDistance(); // generate the call in menu, delegate it to Airline
+    busCompany.travelMinDistance(); // generate the call in menu, delegate it to BusCompany
     Menu::waitForPrompt("\t[press ENTER to continue]");
 }
 
 void Menu::travelMinStops(BusCompany & busCompany) {
-    busCompany.travelMinStops();
+    busCompany.travelMinStops(); // generate the call in menu, delegate it to BusCompany
+    Menu::waitForPrompt("\t[press ENTER to continue]");
+}
+
+void Menu::changeWalkingDistance(BusCompany &busCompany) {
+    busCompany.changeWalkingDistance(); // generate the call in menu, delegate it to BusCompany
     Menu::waitForPrompt("\t[press ENTER to continue]");
 }
 

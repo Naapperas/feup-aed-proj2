@@ -24,6 +24,7 @@ class Menu {
         CLIENT_LIST_ALL_STOPS = 1,
         CLIENT_TRAVEL_DISTANCE,
         CLIENT_TRAVEL_STOPS,
+        CLIENT_WALKING,
         CLIENT_BACK
     };
 
@@ -64,6 +65,7 @@ public:
     static void listStops(BusCompany & busCompany);
     static void travelMinDistance(BusCompany & busCompany);
     static void travelMinStops(BusCompany & busCompany);
+    static void changeWalkingDistance(BusCompany & busCompany);
 };
 
 #endif //PROJECT2_MENU_H

@@ -294,3 +294,7 @@ void BusCompany::travelMinDistance() {
 void BusCompany::travelMinStops() {
 
 }
+
+void BusCompany::changeWalkingDistance() {
+
+}
