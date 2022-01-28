@@ -48,6 +48,10 @@ int main() {
 
     company.calculateWalkingEdges(0.1);
 
+    std::cout << "Recalculated" << std::endl;
+
+    company.calculateWalkingEdges(0.01);
+
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }

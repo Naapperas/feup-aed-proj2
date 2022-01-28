@@ -189,6 +189,7 @@ void BusCompany::calculateWalkingEdges(double walkingDistance) {
                     edge++;
             }
 
+            edge = stopNightNode.adj.begin();
             while (edge != stopNightNode.adj.end()) {
 
                 if (edge->lineCodes.contains("FOOT")) {
