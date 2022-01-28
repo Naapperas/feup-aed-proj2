@@ -52,6 +52,22 @@ BusCompany::~BusCompany() {
         delete line;
 }
 
+bool BusCompany::inputNightDay() {
+    char option;
+    std::cout << "\tDo you plan on travelling during the day (D/d) or during the night (N/n)? ";
+    std::cin >> option;
+    switch (toupper(option)){
+        case 'D':
+            return false;
+            break;
+        case 'N':
+            return true;
+            break;
+        default:
+            return false;
+    }
+}
+
 // Depth-First Search: example implementation
 void BusCompany::dfs(const std::string& cStop, bool night) {
     auto &network =  night ? this->nightNetwork : this->dayNetwork;
@@ -288,13 +304,15 @@ void BusCompany::listStops() {
 }
 
 void BusCompany::travelMinDistance() {
-
+    bool night = inputNightDay();
 }
 
 void BusCompany::travelMinStops() {
-
+    bool night = inputNightDay();
 }
 
 void BusCompany::changeWalkingDistance() {
 
+    bool night = inputNightDay();
 }
+

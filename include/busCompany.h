@@ -20,6 +20,9 @@ class BusCompany {
     std::vector<BusLine*> lines;
 
     std::string companyName, lastOriginStop, lastSearchOperation;
+
+    bool inputNightDay();
+
 public:
     BusCompany(const std::string& companyName);
     ~BusCompany();
