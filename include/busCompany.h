@@ -13,6 +13,7 @@
 class BusCompany {
 
     constexpr static double MAX_NEARBY_DISTANCE = 0.05;
+    double userWalkingDistance = Stop::MAX_WALKING_DISTANCE; // set as default, to be changed later
 
     Graph* dayNetwork;
     Graph* nightNetwork;
@@ -37,6 +38,9 @@ public:
 
     std::set<const Stop*> nearbyStops(double lattittude, double longitude) const;
     std::set<const Stop*> nearbyStops(const std::string& stopCode) const;
+
+    void calculateWalkingEdges(double walkingDistance);
+    void addWalkingEdges();
 };
 
 #endif //PROJECT2_BUSCOMPANY_H
