@@ -46,6 +46,8 @@ int main() {
 
     std::cout << (stops == stops2) << std::endl;
 
+    company.calculateWalkingEdges(0.1);
+
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }

@@ -28,7 +28,7 @@ class Graph {
 
     int n;
     bool hasDir; // false: undirect; true: directed
-    std::unordered_map<std::string,Node> nodes; // The list of nodes being represented
+    std::unordered_map<std::string, Node> nodes; // The list of nodes being represented
 
 public:
     // Constructor: nr nodes and direction (default: directed)
