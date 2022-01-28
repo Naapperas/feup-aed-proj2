@@ -34,7 +34,7 @@ void Graph::dfs(const std::string& cStop, bool firstIteration) {
         this->visitedFalse();
 
     Node& cNode = nodes[cStop];
-    std::cout << cStop << " - " << *(cNode.stop) << '\n'; // show node order
+    std::cout << " - " << *(cNode.stop) << '\n'; // show node order
     cNode.visited = true;
 
     for (const auto& e : cNode.adj) {
