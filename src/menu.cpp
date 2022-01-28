@@ -102,7 +102,7 @@ int Menu::showClientMenu() {
     int option;
 
     std::cout << "\tHello client, what would you like to do?\n\n";
-    std::cout << "\t[1] List all stops\n\t[2] Find the shortest path for your travel\n\t[3] Find the path with less stops for your travel\n\t[4] Back\n\n";
+    std::cout << "\t[1] List all stops\n\t[2] Find the shortest path for your travel\n\t[3] Find the path with less stops for your travel\n\t[4] Set your max walking distance\n\t[5] Back\n\n";
     std::cout << "\t> ";
     std::cin >> option;
 

@@ -313,6 +313,9 @@ void BusCompany::travelMinStops() {
 
 void BusCompany::changeWalkingDistance() {
 
-    bool night = inputNightDay();
+    double dist;
+    std::cout << "\t How much are you willing to walk between two stops (in kilometers)? ";
+    std::cin >> dist;
+    calculateWalkingEdges(dist);
 }
 
