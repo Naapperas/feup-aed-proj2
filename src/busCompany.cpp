@@ -342,6 +342,33 @@ void BusCompany::travelMinDistanceCoord() {
         std::cout << "\tThis locations are to close, no travel needed :)";
         return;
     }
+
+    std::string origin, dest;
+    for (auto s: originStops)
+        std::cout << "\t" <<  s << std::endl;
+    std::cout << "\tPick a close by stop to start your ride: ";
+    std::cin >> origin;
+    if (!originStops.contains(origin)){
+        std::cout << "\tUnable to select that stop";
+        return;
+    }
+
+    for (auto s: destStops)
+        std::cout << "\t" <<  s << std::endl;
+    std::cout << "\tPick a close by stop to finish your ride: ";
+    std::cin >> dest;
+    if (!destStops.contains(dest)){
+        std::cout << "\tUnable to select that stop";
+        return;
+    }
+
+    std::cout << minDistance(origin, dest, night) << std::endl;
+
+    auto path = minDistancePath(origin, dest, night);
+
+    for (const auto& stop : path)
+        std::cout << *stop.first << " " << stop.second << '\n';
+
 }
 
 void BusCompany::travelMinStops() {
@@ -382,6 +409,32 @@ void BusCompany::travelMinStopsCoord() {
         std::cout << "\tThis locations are to close, no travel needed :)";
         return;
     }
+
+    std::string origin, dest;
+    for (auto s: originStops)
+        std::cout << "\t" <<  s << std::endl;
+    std::cout << "\tPick a close by stop to start your ride: ";
+    std::cin >> origin;
+    if (!originStops.contains(origin)){
+        std::cout << "\tUnable to select that stop";
+        return;
+    }
+
+    for (auto s: destStops)
+        std::cout << "\t" <<  s << std::endl;
+    std::cout << "\tPick a close by stop to finish your ride: ";
+    std::cin >> dest;
+    if (!destStops.contains(dest)){
+        std::cout << "\tUnable to select that stop";
+        return;
+    }
+
+    std::cout << minStops(origin, dest, night) << std::endl;
+
+    auto path = minStopsPath(origin, dest, night);
+
+    for (const auto& stop : path)
+        std::cout << *stop.first << " " << stop.second << '\n';
 }
 
 void BusCompany::changeWalkingDistance() {
