@@ -24,6 +24,10 @@ public:
     BusCompany(const std::string& companyName);
     ~BusCompany();
 
+    std::string getName(){
+        return companyName;
+    }
+
     // Depth-First Search: example implementation
     void dfs(const std::string& cStop, bool night = false);
 
@@ -45,6 +49,11 @@ public:
 
     void calculateWalkingEdges(double walkingDistance);
     void addWalkingEdges();
+
+    void listStops();
+    void travelMinDistance();
+    void travelMinStops();
+
 };
 
 #endif //PROJECT2_BUSCOMPANY_H

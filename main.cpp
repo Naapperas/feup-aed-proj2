@@ -1,7 +1,7 @@
-#include <iostream>
-#include "include/busCompany.h"
+#include "include/menu.h"
 
 int main() {
+    /*
     std::string stopAcode = "AL3";
     std::string stopBcode = "MTSP1";
 
@@ -64,5 +64,9 @@ int main() {
     std::cout << std::endl;
 
     std::cout << "Hello, World!" << std::endl;
+     */
+
+    Menu::init();
+
     return 0;
 }

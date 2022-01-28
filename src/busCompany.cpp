@@ -282,3 +282,15 @@ std::list<std::pair<const Stop *, std::string>> BusCompany::minZonesPath(const s
     }
     return path;
 }
+
+void BusCompany::listStops() {
+    this->dfs("AL3");
+}
+
+void BusCompany::travelMinDistance() {
+
+}
+
+void BusCompany::travelMinStops() {
+
+}
