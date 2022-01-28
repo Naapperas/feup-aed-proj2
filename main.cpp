@@ -52,6 +52,17 @@ int main() {
 
     company.calculateWalkingEdges(0.01);
 
+    std::cout << std::endl;
+
+    std::cout << company.minZones(stopAcode, stopBcode) << std::endl;
+
+    auto path2 = company.minZonesPath(stopAcode, stopBcode);
+
+    for (const auto& stop : path2)
+        std::cout << *stop.first << " " << stop.second << '\n';
+
+    std::cout << std::endl;
+
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }

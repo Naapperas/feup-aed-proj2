@@ -238,7 +238,7 @@ int BusCompany::minZones(const std::string &originStop, const std::string &desti
 
     if (network->nodeAt(destinyStop).stop->getZone() == network->nodeAt(originStop).stop->getZone())
         return 1;
-    4
+
     std::string lastZone = network->nodeAt(destinyStop).stop->getZone();
     int numZones = 1;
 
