@@ -125,7 +125,7 @@ std::set<std::string> Graph::getStopCodes() const {
     return ret;
 }
 
-void Graph::dijkstraMinLines(const std::string &origin) {
+void Graph::dijkstraMinZones(const std::string &origin) {
     std::set<std::pair<double, std::string>> q;
     for (auto& node : nodes) {
         node.second.distToSingleSource = INF;
@@ -144,17 +144,7 @@ void Graph::dijkstraMinLines(const std::string &origin) {
         nodes[u].visited = true;
         for (const auto& e : nodes[u].adj) {
             std::string v = e.dest;
-            std::string l = e.lineCode;
-            double w = e.distance;
-
-            if (!nodes[v].visited) {
-
-                if (nodes[u].lineCodeDijkstra == "Begin") {
-
-                } else {
-
-                }
-            }
+            double w = e.distance + (nodes[v].stop->getZone() != nodes[u].stop->getZone()) * 10; // ad zone change overhead
 
             if (!nodes[v].visited && nodes[u].distToSingleSource + w < nodes[v].distToSingleSource) {
                 q.erase({nodes[v].distToSingleSource, v});

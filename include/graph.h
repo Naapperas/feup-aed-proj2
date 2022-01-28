@@ -48,7 +48,7 @@ public:
     void bfs(const std::string& cStop);
 
     void dijkstraMinDistance(const std::string& origin);
-    void dijkstraMinLines(const std::string& origin);
+    void dijkstraMinZones(const std::string& origin);
 
     Node& nodeAt(const std::string& key);
 
