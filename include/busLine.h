@@ -39,12 +39,8 @@ public:
         return this->stopsReverse;
     }
 
-    void closeStop() {
-        this->closed = true;
-    }
-
-    void openStop() {
-        this->closed = false;
+    void toggleLine() {
+        this->closed = !this->closed;
     }
 
     bool isClosed() const {

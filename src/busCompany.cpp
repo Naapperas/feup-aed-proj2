@@ -41,7 +41,7 @@ BusCompany::BusCompany(const std::string& companyName) : companyName(companyName
                 network->addEdge(currentStop, nextStop, l->getLineCode());
             }
 
-        this->lines.push_back(l);
+        this->lines.insert({l->getLineCode(), l});
     }
 }
 
@@ -50,8 +50,8 @@ BusCompany::~BusCompany() {
     nightNetwork->clear();
     delete nightNetwork;
 
-    for (auto line : this->lines)
-        delete line;
+    for (const auto& line : this->lines)
+        delete line.second;
 }
 
 bool BusCompany::inputNightDay() {
@@ -316,15 +316,16 @@ void BusCompany::listStops() {
 }
 
 void BusCompany::listLines() {
-    int aux = 0, option;
-    for (auto l: lines){
-        std::cout << "\t" << aux << " -> " << (*l) << std::endl;
+    int aux = 0;
+    std::string option;
+    for (const auto& l: lines){
+        std::cout << "\t" << aux << " -> " << (*l.second) << std::endl;
         aux++;
     }
-    std::cout << "\tWhich line would you like to see? (select by index) ";
+    std::cout << "\tWhich line would you like to see? (select by line code) ";
     (std::cin >> option).ignore().clear();
-    if (option < 0 || option >= lines.size()){
-        std::cout << "\tInvalid input" << std::endl;
+    if (!lines.contains(option)){
+        std::cout << "\tInvalid input: abborting" << std::endl;
         return;
     }
     std::cout << "\tStops:" << std::endl;
@@ -647,5 +648,20 @@ void BusCompany::toggleStop() {
     }
 
     this->dayNetwork->nodeAt(stopCode).stop->toggleStop(); // since both networks use pointers, changing one changes the other
+}
+
+void BusCompany::toggleLine() {
+
+    std::string lineCode;
+
+    std::cout << "\n\tChoose a lineCode to toggle (close if currently open, open if curently closed)\n\t>";
+    (std::cin >> lineCode).ignore().clear();
+
+    if (!this->dayNetwork->nodeAt(lineCode).stop) { // interchangable with nigtNetwork
+        std::cout << "\n\tInvalid lineCode code: abborting";
+        return;
+    }
+
+    this->lines.at(lineCode)->toggleLine(); // since both networks use pointers, changing one changes the other
 }
 

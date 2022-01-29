@@ -71,6 +71,9 @@ void Menu::init() {
                         case ADMIN_CLOSE_OPEN_STOP:
                             Menu::toggleStop(stcp);
                             break;
+                        case ADMIN_CLOSE_OPEN_LINE:
+                            Menu::toggleLine(stcp);
+                            break;
                         default:
                             std::cout << "Invalid option, returning to main menu\n\n";
                             break;
@@ -214,6 +217,11 @@ void Menu::changeWalkingDistance(BusCompany &busCompany) {
 
 void Menu::toggleStop(BusCompany &busCompany) {
     busCompany.toggleStop(); // generate the call in menu, delegate it to BusCompany
+    Menu::waitForPrompt("\t[press ENTER to continue]");
+}
+
+void Menu::toggleLine(BusCompany &busCompany) {
+    busCompany.toggleLine(); // generate the call in menu, delegate it to BusCompany
     Menu::waitForPrompt("\t[press ENTER to continue]");
 }
 

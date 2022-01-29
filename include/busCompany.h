@@ -5,8 +5,6 @@
 #ifndef PROJECT2_BUSCOMPANY_H
 #define PROJECT2_BUSCOMPANY_H
 
-#include <vector>
-
 #include "graph.h"
 #include "busLine.h"
 
@@ -17,7 +15,7 @@ class BusCompany {
 
     Graph* dayNetwork;
     Graph* nightNetwork;
-    std::vector<BusLine*> lines;
+    std::unordered_map<std::string, BusLine*> lines;
 
     std::string companyName, lastOriginStop, lastSearchOperation;
 
@@ -63,7 +61,7 @@ public:
     void travelPossibleTicket();
     void changeWalkingDistance();
     void toggleStop();
-
+    void toggleLine();
 };
 
 #endif //PROJECT2_BUSCOMPANY_H
