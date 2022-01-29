@@ -131,8 +131,17 @@ int BusCompany::minStops(const std::string& originStop, const std::string& desti
     while (!q.empty()) { // while there are still unvisited nodes
         std::string u = q.front().first;
         int u1 = q.front().second; q.pop();
+
+        if (network->nodeAt(u).stop->isClosed())
+            continue;
+
         for (const auto& e : network->nodeAt(u).adj) {
+
             std::string w = e.dest;
+
+            if (network->nodeAt(w).stop->isClosed())
+                continue;
+
             if (!network->nodeAt(w).visited) {
                 if (w == destinyStop) {
                     nStops = u1+1;
@@ -317,13 +326,13 @@ void BusCompany::listLines() {
         return;
     }
     std::cout << "\tStops:" << std::endl;
-    for (auto s : lines.at(option)->getStops())
+    for (const auto& s : lines.at(option)->getStops())
         std::cout << "\t" << s << std::endl;
 
     std::cout << std::endl;
 
     std::cout << "\tStops (reverse direction):" << std::endl;
-    for (auto s : lines.at(option)->getReverseStops())
+    for (const auto& s : lines.at(option)->getReverseStops())
         std::cout << "\t" << s << std::endl;
 
 }
