@@ -359,32 +359,34 @@ void BusCompany::travelMinDistanceCoord() {
     destStops = nearbyStops(latitude1, longitude1);
 
     if (originStops.empty() || destStops.empty()){
-        std::cout << "\tInvalid locations, unable to select stops";
+        std::cout << "\tInvalid locations, unable to select stops\n";
         return;
     }
     std::set<const Stop *> intersect;
     std::set_intersection(originStops.begin(), originStops.end(), destStops.begin(), destStops.end(), std::inserter(intersect, intersect.begin()));
     if (!intersect.empty()){
-        std::cout << "\tThis locations are to close, no travel needed :)";
+        std::cout << "\tThis locations are to close, no travel needed :)\n";
         return;
     }
 
     std::string origin, dest;
     for (auto s: originStops)
-        std::cout << "\t" <<  s << std::endl;
+        std::cout << "\t" << *s << std::endl;
     std::cout << "\tPick a close by stop to start your ride: ";
     std::cin >> origin;
     if (!originStops.contains(network->nodeAt(origin).stop)){
-        std::cout << "\tUnable to select that stop";
+        std::cout << "\tUnable to select that stop\n";
         return;
     }
 
+    std::cout << '\n';
+
     for (auto s: destStops)
-        std::cout << "\t" <<  s << std::endl;
+        std::cout << "\t" << *s << std::endl;
     std::cout << "\tPick a close by stop to finish your ride: ";
     std::cin >> dest;
     if (!destStops.contains(network->nodeAt(dest).stop)){
-        std::cout << "\tUnable to select that stop";
+        std::cout << "\tUnable to select that stop\n";
         return;
     }
 
@@ -393,7 +395,9 @@ void BusCompany::travelMinDistanceCoord() {
     auto path = minDistancePath(origin, dest, night);
 
     for (const auto& stop : path)
-        std::cout << *stop.first << " " << stop.second << '\n';
+        std::cout << '\t' << *stop.first << " " << stop.second << '\n';
+
+    std::cout << '\n';
 
 }
 
@@ -413,6 +417,8 @@ void BusCompany::travelMinStops() {
 
     for (const auto& stop : path)
         std::cout << *stop.first << " " << stop.second << '\n';
+
+    std::cout << '\n';
 }
 
 void BusCompany::travelMinStopsCoord() {
@@ -431,32 +437,32 @@ void BusCompany::travelMinStopsCoord() {
     destStops = nearbyStops(latitude1, longitude1);
 
     if (originStops.empty() || destStops.empty()){
-        std::cout << "\tInvalid locations, unable to select stops";
+        std::cout << "\tInvalid locations, unable to select stops\n";
         return;
     }
     std::set<const Stop *> intersect;
     std::set_intersection(originStops.begin(), originStops.end(), destStops.begin(), destStops.end(), std::inserter(intersect, intersect.begin()));
     if (!intersect.empty()){
-        std::cout << "\tThis locations are to close, no travel needed :)";
+        std::cout << "\tThis locations are to close, no travel needed :)\n";
         return;
     }
 
     std::string origin, dest;
     for (auto s: originStops)
-        std::cout << "\t" <<  s << std::endl;
+        std::cout << "\t" << *s << std::endl;
     std::cout << "\tPick a close by stop to start your ride: ";
     std::cin >> origin;
     if (!originStops.contains(network->nodeAt(origin).stop)){
-        std::cout << "\tUnable to select that stop";
+        std::cout << "\tUnable to select that stop\n";
         return;
     }
 
     for (auto s: destStops)
-        std::cout << "\t" <<  s << std::endl;
+        std::cout << "\t" << *s << std::endl;
     std::cout << "\tPick a close by stop to finish your ride: ";
     std::cin >> dest;
     if (!destStops.contains(network->nodeAt(dest).stop)){
-        std::cout << "\tUnable to select that stop";
+        std::cout << "\tUnable to select that stop\n";
         return;
     }
 
@@ -466,6 +472,8 @@ void BusCompany::travelMinStopsCoord() {
 
     for (const auto& stop : path)
         std::cout << *stop.first << " " << stop.second << '\n';
+
+    std::cout << '\n';
 }
 
 void BusCompany::travelMinZones() {
@@ -484,6 +492,8 @@ void BusCompany::travelMinZones() {
 
     for (const auto& stop : path)
         std::cout << *stop.first << " " << stop.second << '\n';
+
+    std::cout << '\n';
 }
 
 void BusCompany::travelMinZonesCoord() {
@@ -502,32 +512,32 @@ void BusCompany::travelMinZonesCoord() {
     destStops = nearbyStops(latitude1, longitude1);
 
     if (originStops.empty() || destStops.empty()){
-        std::cout << "\tInvalid locations, unable to select stops";
+        std::cout << "\tInvalid locations, unable to select stops\n";
         return;
     }
     std::set<const Stop *> intersect;
     std::set_intersection(originStops.begin(), originStops.end(), destStops.begin(), destStops.end(), std::inserter(intersect, intersect.begin()));
     if (!intersect.empty()){
-        std::cout << "\tThis locations are to close, no travel needed :)";
+        std::cout << "\tThis locations are to close, no travel needed :)\n";
         return;
     }
 
     std::string origin, dest;
     for (auto s: originStops)
-        std::cout << "\t" <<  s << std::endl;
+        std::cout << "\t" << *s << std::endl;
     std::cout << "\tPick a close by stop to start your ride: ";
     std::cin >> origin;
     if (!originStops.contains(network->nodeAt(origin).stop)){
-        std::cout << "\tUnable to select that stop";
+        std::cout << "\tUnable to select that stop\n";
         return;
     }
 
     for (auto s: destStops)
-        std::cout << "\t" <<  s << std::endl;
+        std::cout << "\t" << *s << std::endl;
     std::cout << "\tPick a close by stop to finish your ride: ";
     std::cin >> dest;
     if (!destStops.contains(network->nodeAt(dest).stop)){
-        std::cout << "\tUnable to select that stop";
+        std::cout << "\tUnable to select that stop\n";
         return;
     }
 
@@ -577,6 +587,6 @@ void BusCompany::changeWalkingDistance() {
     std::cout << "\tHow much are you willing to walk between two stops (in kilometers)? ";
     std::cin >> dist;
     calculateWalkingEdges(dist);
-    std::cout << "\tFinished calculating new travel routes";
+    std::cout << "\tFinished calculating new travel routes\n";
 }
 
