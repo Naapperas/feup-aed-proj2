@@ -17,7 +17,7 @@ class BusCompany {
     Graph* nightNetwork;
     std::unordered_map<std::string, BusLine*> lines;
 
-    std::string companyName, lastOriginStop, lastSearchOperation;
+    std::string companyName;
 
     bool inputNightDay();
 
