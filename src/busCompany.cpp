@@ -56,7 +56,7 @@ BusCompany::~BusCompany() {
 bool BusCompany::inputNightDay() {
     char option;
     std::cout << "\tDo you plan on travelling during the day (D/d) or during the night (N/n)? ";
-    std::cin >> option;
+    (std::cin >> option).ignore().clear();
     switch (toupper(option)){
         case 'D':
             return false;
@@ -106,7 +106,8 @@ std::list<std::pair<const Stop*, std::string>> BusCompany::minDistancePath(const
     std::list<std::pair<const Stop*, std::string>> path;
     path.emplace_front(network->nodeAt(destinyStop).stop, network->nodeAt(destinyStop).lineCodeDijkstra);
     std::string v = destinyStop;
-    while (v != originStop) {
+    while (v != originStop && !v.empty()) {
+
         v = network->nodeAt(v).parentStopCodeDijkstra;
         path.emplace_front(network->nodeAt(v).stop, network->nodeAt(v).lineCodeDijkstra);
     }
@@ -320,7 +321,7 @@ void BusCompany::listLines() {
         aux++;
     }
     std::cout << "\tWhich line would you like to see? (select by index) ";
-    std::cin >> option;
+    (std::cin >> option).ignore().clear();
     if (option < 0 || option >= lines.size()){
         std::cout << "\tInvalid input" << std::endl;
         return;
@@ -341,8 +342,21 @@ void BusCompany::travelMinDistance() {
     bool night = inputNightDay();
 
     std::string origin, dest;
-    std::cout << "\n\tPlease indicate the stop codes: ";
-    std::cin >> origin >> dest;
+    std::cout << "\n\tPlease indicate the origin stop's code: ";
+    (std::cin >> origin).ignore().clear();
+
+    if (!this->dayNetwork->nodeAt(origin).stop) { // interchangable with nightNetwork
+        std::cout << "\n\tUnrecognized stop code, aborting\n\t";
+        return;
+    }
+
+    std::cout << "\n\tPlease indicate the origin stop's code: ";
+    (std::cin >> dest).ignore().clear();
+
+    if (!this->dayNetwork->nodeAt(dest).stop) { // interchangable with nightNetwork
+        std::cout << "\n\tUnrecognized stop code, aborting\n\t";
+        return;
+    }
 
     std::cout << minDistance(origin, dest, night) << std::endl;
 
@@ -361,9 +375,9 @@ void BusCompany::travelMinDistanceCoord() {
     double latitude0, longitude0, latitude1, longitude1;
 
     std::cout << "\n\tPlease indicate your latitude and longitude: ";
-    std::cin >> latitude0 >> longitude0;
+    (std::cin >> latitude0 >> longitude0).ignore().clear();
     std::cout << "\n\tPlease indicate your destination latitude and longitude: ";
-    std::cin >> latitude1 >> longitude1;
+    (std::cin >> latitude1 >> longitude1).ignore().clear();
     originStops = nearbyStops(latitude0, longitude0);
     destStops = nearbyStops(latitude1, longitude1);
 
@@ -382,7 +396,7 @@ void BusCompany::travelMinDistanceCoord() {
     for (auto s: originStops)
         std::cout << "\t" << *s << std::endl;
     std::cout << "\tPick a close by stop to start your ride: ";
-    std::cin >> origin;
+    (std::cin >> origin).ignore().clear();
     if (!originStops.contains(network->nodeAt(origin).stop)){
         std::cout << "\tUnable to select that stop\n";
         return;
@@ -393,7 +407,7 @@ void BusCompany::travelMinDistanceCoord() {
     for (auto s: destStops)
         std::cout << "\t" << *s << std::endl;
     std::cout << "\tPick a close by stop to finish your ride: ";
-    std::cin >> dest;
+    (std::cin >> dest).ignore().clear();
     if (!destStops.contains(network->nodeAt(dest).stop)){
         std::cout << "\tUnable to select that stop\n";
         return;
@@ -415,10 +429,20 @@ void BusCompany::travelMinStops() {
 
     std::string origin, dest;
     std::cout << "\n\tPlease indicate the origin stop's code: ";
-    std::cin >> origin;
+    (std::cin >> origin).ignore().clear();
+
+    if (!this->dayNetwork->nodeAt(origin).stop) { // interchangable with nightNetwork
+        std::cout << "\n\tUnrecognized stop code, aborting\n\t";
+        return;
+    }
 
     std::cout << "\n\tPlease indicate the destiny stop's code: ";
-    std::cin >> dest;
+    (std::cin >> dest).ignore().clear();
+
+    if (!this->dayNetwork->nodeAt(dest).stop) { // interchangable with nightNetwork
+        std::cout << "\n\tUnrecognized stop code, aborting\n\t";
+        return;
+    }
 
     std::cout << minStops(origin, dest, night) << std::endl;
 
@@ -439,9 +463,9 @@ void BusCompany::travelMinStopsCoord() {
     double latitude0, longitude0, latitude1, longitude1;
 
     std::cout << "\n\tPlease indicate your latitude and longitude: ";
-    std::cin >> latitude0 >> longitude0;
+    (std::cin >> latitude0 >> longitude0).ignore().clear();
     std::cout << "\n\tPlease indicate your destination latitude and longitude: ";
-    std::cin >> latitude1 >> longitude1;
+    (std::cin >> latitude1 >> longitude1).ignore().clear();
     originStops = nearbyStops(latitude0, longitude0);
     destStops = nearbyStops(latitude1, longitude1);
 
@@ -460,7 +484,7 @@ void BusCompany::travelMinStopsCoord() {
     for (auto s: originStops)
         std::cout << "\t" << *s << std::endl;
     std::cout << "\tPick a close by stop to start your ride: ";
-    std::cin >> origin;
+    (std::cin >> origin).ignore().clear();
     if (!originStops.contains(network->nodeAt(origin).stop)){
         std::cout << "\tUnable to select that stop\n";
         return;
@@ -469,7 +493,7 @@ void BusCompany::travelMinStopsCoord() {
     for (auto s: destStops)
         std::cout << "\t" << *s << std::endl;
     std::cout << "\tPick a close by stop to finish your ride: ";
-    std::cin >> dest;
+    (std::cin >> dest).ignore().clear();
     if (!destStops.contains(network->nodeAt(dest).stop)){
         std::cout << "\tUnable to select that stop\n";
         return;
@@ -490,10 +514,20 @@ void BusCompany::travelMinZones() {
 
     std::string origin, dest;
     std::cout << "\n\tPlease indicate the origin stop's code: ";
-    std::cin >> origin;
+    (std::cin >> origin).ignore().clear();
+
+    if (!this->dayNetwork->nodeAt(origin).stop) { // interchangable with nightNetwork
+        std::cout << "\n\tUnrecognized stop code, aborting\n\t";
+        return;
+    }
 
     std::cout << "\n\tPlease indicate the destiny stop's code: ";
-    std::cin >> dest;
+    (std::cin >> dest).ignore().clear();
+
+    if (!this->dayNetwork->nodeAt(dest).stop) { // interchangable with nightNetwork
+        std::cout << "\n\tUnrecognized stop code, aborting\n\t";
+        return;
+    }
 
     std::cout << minZones(origin, dest, night) << std::endl;
 
@@ -514,9 +548,9 @@ void BusCompany::travelMinZonesCoord() {
     double latitude0, longitude0, latitude1, longitude1;
 
     std::cout << "\n\tPlease indicate your latitude and longitude: ";
-    std::cin >> latitude0 >> longitude0;
+    (std::cin >> latitude0 >> longitude0).ignore().clear();
     std::cout << "\n\tPlease indicate your destination latitude and longitude: ";
-    std::cin >> latitude1 >> longitude1;
+    (std::cin >> latitude1 >> longitude1).ignore().clear();
     originStops = nearbyStops(latitude0, longitude0);
     destStops = nearbyStops(latitude1, longitude1);
 
@@ -535,7 +569,7 @@ void BusCompany::travelMinZonesCoord() {
     for (auto s: originStops)
         std::cout << "\t" << *s << std::endl;
     std::cout << "\tPick a close by stop to start your ride: ";
-    std::cin >> origin;
+    (std::cin >> origin).ignore().clear();
     if (!originStops.contains(network->nodeAt(origin).stop)){
         std::cout << "\tUnable to select that stop\n";
         return;
@@ -544,7 +578,7 @@ void BusCompany::travelMinZonesCoord() {
     for (auto s: destStops)
         std::cout << "\t" << *s << std::endl;
     std::cout << "\tPick a close by stop to finish your ride: ";
-    std::cin >> dest;
+    (std::cin >> dest).ignore().clear();
     if (!destStops.contains(network->nodeAt(dest).stop)){
         std::cout << "\tUnable to select that stop\n";
         return;
@@ -563,14 +597,14 @@ void BusCompany::travelPossibleTicket() {
 
     std::string origin, dest;
     std::cout << "\n\tPlease indicate the origin stop's code: ";
-    std::cin >> origin;
+    (std::cin >> origin).ignore().clear();
 
     std::cout << "\n\tPlease indicate the destiny stop's code: ";
-    std::cin >> dest;
+    (std::cin >> dest).ignore().clear();
 
     int ticket;
     std::cout << "\n\tPlease indicate how many zones you can travel according to your ticket (Z2 -> 2, ..., Z9 -> 9): ";
-    std::cin >> ticket;
+    (std::cin >> ticket).ignore().clear();
 
     if (ticket<=1 || ticket>9){
         std::cout << "\tInvalid ticket" << std::endl;
@@ -594,7 +628,7 @@ void BusCompany::changeWalkingDistance() {
 
     double dist;
     std::cout << "\tHow much are you willing to walk between two stops (in kilometers)? ";
-    std::cin >> dist;
+    (std::cin >> dist).ignore().clear();
     calculateWalkingEdges(dist);
     std::cout << "\tFinished calculating new travel routes\n";
 }
