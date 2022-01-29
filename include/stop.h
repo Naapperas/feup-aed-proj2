@@ -10,6 +10,8 @@ class Stop{
     std::string const code, name, zone;
     double latitude, longitude;
 
+    bool closed = false;
+
     friend std::ostream& operator <<(std::ostream& out ,const Stop& stop);
 
 public:
@@ -35,6 +37,15 @@ public:
 
     double getLongitude() const {
         return longitude;
+    }
+
+    void toggleStop() {
+        this->closed = !this->closed;
+    }
+
+
+    bool isClosed() const {
+        return closed;
     }
 
     static double distance(const Stop& oStop, const Stop& dStop);

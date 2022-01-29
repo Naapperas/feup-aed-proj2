@@ -5,8 +5,6 @@
 #ifndef PROJECT2_BUSCOMPANY_H
 #define PROJECT2_BUSCOMPANY_H
 
-#include <vector>
-
 #include "graph.h"
 #include "busLine.h"
 
@@ -17,9 +15,9 @@ class BusCompany {
 
     Graph* dayNetwork;
     Graph* nightNetwork;
-    std::vector<BusLine*> lines;
+    std::unordered_map<std::string, BusLine*> lines;
 
-    std::string companyName, lastOriginStop, lastSearchOperation;
+    std::string companyName;
 
     bool inputNightDay();
 
@@ -46,7 +44,6 @@ public:
     int minZones(const std::string& originStop, const std::string& destinyStop, bool night = false);
     std::list<std::pair<const Stop*, std::string>> minZonesPath(const std::string& originStop, const std::string& destinyStop, bool night = false);
 
-
     std::set<const Stop*> nearbyStops(double lattittude, double longitude) const;
     std::set<const Stop*> nearbyStops(const std::string& stopCode) const;
 
@@ -63,7 +60,8 @@ public:
     void travelMinZonesCoord();
     void travelPossibleTicket();
     void changeWalkingDistance();
-
+    void toggleStop();
+    void toggleLine();
 };
 
 #endif //PROJECT2_BUSCOMPANY_H

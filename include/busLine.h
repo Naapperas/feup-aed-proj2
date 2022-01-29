@@ -10,7 +10,9 @@
 class BusLine{
     std::string code, name;
     bool nocturn;
-    std::vector<std::string> stops, stopsReverse;  // both directions
+    std::vector<std::string> stops, stopsReverse;  // both directions7
+
+    bool closed = false;
 
     friend std::ostream& operator <<(std::ostream& out ,const BusLine& line);
 
@@ -35,6 +37,14 @@ public:
 
     const std::vector<std::string>& getReverseStops() const {
         return this->stopsReverse;
+    }
+
+    void toggleLine() {
+        this->closed = !this->closed;
+    }
+
+    bool isClosed() const {
+        return closed;
     }
 
     static BusLine* parseLine(const std::string& line);

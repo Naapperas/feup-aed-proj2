@@ -89,8 +89,16 @@ void Graph::dijkstraMinDistance(const std::string &origin) {
         std::string u = q.begin()->second;
         q.erase(q.begin());
         nodes[u].visited = true;
+
+        if (this->nodes[u].stop->isClosed())
+            continue;
+
         for (const auto& e : nodes[u].adj) {
             std::string v = e.dest;
+
+            if (this->nodes[v].stop->isClosed() || e.disabled)
+                continue;
+
             double w = e.distance;
             if (!nodes[v].visited && nodes[u].distToSingleSource + w < nodes[v].distToSingleSource) {
                 q.erase({nodes[v].distToSingleSource, v});
@@ -142,8 +150,16 @@ void Graph::dijkstraMinZones(const std::string &origin) {
         std::string u = q.begin()->second;
         q.erase(q.begin());
         nodes[u].visited = true;
+
+        if (this->nodes[u].stop->isClosed())
+            continue;
+
         for (const auto& e : nodes[u].adj) {
             std::string v = e.dest;
+
+            if (this->nodes[v].stop->isClosed() || e.disabled)
+                continue;
+
             double w = e.distance + (nodes[v].stop->getZone() != nodes[u].stop->getZone()) * e.distance; // add zone change overhead
 
             if (!nodes[v].visited && nodes[u].distToSingleSource + w < nodes[v].distToSingleSource) {

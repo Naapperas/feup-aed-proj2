@@ -68,6 +68,12 @@ void Menu::init() {
                     switch (option) {
                         case ADMIN_BACK:
                             break;
+                        case ADMIN_CLOSE_OPEN_STOP:
+                            Menu::toggleStop(stcp);
+                            break;
+                        case ADMIN_CLOSE_OPEN_LINE:
+                            Menu::toggleLine(stcp);
+                            break;
                         default:
                             std::cout << "Invalid option, returning to main menu\n\n";
                             break;
@@ -103,7 +109,7 @@ int Menu::showAdminMenu() {
     int option;
 
     std::cout << "\tHello administrator, what would you like to do?\n\n";
-    std::cout << "\t[1] Back\n\n";
+    std::cout << "\t[1] Close/open stop\n\t[2] Close/open lines\n\t[3] Back\n\n";
     std::cout << "\t> ";
     std::cin >> option;
 
@@ -206,6 +212,16 @@ void Menu::travelPossibleTicket(BusCompany &busCompany) {
 
 void Menu::changeWalkingDistance(BusCompany &busCompany) {
     busCompany.changeWalkingDistance(); // generate the call in menu, delegate it to BusCompany
+    Menu::waitForPrompt("\t[press ENTER to continue]");
+}
+
+void Menu::toggleStop(BusCompany &busCompany) {
+    busCompany.toggleStop(); // generate the call in menu, delegate it to BusCompany
+    Menu::waitForPrompt("\t[press ENTER to continue]");
+}
+
+void Menu::toggleLine(BusCompany &busCompany) {
+    busCompany.toggleLine(); // generate the call in menu, delegate it to BusCompany
     Menu::waitForPrompt("\t[press ENTER to continue]");
 }
 
