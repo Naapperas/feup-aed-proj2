@@ -552,7 +552,7 @@ void BusCompany::travelPossibleTicket() {
     std::cout << "\n\tPlease indicate how many zones you can travel according to your ticket (Z2 -> 2, ..., Z9 -> 9): ";
     std::cin >> ticket;
 
-    if (ticket<=0 || ticket>9){
+    if (ticket<=1 || ticket>9){
         std::cout << "\tInvalid ticket" << std::endl;
         return;
     }
