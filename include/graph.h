@@ -16,6 +16,7 @@ class Graph {
         std::string dest; // Stop destination
         double distance; // distance between stops
         std::string lineCode;
+        bool disabled = false; // for closing down lines
     };
 
     struct Node {

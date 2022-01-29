@@ -96,7 +96,7 @@ void Graph::dijkstraMinDistance(const std::string &origin) {
         for (const auto& e : nodes[u].adj) {
             std::string v = e.dest;
 
-            if (this->nodes[v].stop->isClosed())
+            if (this->nodes[v].stop->isClosed() || e.disabled)
                 continue;
 
             double w = e.distance;
@@ -157,7 +157,7 @@ void Graph::dijkstraMinZones(const std::string &origin) {
         for (const auto& e : nodes[u].adj) {
             std::string v = e.dest;
 
-            if (this->nodes[v].stop->isClosed())
+            if (this->nodes[v].stop->isClosed() || e.disabled)
                 continue;
 
             double w = e.distance + (nodes[v].stop->getZone() != nodes[u].stop->getZone()) * e.distance; // add zone change overhead

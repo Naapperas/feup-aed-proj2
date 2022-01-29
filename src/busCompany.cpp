@@ -141,7 +141,7 @@ int BusCompany::minStops(const std::string& originStop, const std::string& desti
 
             std::string w = e.dest;
 
-            if (network->nodeAt(w).stop->isClosed())
+            if (network->nodeAt(w).stop->isClosed() || e.disabled)
                 continue;
 
             if (!network->nodeAt(w).visited) {
@@ -653,15 +653,37 @@ void BusCompany::toggleStop() {
 void BusCompany::toggleLine() {
 
     std::string lineCode;
+    char reverseChar;
+
+    bool reverse = true;
 
     std::cout << "\n\tChoose a lineCode to toggle (close if currently open, open if curently closed)\n\t>";
     (std::cin >> lineCode).ignore().clear();
 
-    if (!this->dayNetwork->nodeAt(lineCode).stop) { // interchangable with nigtNetwork
+    if (!this->lines.contains(lineCode)) { // interchangable with nigtNetwork
         std::cout << "\n\tInvalid lineCode code: abborting";
         return;
     }
 
-    this->lines.at(lineCode)->toggleLine(); // since both networks use pointers, changing one changes the other
+    std::cout << "\n\tShould the reverse direction be closed aswell(Y/n)?\n\t>";
+    (std::cin >> reverseChar).ignore().clear();
+
+    if (reverseChar == 'n')
+        reverse = false;
+
+    this->lines.at(lineCode)->toggleLine();
+
+    auto& network = this->lines.at(lineCode)->isNocturn() ? this->nightNetwork : this->dayNetwork;
+
+    for (const auto& stopCode : this->lines.at(lineCode)->getStops())
+        for (auto& edge : network->nodeAt(stopCode).adj)
+            if (edge.lineCode == lineCode)
+                edge.disabled = this->lines.at(lineCode)->isClosed();
+
+    if (reverse)
+        for (const auto& stopCode : this->lines.at(lineCode)->getReverseStops())
+            for (auto& edge : network->nodeAt(stopCode).adj)
+                if (edge.lineCode == lineCode)
+                    edge.disabled = this->lines.at(lineCode)->isClosed();
 }
 

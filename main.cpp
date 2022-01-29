@@ -66,8 +66,7 @@ int main() {
     std::cout << "Hello, World!" << std::endl;
      */
 
-    BusCompany stcp{"STCP"};
-    Menu::init(stcp);
+    Menu::init();
 
     return 0;
 }

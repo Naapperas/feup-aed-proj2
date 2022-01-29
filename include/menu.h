@@ -9,7 +9,6 @@ class Menu {
     static std::string BUS_ADMIN_PASSWORD;
 
     static bool exitApplication;
-    static BusCompany stcp;
 
     enum MainMenuOption {
         CLIENT = 1,
@@ -47,7 +46,7 @@ public:
     /**
      * Initialize the program
      */
-    static void init(BusCompany& company);
+    static void init();
 
     /**
      * Shows the initial menu on screen

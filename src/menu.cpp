@@ -3,9 +3,9 @@
 std::string Menu::BUS_ADMIN_PASSWORD = "toni";
 bool Menu::exitApplication = false;
 
-void Menu::init(BusCompany& company) {
+void Menu::init() {
 
-    Menu::stcp = company;
+    BusCompany stcp{"STCP"};
 
     atexit(Menu::endProgram);
 
