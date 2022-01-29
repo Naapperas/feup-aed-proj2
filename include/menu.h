@@ -29,6 +29,7 @@ class Menu {
         CLIENT_TRAVEL_STOPS_NEARBY,
         CLIENT_TRAVEL_ZONES,
         CLIENT_TRAVEL_ZONES_NEARBY,
+        CLIENT_POSSIBLE_TICKET,
         CLIENT_WALKING,
         CLIENT_BACK
     };
@@ -75,6 +76,7 @@ public:
     static void travelMinStopsCoord(BusCompany & busCompany);
     static void travelMinZones(BusCompany & busCompany);
     static void travelMinZonesCoord(BusCompany & busCompany);
+    static void travelPossibleTicket(BusCompany & busCompany);
     static void changeWalkingDistance(BusCompany & busCompany);
 };
 
