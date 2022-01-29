@@ -539,6 +539,38 @@ void BusCompany::travelMinZonesCoord() {
         std::cout << *stop.first << " " << stop.second << '\n';
 }
 
+void BusCompany::travelPossibleTicket() {
+    bool night = inputNightDay();
+
+    std::string origin, dest;
+    std::cout << "\n\tPlease indicate the origin stop's code: ";
+    std::cin >> origin;
+
+    std::cout << "\n\tPlease indicate the destiny stop's code: ";
+    std::cin >> dest;
+
+    int ticket;
+    std::cout << "\n\tPlease indicate how many zones you can travel according to your ticket (Z2 -> 2, ..., Z9 -> 9): ";
+    std::cin >> ticket;
+
+    if (ticket<=1 || ticket>9){
+        std::cout << "\tInvalid ticket" << std::endl;
+        return;
+    }
+
+    int min = minZones(origin, dest, night);
+
+    if (min > ticket){
+        std::cout << "\tYou can´t do this with your current ticket, you need at least a Z" << min << std::endl;
+    }
+    else {
+        auto path = minZonesPath(origin, dest, night);
+        std::cout << "\tYou can use this path:" << std::endl;
+        for (const auto &stop: path)
+            std::cout << *stop.first << " " << stop.second << '\n';
+    }
+}
+
 void BusCompany::changeWalkingDistance() {
 
     double dist;

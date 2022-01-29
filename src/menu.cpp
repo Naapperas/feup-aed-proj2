@@ -48,6 +48,9 @@ void Menu::init() {
                         case CLIENT_TRAVEL_ZONES_NEARBY:
                             Menu::travelMinZonesCoord(stcp);
                             break;
+                        case CLIENT_POSSIBLE_TICKET:
+                            Menu::travelPossibleTicket(stcp);
+                            break;
                         case CLIENT_WALKING:
                             Menu::changeWalkingDistance(stcp);
                             break;
@@ -117,7 +120,7 @@ int Menu::showClientMenu() {
     int option;
 
     std::cout << "\tHello client, what would you like to do?\n\n";
-    std::cout << "\t[1] List all stops\n\t[2] List lines (and check a line)\n\t[3] Find the shortest path for your travel\n\t[4] Find the shortest path for your travel (coordinates)\n\t[5] Find the path with less stops for your travel\n\t[6] Find the path with less stops for your travel (coordinates)\n\t[7] Find the cheapest path (less zones) for your travel\n\t[8] Find the cheapest path (less zones) for your travel (coordinates)\n\t[9] Set your max walking distance\n\t[10] Back\n\n";
+    std::cout << "\t[1] List all stops\n\t[2] List lines (and check a line)\n\t[3] Find the shortest path for your travel\n\t[4] Find the shortest path for your travel (coordinates)\n\t[5] Find the path with less stops for your travel\n\t[6] Find the path with less stops for your travel (coordinates)\n\t[7] Find the cheapest path (less zones) for your travel\n\t[8] Find the cheapest path (less zones) for your travel (coordinates)\n\t[9] Can you travel with certain ticket?\n\t[10] Set your max walking distance\n\t[11] Back\n\n";
     std::cout << "\t> ";
     std::cin >> option;
 
@@ -193,6 +196,11 @@ void Menu::travelMinZones(BusCompany &busCompany) {
 
 void Menu::travelMinZonesCoord(BusCompany &busCompany) {
     busCompany.travelMinZonesCoord(); // generate the call in menu, delegate it to BusCompany
+    Menu::waitForPrompt("\t[press ENTER to continue]");
+}
+
+void Menu::travelPossibleTicket(BusCompany &busCompany) {
+    busCompany.travelPossibleTicket(); // generate the call in menu, delegate it to BusCompany
     Menu::waitForPrompt("\t[press ENTER to continue]");
 }
 
