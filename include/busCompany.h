@@ -20,9 +20,16 @@ class BusCompany {
     std::vector<BusLine*> lines;
 
     std::string companyName, lastOriginStop, lastSearchOperation;
+
+    bool inputNightDay();
+
 public:
     BusCompany(const std::string& companyName);
     ~BusCompany();
+
+    std::string getName(){
+        return companyName;
+    }
 
     // Depth-First Search: example implementation
     void dfs(const std::string& cStop, bool night = false);
@@ -45,6 +52,16 @@ public:
 
     void calculateWalkingEdges(double walkingDistance);
     void addWalkingEdges();
+
+    void listStops();
+    void travelMinDistance();
+    void travelMinDistanceCoord();
+    void travelMinStops();
+    void travelMinStopsCoord();
+    void travelMinZones();
+    void travelMinZonesCoord();
+    void changeWalkingDistance();
+
 };
 
 #endif //PROJECT2_BUSCOMPANY_H

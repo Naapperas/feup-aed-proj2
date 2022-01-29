@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "../include/busCompany.h"
 
 BusCompany::BusCompany(const std::string& companyName) : companyName(companyName), lastOriginStop("") {
@@ -50,6 +51,22 @@ BusCompany::~BusCompany() {
 
     for (auto line : this->lines)
         delete line;
+}
+
+bool BusCompany::inputNightDay() {
+    char option;
+    std::cout << "\tDo you plan on travelling during the day (D/d) or during the night (N/n)? ";
+    std::cin >> option;
+    switch (toupper(option)){
+        case 'D':
+            return false;
+            break;
+        case 'N':
+            return true;
+            break;
+        default:
+            return false;
+    }
 }
 
 // Depth-First Search: example implementation
@@ -146,9 +163,9 @@ std::list<std::pair<const Stop*, std::string>> BusCompany::minStopsPath(const st
     return path;
 }
 
-std::set<const Stop *> BusCompany::nearbyStops(double lattittude, double longitude) const {
+std::set<const Stop *> BusCompany::nearbyStops(double latitude, double longitude) const {
 
-    Stop dummyStop{"", "", "", lattittude, longitude};
+    Stop dummyStop{"", "", "", latitude, longitude};
     std::set<const Stop *> ret;
 
     for (const auto& stopCode : this->dayNetwork->getStopCodes()) { // can be any of them, they both have the same stops
@@ -160,7 +177,7 @@ std::set<const Stop *> BusCompany::nearbyStops(double lattittude, double longitu
     }
 
     for (auto stop : ret) {
-        if (stop->getLatitude() == lattittude && stop->getLongitude() == longitude) {
+        if (stop->getLatitude() == latitude && stop->getLongitude() == longitude) {
             ret.erase(stop);
             break;
         }
@@ -282,3 +299,228 @@ std::list<std::pair<const Stop *, std::string>> BusCompany::minZonesPath(const s
     }
     return path;
 }
+
+void BusCompany::listStops() {
+    this->dfs("AL3");
+}
+
+void BusCompany::travelMinDistance() {
+    bool night = inputNightDay();
+
+    std::string origin, dest;
+    std::cout << "\n\tPlease indicate the stop codes: ";
+    std::cin >> origin >> dest;
+
+    std::cout << minDistance(origin, dest, night) << std::endl;
+
+    auto path = minDistancePath(origin, dest, night);
+
+    for (const auto& stop : path)
+        std::cout << *stop.first << " " << stop.second << '\n';
+}
+
+void BusCompany::travelMinDistanceCoord() {
+    bool night = inputNightDay();
+
+    auto& network = this->dayNetwork; // can be interchanged for nightNetwork
+
+    std::set<const Stop *> originStops, destStops;
+    double latitude0, longitude0, latitude1, longitude1;
+
+    std::cout << "\n\tPlease indicate your latitude and longitude: ";
+    std::cin >> latitude0 >> longitude0;
+    std::cout << "\n\tPlease indicate your destination latitude and longitude: ";
+    std::cin >> latitude1 >> longitude1;
+    originStops = nearbyStops(latitude0, longitude0);
+    destStops = nearbyStops(latitude1, longitude1);
+
+    if (originStops.empty() || destStops.empty()){
+        std::cout << "\tInvalid locations, unable to select stops";
+        return;
+    }
+    std::set<const Stop *> intersect;
+    std::set_intersection(originStops.begin(), originStops.end(), destStops.begin(), destStops.end(), std::inserter(intersect, intersect.begin()));
+    if (!intersect.empty()){
+        std::cout << "\tThis locations are to close, no travel needed :)";
+        return;
+    }
+
+    std::string origin, dest;
+    for (auto s: originStops)
+        std::cout << "\t" <<  s << std::endl;
+    std::cout << "\tPick a close by stop to start your ride: ";
+    std::cin >> origin;
+    if (!originStops.contains(network->nodeAt(origin).stop)){
+        std::cout << "\tUnable to select that stop";
+        return;
+    }
+
+    for (auto s: destStops)
+        std::cout << "\t" <<  s << std::endl;
+    std::cout << "\tPick a close by stop to finish your ride: ";
+    std::cin >> dest;
+    if (!destStops.contains(network->nodeAt(dest).stop)){
+        std::cout << "\tUnable to select that stop";
+        return;
+    }
+
+    std::cout << minDistance(origin, dest, night) << std::endl;
+
+    auto path = minDistancePath(origin, dest, night);
+
+    for (const auto& stop : path)
+        std::cout << *stop.first << " " << stop.second << '\n';
+
+}
+
+void BusCompany::travelMinStops() {
+    bool night = inputNightDay();
+
+    std::string origin, dest;
+    std::cout << "\n\tPlease indicate the origin stop's code: ";
+    std::cin >> origin;
+
+    std::cout << "\n\tPlease indicate the destiny stop's code: ";
+    std::cin >> dest;
+
+    std::cout << minStops(origin, dest, night) << std::endl;
+
+    auto path = minStopsPath(origin, dest, night);
+
+    for (const auto& stop : path)
+        std::cout << *stop.first << " " << stop.second << '\n';
+}
+
+void BusCompany::travelMinStopsCoord() {
+    bool night = inputNightDay();
+
+    auto& network = this->dayNetwork; // can be interchanged for nightNetwork
+
+    std::set<const Stop *> originStops, destStops;
+    double latitude0, longitude0, latitude1, longitude1;
+
+    std::cout << "\n\tPlease indicate your latitude and longitude: ";
+    std::cin >> latitude0 >> longitude0;
+    std::cout << "\n\tPlease indicate your destination latitude and longitude: ";
+    std::cin >> latitude1 >> longitude1;
+    originStops = nearbyStops(latitude0, longitude0);
+    destStops = nearbyStops(latitude1, longitude1);
+
+    if (originStops.empty() || destStops.empty()){
+        std::cout << "\tInvalid locations, unable to select stops";
+        return;
+    }
+    std::set<const Stop *> intersect;
+    std::set_intersection(originStops.begin(), originStops.end(), destStops.begin(), destStops.end(), std::inserter(intersect, intersect.begin()));
+    if (!intersect.empty()){
+        std::cout << "\tThis locations are to close, no travel needed :)";
+        return;
+    }
+
+    std::string origin, dest;
+    for (auto s: originStops)
+        std::cout << "\t" <<  s << std::endl;
+    std::cout << "\tPick a close by stop to start your ride: ";
+    std::cin >> origin;
+    if (!originStops.contains(network->nodeAt(origin).stop)){
+        std::cout << "\tUnable to select that stop";
+        return;
+    }
+
+    for (auto s: destStops)
+        std::cout << "\t" <<  s << std::endl;
+    std::cout << "\tPick a close by stop to finish your ride: ";
+    std::cin >> dest;
+    if (!destStops.contains(network->nodeAt(dest).stop)){
+        std::cout << "\tUnable to select that stop";
+        return;
+    }
+
+    std::cout << minStops(origin, dest, night) << std::endl;
+
+    auto path = minStopsPath(origin, dest, night);
+
+    for (const auto& stop : path)
+        std::cout << *stop.first << " " << stop.second << '\n';
+}
+
+void BusCompany::travelMinZones() {
+    bool night = inputNightDay();
+
+    std::string origin, dest;
+    std::cout << "\n\tPlease indicate the origin stop's code: ";
+    std::cin >> origin;
+
+    std::cout << "\n\tPlease indicate the destiny stop's code: ";
+    std::cin >> dest;
+
+    std::cout << minZones(origin, dest, night) << std::endl;
+
+    auto path = minZonesPath(origin, dest, night);
+
+    for (const auto& stop : path)
+        std::cout << *stop.first << " " << stop.second << '\n';
+}
+
+void BusCompany::travelMinZonesCoord() {
+    bool night = inputNightDay();
+
+    auto& network = this->dayNetwork; // can be interchanged for nightNetwork
+
+    std::set<const Stop *> originStops, destStops;
+    double latitude0, longitude0, latitude1, longitude1;
+
+    std::cout << "\n\tPlease indicate your latitude and longitude: ";
+    std::cin >> latitude0 >> longitude0;
+    std::cout << "\n\tPlease indicate your destination latitude and longitude: ";
+    std::cin >> latitude1 >> longitude1;
+    originStops = nearbyStops(latitude0, longitude0);
+    destStops = nearbyStops(latitude1, longitude1);
+
+    if (originStops.empty() || destStops.empty()){
+        std::cout << "\tInvalid locations, unable to select stops";
+        return;
+    }
+    std::set<const Stop *> intersect;
+    std::set_intersection(originStops.begin(), originStops.end(), destStops.begin(), destStops.end(), std::inserter(intersect, intersect.begin()));
+    if (!intersect.empty()){
+        std::cout << "\tThis locations are to close, no travel needed :)";
+        return;
+    }
+
+    std::string origin, dest;
+    for (auto s: originStops)
+        std::cout << "\t" <<  s << std::endl;
+    std::cout << "\tPick a close by stop to start your ride: ";
+    std::cin >> origin;
+    if (!originStops.contains(network->nodeAt(origin).stop)){
+        std::cout << "\tUnable to select that stop";
+        return;
+    }
+
+    for (auto s: destStops)
+        std::cout << "\t" <<  s << std::endl;
+    std::cout << "\tPick a close by stop to finish your ride: ";
+    std::cin >> dest;
+    if (!destStops.contains(network->nodeAt(dest).stop)){
+        std::cout << "\tUnable to select that stop";
+        return;
+    }
+
+    std::cout << minZones(origin, dest, night) << std::endl;
+
+    auto path = minZonesPath(origin, dest, night);
+
+    for (const auto& stop : path)
+        std::cout << *stop.first << " " << stop.second << '\n';
+}
+
+void BusCompany::changeWalkingDistance() {
+
+    double dist;
+    std::cout << "\tHow much are you willing to walk between two stops (in kilometers)? ";
+    std::cin >> dist;
+    calculateWalkingEdges(dist);
+    std::cout << "\tFinished calculating new travel routes";
+}
+
