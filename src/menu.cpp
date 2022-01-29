@@ -28,7 +28,7 @@ void Menu::init() {
                             Menu::listStops(stcp);
                             break;
                         case CLIENT_LIST_LINES:
-                            Menu::listStops(stcp);
+                            Menu::listLines(stcp);
                             break;
                         case CLIENT_TRAVEL_DISTANCE:
                             Menu::travelMinDistance(stcp);
@@ -158,6 +158,11 @@ void Menu::endProgram() {
 
 void Menu::listStops(BusCompany & busCompany) {
     busCompany.listStops(); // generate the call in menu, delegate it to BusCompany
+    Menu::waitForPrompt("\t[press ENTER to continue]");
+}
+
+void Menu::listLines(BusCompany & busCompany) {
+    busCompany.listLines(); // generate the call in menu, delegate it to BusCompany
     Menu::waitForPrompt("\t[press ENTER to continue]");
 }
 

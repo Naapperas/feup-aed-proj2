@@ -26,3 +26,8 @@ BusLine* BusLine::parseLine(const std::string& line) {
     return new BusLine(code, name, code.back() == 'M');
 }
 
+std::ostream& operator <<(std::ostream& out , const BusLine& line) {
+    out << line.getLineName();
+    return out;
+}
+

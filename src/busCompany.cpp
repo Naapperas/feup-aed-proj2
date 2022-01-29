@@ -304,6 +304,28 @@ void BusCompany::listStops() {
     this->dfs("AL3");
 }
 
+void BusCompany::listLines() {
+    int aux = 0, option;
+    for (auto l: lines){
+        std::cout << "\t" << aux << " -> " << (*l) << std::endl;
+        aux++;
+    }
+    std::cout << "\tWhich line would you like to see? (select by index) ";
+    std::cin >> option;
+    if (option < 0 || option >= lines.size()){
+        std::cout << "\tInvalid input" << std::endl;
+        return;
+    }
+    std::cout << "\tStops:" << std::endl;
+    for (auto s : lines.at(option)->getStops())
+        std::cout << "\t" << s << std::endl;
+
+    std::cout << "\tStops (reverse direction):" << std::endl;
+    for (auto s : lines.at(option)->getReverseStops())
+        std::cout << "\t" << s << std::endl;
+
+}
+
 void BusCompany::travelMinDistance() {
     bool night = inputNightDay();
 
