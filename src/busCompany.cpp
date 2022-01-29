@@ -657,11 +657,11 @@ void BusCompany::toggleLine() {
 
     bool reverse = true;
 
-    std::cout << "\n\tChoose a lineCode to toggle (close if currently open, open if curently closed)\n\t>";
+    std::cout << "\n\tChoose a lineCode to toggle (close if currently open, open if curently closed)\n\t> ";
     (std::cin >> lineCode).ignore().clear();
 
     if (!this->lines.contains(lineCode)) { // interchangable with nigtNetwork
-        std::cout << "\n\tInvalid lineCode code: abborting";
+        std::cout << "\n\tInvalid lineCode code: abborting\n";
         return;
     }
 

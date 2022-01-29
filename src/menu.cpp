@@ -109,7 +109,7 @@ int Menu::showAdminMenu() {
     int option;
 
     std::cout << "\tHello administrator, what would you like to do?\n\n";
-    std::cout << "\t[1] Close/open stop\n\t[2] Back\n\n";
+    std::cout << "\t[1] Close/open stop\n\t[2] Close/open lines\n\t[3] Back\n\n";
     std::cout << "\t> ";
     std::cin >> option;
 
