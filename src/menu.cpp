@@ -39,6 +39,12 @@ void Menu::init() {
                         case CLIENT_TRAVEL_STOPS_NEARBY:
                             Menu::travelMinStopsCoord(stcp);
                             break;
+                        case CLIENT_TRAVEL_ZONES:
+                            Menu::travelMinZones(stcp);
+                            break;
+                        case CLIENT_TRAVEL_ZONES_NEARBY:
+                            Menu::travelMinZonesCoord(stcp);
+                            break;
                         case CLIENT_WALKING:
                             Menu::changeWalkingDistance(stcp);
                             break;
@@ -108,7 +114,7 @@ int Menu::showClientMenu() {
     int option;
 
     std::cout << "\tHello client, what would you like to do?\n\n";
-    std::cout << "\t[1] List all stops\n\t[2] Find the shortest path for your travel\n\t[3] Find the shortest path for your travel (coordinates)(change this)\n\t[4] Find the path with less stops for your travel\n\t[5] Find the path with less stops for your travel (coordinates)(change this)\n\t[6] Set your max walking distance\n\t[7] Back\n\n";
+    std::cout << "\t[1] List all stops\n\t[2] Find the shortest path for your travel\n\t[3] Find the shortest path for your travel (coordinates)\n\t[4] Find the path with less stops for your travel\n\t[5] Find the path with less stops for your travel (coordinates)\n\t[6] Find the cheapest path (less zones) for your travel\n\t[7] Find the cheapest path (less zones) for your travel (coordinates)\n\t[8] Set your max walking distance\n\t[9] Back\n\n";
     std::cout << "\t> ";
     std::cin >> option;
 

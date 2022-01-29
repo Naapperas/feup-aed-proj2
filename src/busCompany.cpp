@@ -444,6 +444,77 @@ void BusCompany::travelMinStopsCoord() {
         std::cout << *stop.first << " " << stop.second << '\n';
 }
 
+void BusCompany::travelMinZones() {
+    bool night = inputNightDay();
+
+    std::string origin, dest;
+    std::cout << "\n\tPlease indicate the origin stop's code: ";
+    std::cin >> origin;
+
+    std::cout << "\n\tPlease indicate the destiny stop's code: ";
+    std::cin >> dest;
+
+    std::cout << minZones(origin, dest, night) << std::endl;
+
+    auto path = minZonesPath(origin, dest, night);
+
+    for (const auto& stop : path)
+        std::cout << *stop.first << " " << stop.second << '\n';
+}
+
+void BusCompany::travelMinZonesCoord() {
+    bool night = inputNightDay();
+
+    auto& network = this->dayNetwork; // can be interchanged for nightNetwork
+
+    std::set<const Stop *> originStops, destStops;
+    double latitude0, longitude0, latitude1, longitude1;
+
+    std::cout << "\n\tPlease indicate your latitude and longitude: ";
+    std::cin >> latitude0 >> longitude0;
+    std::cout << "\n\tPlease indicate your destination latitude and longitude: ";
+    std::cin >> latitude1 >> longitude1;
+    originStops = nearbyStops(latitude0, longitude0);
+    destStops = nearbyStops(latitude1, longitude1);
+
+    if (originStops.empty() || destStops.empty()){
+        std::cout << "\tInvalid locations, unable to select stops";
+        return;
+    }
+    std::set<const Stop *> intersect;
+    std::set_intersection(originStops.begin(), originStops.end(), destStops.begin(), destStops.end(), std::inserter(intersect, intersect.begin()));
+    if (!intersect.empty()){
+        std::cout << "\tThis locations are to close, no travel needed :)";
+        return;
+    }
+
+    std::string origin, dest;
+    for (auto s: originStops)
+        std::cout << "\t" <<  s << std::endl;
+    std::cout << "\tPick a close by stop to start your ride: ";
+    std::cin >> origin;
+    if (!originStops.contains(network->nodeAt(origin).stop)){
+        std::cout << "\tUnable to select that stop";
+        return;
+    }
+
+    for (auto s: destStops)
+        std::cout << "\t" <<  s << std::endl;
+    std::cout << "\tPick a close by stop to finish your ride: ";
+    std::cin >> dest;
+    if (!destStops.contains(network->nodeAt(dest).stop)){
+        std::cout << "\tUnable to select that stop";
+        return;
+    }
+
+    std::cout << minZones(origin, dest, night) << std::endl;
+
+    auto path = minZonesPath(origin, dest, night);
+
+    for (const auto& stop : path)
+        std::cout << *stop.first << " " << stop.second << '\n';
+}
+
 void BusCompany::changeWalkingDistance() {
 
     double dist;

@@ -58,6 +58,8 @@ public:
     void travelMinDistanceCoord();
     void travelMinStops();
     void travelMinStopsCoord();
+    void travelMinZones();
+    void travelMinZonesCoord();
     void changeWalkingDistance();
 
 };
