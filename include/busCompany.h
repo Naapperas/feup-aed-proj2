@@ -54,6 +54,7 @@ public:
     void addWalkingEdges();
 
     void listStops();
+    void listLines();
     void travelMinDistance();
     void travelMinDistanceCoord();
     void travelMinStops();

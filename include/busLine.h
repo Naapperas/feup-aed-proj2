@@ -12,6 +12,8 @@ class BusLine{
     bool nocturn;
     std::vector<std::string> stops, stopsReverse;  // both directions
 
+    friend std::ostream& operator <<(std::ostream& out ,const BusLine& line);
+
 public:
     BusLine(const std::string &code, const std::string &name, bool nocturn);
 
