@@ -322,6 +322,8 @@ void BusCompany::travelMinDistance() {
 void BusCompany::travelMinDistanceCoord() {
     bool night = inputNightDay();
 
+    auto& network = this->dayNetwork; // can be interchanged for nightNetwork
+
     std::set<const Stop *> originStops, destStops;
     double latitude0, longitude0, latitude1, longitude1;
 
@@ -348,7 +350,7 @@ void BusCompany::travelMinDistanceCoord() {
         std::cout << "\t" <<  s << std::endl;
     std::cout << "\tPick a close by stop to start your ride: ";
     std::cin >> origin;
-    if (!originStops.contains(origin)){
+    if (!originStops.contains(network->nodeAt(origin).stop)){
         std::cout << "\tUnable to select that stop";
         return;
     }
@@ -357,7 +359,7 @@ void BusCompany::travelMinDistanceCoord() {
         std::cout << "\t" <<  s << std::endl;
     std::cout << "\tPick a close by stop to finish your ride: ";
     std::cin >> dest;
-    if (!destStops.contains(dest)){
+    if (!destStops.contains(network->nodeAt(dest).stop)){
         std::cout << "\tUnable to select that stop";
         return;
     }
@@ -375,8 +377,11 @@ void BusCompany::travelMinStops() {
     bool night = inputNightDay();
 
     std::string origin, dest;
-    std::cout << "\n\tPlease indicate the stop codes: ";
-    std::cin >> origin >> dest;
+    std::cout << "\n\tPlease indicate the origin stop's code: ";
+    std::cin >> origin;
+
+    std::cout << "\n\tPlease indicate the destiny stop's code: ";
+    std::cin >> dest;
 
     std::cout << minStops(origin, dest, night) << std::endl;
 
@@ -388,6 +393,8 @@ void BusCompany::travelMinStops() {
 
 void BusCompany::travelMinStopsCoord() {
     bool night = inputNightDay();
+
+    auto& network = this->dayNetwork; // can be interchanged for nightNetwork
 
     std::set<const Stop *> originStops, destStops;
     double latitude0, longitude0, latitude1, longitude1;
@@ -415,7 +422,7 @@ void BusCompany::travelMinStopsCoord() {
         std::cout << "\t" <<  s << std::endl;
     std::cout << "\tPick a close by stop to start your ride: ";
     std::cin >> origin;
-    if (!originStops.contains(origin)){
+    if (!originStops.contains(network->nodeAt(origin).stop)){
         std::cout << "\tUnable to select that stop";
         return;
     }
@@ -424,7 +431,7 @@ void BusCompany::travelMinStopsCoord() {
         std::cout << "\t" <<  s << std::endl;
     std::cout << "\tPick a close by stop to finish your ride: ";
     std::cin >> dest;
-    if (!destStops.contains(dest)){
+    if (!destStops.contains(network->nodeAt(dest).stop)){
         std::cout << "\tUnable to select that stop";
         return;
     }
@@ -443,5 +450,6 @@ void BusCompany::changeWalkingDistance() {
     std::cout << "\tHow much are you willing to walk between two stops (in kilometers)? ";
     std::cin >> dist;
     calculateWalkingEdges(dist);
+    std::cout << "\tFinished calculating new travel routes";
 }
 
