@@ -39,13 +39,10 @@ public:
         return longitude;
     }
 
-    void closeStop() {
-        this->closed = true;
+    void toggleStop() {
+        this->closed = !this->closed;
     }
 
-    void openStop() {
-        this->closed = false;
-    }
 
     bool isClosed() const {
         return closed;

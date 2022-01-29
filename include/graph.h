@@ -19,7 +19,7 @@ class Graph {
     };
 
     struct Node {
-        const Stop* stop; // Information about the stop
+        Stop* stop; // Information about the stop
         std::list<Edge> adj; // The list of outgoing edges (to adjacent nodes)
         bool visited; // As the node been visited on a search?
         std::string parentStopCodeDijkstra, parentStopCodeBFS, lineCodeDijkstra, lineCodeBFS; // used to create paths

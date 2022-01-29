@@ -17,7 +17,8 @@ class Menu {
     };
 
     enum AdminMenuOption {
-        ADMIN_BACK = 1
+        ADMIN_CLOSE_OPEN_STOP = 1,
+        ADMIN_BACK
     };
 
     enum ClientMenuOption {
@@ -78,6 +79,7 @@ public:
     static void travelMinZonesCoord(BusCompany & busCompany);
     static void travelPossibleTicket(BusCompany & busCompany);
     static void changeWalkingDistance(BusCompany & busCompany);
+    static void toggleStop(BusCompany & busCompany);
 };
 
 #endif //PROJECT2_MENU_H

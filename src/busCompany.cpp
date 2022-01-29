@@ -1,5 +1,6 @@
 #include <algorithm>
 #include "../include/busCompany.h"
+#include "../include/menu.h"
 
 BusCompany::BusCompany(const std::string& companyName) : companyName(companyName), lastOriginStop("") {
 
@@ -631,5 +632,20 @@ void BusCompany::changeWalkingDistance() {
     (std::cin >> dist).ignore().clear();
     calculateWalkingEdges(dist);
     std::cout << "\tFinished calculating new travel routes\n";
+}
+
+void BusCompany::toggleStop() {
+
+    std::string stopCode;
+
+    std::cout << "\n\tChoose a stop to toggle (close if currently open, open if curently closed)\n\t>";
+    (std::cin >> stopCode).ignore().clear();
+
+    if (!this->dayNetwork->nodeAt(stopCode).stop) { // interchangable with nigtNetwork
+        std::cout << "\n\tInvalid stop code: abborting";
+        return;
+    }
+
+    this->dayNetwork->nodeAt(stopCode).stop->toggleStop(); // since both networks use pointers, changing one changes the other
 }
 
