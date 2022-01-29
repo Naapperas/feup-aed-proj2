@@ -538,6 +538,7 @@ void BusCompany::travelMinZonesCoord() {
     for (const auto& stop : path)
         std::cout << *stop.first << " " << stop.second << '\n';
 }
+
 void BusCompany::travelPossibleTicket() {
     bool night = inputNightDay();
 
