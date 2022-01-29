@@ -320,6 +320,8 @@ void BusCompany::listLines() {
     for (auto s : lines.at(option)->getStops())
         std::cout << "\t" << s << std::endl;
 
+    std::cout << std::endl;
+
     std::cout << "\tStops (reverse direction):" << std::endl;
     for (auto s : lines.at(option)->getReverseStops())
         std::cout << "\t" << s << std::endl;
