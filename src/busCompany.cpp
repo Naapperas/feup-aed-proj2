@@ -269,7 +269,7 @@ int BusCompany::minZones(const std::string &originStop, const std::string &desti
     std::string v = destinyStop;
     while (v != originStop) {
         auto node = network->nodeAt(v);
-        v = node.parentStopCodeBFS;
+        v = node.parentStopCodeDijkstra;
 
         if (node.stop->getZone() != lastZone) {
             numZones++;
@@ -346,12 +346,11 @@ void BusCompany::travelMinDistance() {
         return;
     }
 
-    std::cout << minDistance(origin, dest, night) << std::endl;
+    std::cout << "\n\tTrip distance: " << minDistance(origin, dest, night) << "km" << std::endl;
 
     auto path = minDistancePath(origin, dest, night);
 
-    for (const auto& stop : path)
-        std::cout << *stop.first << " " << stop.second << '\n';
+    this->processPath(path);
 }
 
 void BusCompany::travelMinDistanceCoord() {
@@ -401,12 +400,11 @@ void BusCompany::travelMinDistanceCoord() {
         return;
     }
 
-    std::cout << minDistance(origin, dest, night) << std::endl;
+    std::cout << "\n\tTrip distance: " << minDistance(origin, dest, night) << "km" << std::endl;
 
     auto path = minDistancePath(origin, dest, night);
 
-    for (const auto& stop : path)
-        std::cout << '\t' << *stop.first << " " << stop.second << '\n';
+    this->processPath(path);
 
     std::cout << '\n';
 
@@ -432,12 +430,11 @@ void BusCompany::travelMinStops() {
         return;
     }
 
-    std::cout << minStops(origin, dest, night) << std::endl;
+    std::cout << "\n\tTrip's number of stops: " << minStops(origin, dest, night) << std::endl;
 
     auto path = minStopsPath(origin, dest, night);
 
-    for (const auto& stop : path)
-        std::cout << *stop.first << " " << stop.second << '\n';
+    this->processPath(path);
 
     std::cout << '\n';
 }
@@ -487,12 +484,11 @@ void BusCompany::travelMinStopsCoord() {
         return;
     }
 
-    std::cout << minStops(origin, dest, night) << std::endl;
+    std::cout << "\n\tTrip's number of stops: " << minStops(origin, dest, night) << std::endl;
 
     auto path = minStopsPath(origin, dest, night);
 
-    for (const auto& stop : path)
-        std::cout << *stop.first << " " << stop.second << '\n';
+   this->processPath(path);
 
     std::cout << '\n';
 }
@@ -517,12 +513,11 @@ void BusCompany::travelMinZones() {
         return;
     }
 
-    std::cout << minZones(origin, dest, night) << std::endl;
+    std::cout << "\n\tNumber of zones crossed: " << minZones(origin, dest, night) << std::endl;
 
     auto path = minZonesPath(origin, dest, night);
 
-    for (const auto& stop : path)
-        std::cout << *stop.first << " " << stop.second << '\n';
+    this->processPath(path);
 
     std::cout << '\n';
 }
@@ -572,12 +567,11 @@ void BusCompany::travelMinZonesCoord() {
         return;
     }
 
-    std::cout << minZones(origin, dest, night) << std::endl;
+    std::cout << "\n\tNumber of zones crossed: " << minZones(origin, dest, night) << std::endl;
 
     auto path = minZonesPath(origin, dest, night);
 
-    for (const auto& stop : path)
-        std::cout << *stop.first << " " << stop.second << '\n';
+    this->processPath(path);
 }
 
 void BusCompany::travelPossibleTicket() {
@@ -673,3 +667,38 @@ void BusCompany::toggleLine() {
                     edge.disabled = this->lines.at(lineCode)->isClosed();
 }
 
+void BusCompany::processPath(const std::list<std::pair<const Stop *, std::string>>& pathList) {
+
+    std::vector<std::pair<const Stop*, std::string>> path(pathList.begin(), pathList.end());
+
+    auto firstStop = path.begin();
+
+    std::string lastOriginPoint = firstStop->second;
+    const Stop *firstOriginStop = firstStop->first, *lastOriginStop = nullptr;
+
+    for (auto itr = path.begin(); itr != path.end(); itr++) {
+
+        if (itr == firstStop) continue;
+
+        auto pair = *itr;
+
+        if (lastOriginPoint == "Begin") {
+            lastOriginPoint = pair.second;
+            lastOriginStop = pair.first;
+        } else if (pair.second != lastOriginPoint || itr == path.end()-1) {
+
+            std::cout << "\tGo from " << *firstOriginStop << " to " << *(itr == path.end()-1 ? itr->first : lastOriginStop);
+
+            if (lastOriginPoint == "FOOT")
+                std::cout << " on foot.";
+            else
+                std::cout << " following line " << lastOriginPoint;
+            std::cout << '\n';
+
+            firstOriginStop = lastOriginStop;
+            lastOriginStop = pair.first;
+            lastOriginPoint = pair.second;
+        } else
+            lastOriginStop = pair.first;
+    }
+}

@@ -160,6 +160,11 @@ public:
      */
     void addWalkingEdges();
 
+    /**
+     * Processes a path generated from one of the path searching algorithms.
+     */
+    void processPath(const std::list<std::pair<const Stop*, std::string>>&);
+
     void listStops();
     void listLines();
     void travelMinDistance();
