@@ -79,7 +79,7 @@ public:
     /**
      * Returns the minimum number of stops needed to go from the origin stop to the destination stop.
      *
-     * Time complexity: O(|E|*log(|V|))
+     * Time complexity: O(|E|+|V|)
      *
      * @param originStop the departure stop
      * @param destinyStop the arrival stop
@@ -90,7 +90,7 @@ public:
     /**
      * Returns the path that minimizes the number of stops needed to go from the origin stop to the destination stop.
      *
-     * Time complexity: O(|E|*log(|V|))
+     * Time complexity: O(|E|+|V|)
      *
      * @param originStop the departure stop
      * @param destinyStop the arrival stop
