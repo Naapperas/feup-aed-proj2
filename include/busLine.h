@@ -7,10 +7,13 @@
 
 #include "utils.h"
 
+/**
+ * Represents a BusLine in the context of this program.
+ */
 class BusLine{
     std::string code, name;
     bool nocturn;
-    std::vector<std::string> stops, stopsReverse;  // both directions7
+    std::vector<std::string> stops, stopsReverse;  // both directions
 
     bool closed = false;
 
@@ -39,6 +42,9 @@ public:
         return this->stopsReverse;
     }
 
+    /**
+     * Toggles the 'closed' status of this line.
+     */
     void toggleLine() {
         this->closed = !this->closed;
     }
@@ -47,6 +53,12 @@ public:
         return closed;
     }
 
+    /**
+     * Parses a line read from a CSV file containing data needed to construct a BusLine object.
+     *
+     * @param line a string containing comma-separated-values representing a bus line.
+     * @return a dynamically allocated BusLine object with the given data
+     */
     static BusLine* parseLine(const std::string& line);
 };
 
