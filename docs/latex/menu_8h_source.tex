@@ -1,0 +1,70 @@
+\hypertarget{menu_8h_source}{}\doxysection{menu.\+h}
+\label{menu_8h_source}\index{include/menu.h@{include/menu.h}}
+\mbox{\hyperlink{menu_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef PROJECT2\_MENU\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define PROJECT2\_MENU\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{bus_company_8h}{busCompany.h}}"{}}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{keyword}{class }\mbox{\hyperlink{class_menu}{Menu}} \{}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9     \textcolor{keyword}{static} std::string BUS\_ADMIN\_PASSWORD;}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} exitApplication;}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13     \textcolor{keyword}{enum} MainMenuOption \{}
+\DoxyCodeLine{14         CLIENT = 1,}
+\DoxyCodeLine{15         ADMIN,}
+\DoxyCodeLine{16         LEAVE}
+\DoxyCodeLine{17     \};}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19     \textcolor{keyword}{enum} AdminMenuOption \{}
+\DoxyCodeLine{20         ADMIN\_CLOSE\_OPEN\_STOP = 1,}
+\DoxyCodeLine{21         ADMIN\_CLOSE\_OPEN\_LINE,}
+\DoxyCodeLine{22         ADMIN\_BACK}
+\DoxyCodeLine{23     \};}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \textcolor{keyword}{enum} ClientMenuOption \{}
+\DoxyCodeLine{26         CLIENT\_LIST\_ALL\_STOPS = 1,}
+\DoxyCodeLine{27         CLIENT\_LIST\_LINES,}
+\DoxyCodeLine{28         CLIENT\_TRAVEL\_DISTANCE,}
+\DoxyCodeLine{29         CLIENT\_TRAVEL\_DISTANCE\_NEARBY,}
+\DoxyCodeLine{30         CLIENT\_TRAVEL\_STOPS,}
+\DoxyCodeLine{31         CLIENT\_TRAVEL\_STOPS\_NEARBY,}
+\DoxyCodeLine{32         CLIENT\_TRAVEL\_ZONES,}
+\DoxyCodeLine{33         CLIENT\_TRAVEL\_ZONES\_NEARBY,}
+\DoxyCodeLine{34         CLIENT\_POSSIBLE\_TICKET,}
+\DoxyCodeLine{35         CLIENT\_WALKING,}
+\DoxyCodeLine{36         CLIENT\_BACK}
+\DoxyCodeLine{37     \};}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{43     \textcolor{keyword}{static} \textcolor{keywordtype}{void} waitForPrompt(\textcolor{keyword}{const} std::string\& prompt);}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{keyword}{public}:}
+\DoxyCodeLine{49     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_menu_a342d2a526a850dbf2d1aecd830b91287}{init}}();}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{56     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_menu_ae32b9bfb7d2e0eb2fda4cb6ffd949545}{showInitialMenu}}(\textcolor{keyword}{const} std::string\& busCompanyName);}
+\DoxyCodeLine{61     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_menu_ab35af53d6cbd32f6edb09203de657e9b}{showAdminMenu}}();}
+\DoxyCodeLine{66     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_menu_a33f7495ebfd9ea8a21c93b7494f911db}{showClientMenu}}();}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{71     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_menu_aec0055490dfaee186759448d59972f61}{endProgram}}();}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_menu_a84678548b83c04bf70ff36bd2a8cdeb1}{listStops}}(\mbox{\hyperlink{class_bus_company}{BusCompany}} \& busCompany);}
+\DoxyCodeLine{74     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_menu_abec2748511d3b6740a27f3800790f275}{listLines}}(\mbox{\hyperlink{class_bus_company}{BusCompany}} \& busCompany);}
+\DoxyCodeLine{75     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_menu_a39bd4c247bb85e35a31fbb5169a9ba66}{travelMinDistance}}(\mbox{\hyperlink{class_bus_company}{BusCompany}} \& busCompany);}
+\DoxyCodeLine{76     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_menu_aa252988ad0c922b56f53a552aa137cc5}{travelMinDistanceCoord}}(\mbox{\hyperlink{class_bus_company}{BusCompany}} \& busCompany);}
+\DoxyCodeLine{77     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_menu_acdce5b8d697a87121fccff8076c0548b}{travelMinStops}}(\mbox{\hyperlink{class_bus_company}{BusCompany}} \& busCompany);}
+\DoxyCodeLine{78     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_menu_a644dcd59a5bd8197060f6c47ca86978f}{travelMinStopsCoord}}(\mbox{\hyperlink{class_bus_company}{BusCompany}} \& busCompany);}
+\DoxyCodeLine{79     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_menu_ae3dd6988b2e55d2638830bc18915bbac}{travelMinZones}}(\mbox{\hyperlink{class_bus_company}{BusCompany}} \& busCompany);}
+\DoxyCodeLine{80     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_menu_ac8803d6d811ad79091888edabe934f95}{travelMinZonesCoord}}(\mbox{\hyperlink{class_bus_company}{BusCompany}} \& busCompany);}
+\DoxyCodeLine{81     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_menu_aac71ca53fc7c1dbc29452fdad50113f3}{travelPossibleTicket}}(\mbox{\hyperlink{class_bus_company}{BusCompany}} \& busCompany);}
+\DoxyCodeLine{82     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_menu_a24211283043f34ee796214c08fdfecf5}{changeWalkingDistance}}(\mbox{\hyperlink{class_bus_company}{BusCompany}} \& busCompany);}
+\DoxyCodeLine{83     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_menu_a15173efd48129f6b9e783fee05a9f0e3}{toggleStop}}(\mbox{\hyperlink{class_bus_company}{BusCompany}} \& busCompany);}
+\DoxyCodeLine{84     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_menu_a0336882cac638ff2d9d11d1dfdc89e86}{toggleLine}}(\mbox{\hyperlink{class_bus_company}{BusCompany}} \& busCompany);}
+\DoxyCodeLine{85 \};}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//PROJECT2\_MENU\_H}}
+
+\end{DoxyCode}

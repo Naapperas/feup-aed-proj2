@@ -1,0 +1,75 @@
+\hypertarget{bus_company_8h_source}{}\doxysection{bus\+Company.\+h}
+\label{bus_company_8h_source}\index{include/busCompany.h@{include/busCompany.h}}
+\mbox{\hyperlink{bus_company_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by naapperas on 18/01/22.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef PROJECT2\_BUSCOMPANY\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define PROJECT2\_BUSCOMPANY\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{graph_8h}{graph.h}}"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{bus_line_8h}{busLine.h}}"{}}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{14 \textcolor{keyword}{class }\mbox{\hyperlink{class_bus_company}{BusCompany}} \{}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16     \textcolor{keyword}{constexpr} \textcolor{keyword}{static} \textcolor{keywordtype}{double} MAX\_NEARBY\_DISTANCE = 0.05;}
+\DoxyCodeLine{17     \textcolor{keywordtype}{double} userWalkingDistance = \mbox{\hyperlink{class_stop_aabc22f97bcecb83e4088a2429f8e0eb1}{Stop::MAX\_WALKING\_DISTANCE}}; \textcolor{comment}{// set as default, to be changed later}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19     \mbox{\hyperlink{class_graph}{Graph}}* dayNetwork;}
+\DoxyCodeLine{20     \mbox{\hyperlink{class_graph}{Graph}}* nightNetwork;}
+\DoxyCodeLine{21     std::unordered\_map<std::string, BusLine*> lines;}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23     std::string companyName;}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \textcolor{keywordtype}{bool} inputNightDay();}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{public}:}
+\DoxyCodeLine{28     \mbox{\hyperlink{class_bus_company_a1ca390c8d4be23f22ebdec2e90f7038f}{BusCompany}}(\textcolor{keyword}{const} std::string\& companyName);}
+\DoxyCodeLine{29     \mbox{\hyperlink{class_bus_company_a50c73b2ce526bca8ed5bcd9131a29291}{\string~BusCompany}}();}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     std::string \mbox{\hyperlink{class_bus_company_a9ea044bf4bb7aabfa188d38963986dfe}{getName}}()\{}
+\DoxyCodeLine{32         \textcolor{keywordflow}{return} companyName;}
+\DoxyCodeLine{33     \}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{43     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a613af8cfb33823f8adb72e5bab94f332}{dfs}}(\textcolor{keyword}{const} std::string\& cStop, \textcolor{keywordtype}{bool} night = \textcolor{keyword}{false});}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{53     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_ab012176d404e36902554da377fd3f89f}{bfs}}(\textcolor{keyword}{const} std::string\& cStop, \textcolor{keywordtype}{bool} night = \textcolor{keyword}{false});}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{65     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_bus_company_a0407994d4bb5c6fd8f10b39b48b21c78}{minDistance}}(\textcolor{keyword}{const} std::string\& originStop, \textcolor{keyword}{const} std::string\& destinyStop, \textcolor{keywordtype}{bool} night = \textcolor{keyword}{false});}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{77     std::list<std::pair<const Stop*, std::string>> \mbox{\hyperlink{class_bus_company_abbab9fb0c27abc8fcbbd30aea846baca}{minDistancePath}}(\textcolor{keyword}{const} std::string\& originStop, \textcolor{keyword}{const} std::string\& destinyStop, \textcolor{keywordtype}{bool} night = \textcolor{keyword}{false});}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{89     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_bus_company_af505b82db3dc10c50dea488e4b6e32ec}{minStops}}(\textcolor{keyword}{const} std::string\& originStop, \textcolor{keyword}{const} std::string\& destinyStop, \textcolor{keywordtype}{bool} night = \textcolor{keyword}{false});}
+\DoxyCodeLine{100     std::list<std::pair<const Stop*, std::string>> \mbox{\hyperlink{class_bus_company_ace474baa66f9e20ca9ce7eb9bbd14006}{minStopsPath}}(\textcolor{keyword}{const} std::string\& originStop, \textcolor{keyword}{const} std::string\& destinyStop, \textcolor{keywordtype}{bool} night = \textcolor{keyword}{false});}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{112     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_bus_company_af6bf896052833002d8ad28d097ed10a3}{minZones}}(\textcolor{keyword}{const} std::string\& originStop, \textcolor{keyword}{const} std::string\& destinyStop, \textcolor{keywordtype}{bool} night = \textcolor{keyword}{false});}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{124     std::list<std::pair<const Stop*, std::string>> \mbox{\hyperlink{class_bus_company_ab6bc348f7d9e6726fce12f10f2498d32}{minZonesPath}}(\textcolor{keyword}{const} std::string\& originStop, \textcolor{keyword}{const} std::string\& destinyStop, \textcolor{keywordtype}{bool} night = \textcolor{keyword}{false});}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{135     std::set<const Stop*> \mbox{\hyperlink{class_bus_company_a6b60c082d4954537f40afeecfb69048e}{nearbyStops}}(\textcolor{keywordtype}{double} latitude, \textcolor{keywordtype}{double} longitude) \textcolor{keyword}{const};}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{145     std::set<const Stop*> \mbox{\hyperlink{class_bus_company_a6b60c082d4954537f40afeecfb69048e}{nearbyStops}}(\textcolor{keyword}{const} std::string\& stopCode) \textcolor{keyword}{const};}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{154     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a1e8298fe89fa6b1c5b0eff4bb32d9af4}{calculateWalkingEdges}}(\textcolor{keywordtype}{double} walkingDistance);}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{161     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a6dddb299c9fb96218357d9e28b33ac84}{addWalkingEdges}}();}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_afa18d49babae061148035d70fc3758b9}{listStops}}();}
+\DoxyCodeLine{164     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_aa3b50d3c7e9ec521b89c10d9b1d71554}{listLines}}();}
+\DoxyCodeLine{165     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a4700e46c2ddf7c0d0b9cb183257df62e}{travelMinDistance}}();}
+\DoxyCodeLine{166     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a9a638828f4a002aef8d76975658521c4}{travelMinDistanceCoord}}();}
+\DoxyCodeLine{167     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a7ca15d8a5d17603b3824167b7348cbf7}{travelMinStops}}();}
+\DoxyCodeLine{168     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a1fb44cb2b421f96e7a0b22f0fad10321}{travelMinStopsCoord}}();}
+\DoxyCodeLine{169     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a61c2cabb1d8023931b341e1c8fbc8260}{travelMinZones}}();}
+\DoxyCodeLine{170     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a2011486cc72bdfc78d0a41bc905ff0f0}{travelMinZonesCoord}}();}
+\DoxyCodeLine{171     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a248cc4e9bfab6cc9611d6f689ef7f970}{travelPossibleTicket}}();}
+\DoxyCodeLine{172     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_adb812b5f8280da8625e0820074601ce2}{changeWalkingDistance}}();}
+\DoxyCodeLine{173     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a7dbac7dca35389d8c94e672494c687b5}{toggleStop}}();}
+\DoxyCodeLine{174     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a7ec64bfe905e18d37f24124c81a266f8}{toggleLine}}();}
+\DoxyCodeLine{175 \};}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//PROJECT2\_BUSCOMPANY\_H}}
+
+\end{DoxyCode}

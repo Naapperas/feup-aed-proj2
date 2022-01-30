@@ -1,0 +1,175 @@
+\hypertarget{class_stop}{}\doxysection{Stop Class Reference}
+\label{class_stop}\index{Stop@{Stop}}
+
+
+{\ttfamily \#include $<$stop.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_stop_a2d381c4212eedbb3a2be7ed9f81acbac}{Stop}} (const std\+::string \&stop\+Code, const std\+::string \&name, const std\+::string \&zone, double latitude, double longitude)
+\item 
+const std\+::string \& \mbox{\hyperlink{class_stop_a252913974ffac0179ec3844f48fa3d24}{get\+Name}} () const
+\item 
+const std\+::string \& \mbox{\hyperlink{class_stop_a344bb78eeb1b4004d09491d55a3210a9}{get\+Zone}} () const
+\item 
+const std\+::string \& \mbox{\hyperlink{class_stop_a3c9e6e530e246212301e4574147373b7}{get\+Stop\+Code}} () const
+\item 
+double \mbox{\hyperlink{class_stop_a9d10ee2761549c5d28f450d6841c8d09}{get\+Latitude}} () const
+\item 
+double \mbox{\hyperlink{class_stop_adb957857f82251f8ae3faa69da9f5a8d}{get\+Longitude}} () const
+\item 
+void \mbox{\hyperlink{class_stop_a9cb682adfc2d0f145d229ae795abd043}{toggle\+Stop}} ()
+\item 
+bool \mbox{\hyperlink{class_stop_a01de205ef3594826c7191fa1c8eb604e}{is\+Closed}} () const
+\item 
+double \mbox{\hyperlink{class_stop_a630d19c6a179abefe3065af84b3bbbdb}{distance}} (const \mbox{\hyperlink{class_stop}{Stop}} \&s) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{class_stop_a034c8f5fd0f4d32b9b822fecbb82c411}{distance}} (const \mbox{\hyperlink{class_stop}{Stop}} \&o\+Stop, const \mbox{\hyperlink{class_stop}{Stop}} \&d\+Stop)
+\item 
+static \mbox{\hyperlink{class_stop}{Stop}} $\ast$ \mbox{\hyperlink{class_stop_a90fedbb00a0fa3fefe163849c76014da}{parse\+Line}} (const std\+::string \&line)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr double \mbox{\hyperlink{class_stop_aabc22f97bcecb83e4088a2429f8e0eb1}{MAX\+\_\+\+WALKING\+\_\+\+DISTANCE}} = 0.\+100
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{class_stop_a262c94ef9d966ee986d5d2c4bd264eb5}{operator$<$$<$}} (std\+::ostream \&out, const \mbox{\hyperlink{class_stop}{Stop}} \&stop)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a \mbox{\hyperlink{class_stop}{Stop}} in the STCP network. In the context of this program this is going to act as a graph node. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_stop_a2d381c4212eedbb3a2be7ed9f81acbac}\label{class_stop_a2d381c4212eedbb3a2be7ed9f81acbac}} 
+\index{Stop@{Stop}!Stop@{Stop}}
+\index{Stop@{Stop}!Stop@{Stop}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily Stop\+::\+Stop (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{stop\+Code,  }\item[{const std\+::string \&}]{name,  }\item[{const std\+::string \&}]{zone,  }\item[{double}]{latitude,  }\item[{double}]{longitude }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_stop_a034c8f5fd0f4d32b9b822fecbb82c411}\label{class_stop_a034c8f5fd0f4d32b9b822fecbb82c411}} 
+\index{Stop@{Stop}!distance@{distance}}
+\index{distance@{distance}!Stop@{Stop}}
+\doxysubsubsection{\texorpdfstring{distance()}{distance()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double Stop\+::distance (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_stop}{Stop}} \&}]{o\+Stop,  }\item[{const \mbox{\hyperlink{class_stop}{Stop}} \&}]{d\+Stop }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Calculates the great-\/circle distance between 2 stops on the surface of the Earth.
+
+
+\begin{DoxyParams}{Parameters}
+{\em o\+Stop} & the first stop \\
+\hline
+{\em d\+Stop} & the second stop \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the great-\/circle distance between 2 stops 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_stop_a630d19c6a179abefe3065af84b3bbbdb}\label{class_stop_a630d19c6a179abefe3065af84b3bbbdb}} 
+\index{Stop@{Stop}!distance@{distance}}
+\index{distance@{distance}!Stop@{Stop}}
+\doxysubsubsection{\texorpdfstring{distance()}{distance()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily double Stop\+::distance (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_stop}{Stop}} \&}]{s }\end{DoxyParamCaption}) const}
+
+Calculates the great-\/circle distance from the given stop to this stop along the surface of the earth.
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & the other stop \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the great-\/circle distance between this and the other stop 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_stop_a9d10ee2761549c5d28f450d6841c8d09}\label{class_stop_a9d10ee2761549c5d28f450d6841c8d09}} 
+\index{Stop@{Stop}!getLatitude@{getLatitude}}
+\index{getLatitude@{getLatitude}!Stop@{Stop}}
+\doxysubsubsection{\texorpdfstring{getLatitude()}{getLatitude()}}
+{\footnotesize\ttfamily double Stop\+::get\+Latitude (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_stop_adb957857f82251f8ae3faa69da9f5a8d}\label{class_stop_adb957857f82251f8ae3faa69da9f5a8d}} 
+\index{Stop@{Stop}!getLongitude@{getLongitude}}
+\index{getLongitude@{getLongitude}!Stop@{Stop}}
+\doxysubsubsection{\texorpdfstring{getLongitude()}{getLongitude()}}
+{\footnotesize\ttfamily double Stop\+::get\+Longitude (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_stop_a252913974ffac0179ec3844f48fa3d24}\label{class_stop_a252913974ffac0179ec3844f48fa3d24}} 
+\index{Stop@{Stop}!getName@{getName}}
+\index{getName@{getName}!Stop@{Stop}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily const std\+::string \& Stop\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_stop_a3c9e6e530e246212301e4574147373b7}\label{class_stop_a3c9e6e530e246212301e4574147373b7}} 
+\index{Stop@{Stop}!getStopCode@{getStopCode}}
+\index{getStopCode@{getStopCode}!Stop@{Stop}}
+\doxysubsubsection{\texorpdfstring{getStopCode()}{getStopCode()}}
+{\footnotesize\ttfamily const std\+::string \& Stop\+::get\+Stop\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_stop_a344bb78eeb1b4004d09491d55a3210a9}\label{class_stop_a344bb78eeb1b4004d09491d55a3210a9}} 
+\index{Stop@{Stop}!getZone@{getZone}}
+\index{getZone@{getZone}!Stop@{Stop}}
+\doxysubsubsection{\texorpdfstring{getZone()}{getZone()}}
+{\footnotesize\ttfamily const std\+::string \& Stop\+::get\+Zone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_stop_a01de205ef3594826c7191fa1c8eb604e}\label{class_stop_a01de205ef3594826c7191fa1c8eb604e}} 
+\index{Stop@{Stop}!isClosed@{isClosed}}
+\index{isClosed@{isClosed}!Stop@{Stop}}
+\doxysubsubsection{\texorpdfstring{isClosed()}{isClosed()}}
+{\footnotesize\ttfamily bool Stop\+::is\+Closed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_stop_a90fedbb00a0fa3fefe163849c76014da}\label{class_stop_a90fedbb00a0fa3fefe163849c76014da}} 
+\index{Stop@{Stop}!parseLine@{parseLine}}
+\index{parseLine@{parseLine}!Stop@{Stop}}
+\doxysubsubsection{\texorpdfstring{parseLine()}{parseLine()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_stop}{Stop}} $\ast$ Stop\+::parse\+Line (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{line }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Parses a line read from a CSV file containing data needed to construct a \mbox{\hyperlink{class_stop}{Stop}} object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & a string containing comma-\/separated-\/values representing a stop. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a dynamically allocated \mbox{\hyperlink{class_stop}{Stop}} object with the given data 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_stop_a9cb682adfc2d0f145d229ae795abd043}\label{class_stop_a9cb682adfc2d0f145d229ae795abd043}} 
+\index{Stop@{Stop}!toggleStop@{toggleStop}}
+\index{toggleStop@{toggleStop}!Stop@{Stop}}
+\doxysubsubsection{\texorpdfstring{toggleStop()}{toggleStop()}}
+{\footnotesize\ttfamily void Stop\+::toggle\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Toggles the \textquotesingle{}closed\textquotesingle{} status of this line. 
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_stop_a262c94ef9d966ee986d5d2c4bd264eb5}\label{class_stop_a262c94ef9d966ee986d5d2c4bd264eb5}} 
+\index{Stop@{Stop}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Stop@{Stop}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{const \mbox{\hyperlink{class_stop}{Stop}} \&}]{stop }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_stop_aabc22f97bcecb83e4088a2429f8e0eb1}\label{class_stop_aabc22f97bcecb83e4088a2429f8e0eb1}} 
+\index{Stop@{Stop}!MAX\_WALKING\_DISTANCE@{MAX\_WALKING\_DISTANCE}}
+\index{MAX\_WALKING\_DISTANCE@{MAX\_WALKING\_DISTANCE}!Stop@{Stop}}
+\doxysubsubsection{\texorpdfstring{MAX\_WALKING\_DISTANCE}{MAX\_WALKING\_DISTANCE}}
+{\footnotesize\ttfamily constexpr double Stop\+::\+MAX\+\_\+\+WALKING\+\_\+\+DISTANCE = 0.\+100\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{stop_8h}{stop.\+h}}\item 
+src/\mbox{\hyperlink{stop_8cpp}{stop.\+cpp}}\end{DoxyCompactItemize}

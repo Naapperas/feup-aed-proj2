@@ -1,0 +1,66 @@
+\hypertarget{graph_8h_source}{}\doxysection{graph.\+h}
+\label{graph_8h_source}\index{include/graph.h@{include/graph.h}}
+\mbox{\hyperlink{graph_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef PROJECT2\_GRAPH\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define PROJECT2\_GRAPH\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <set>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <queue>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <list>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <unordered\_map>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <limits>}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{stop_8h}{stop.h}}"{}}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#define INF (std::numeric\_limits<double>::max()/2)}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{20 \textcolor{keyword}{class }\mbox{\hyperlink{class_graph}{Graph}} \{}
+\DoxyCodeLine{24     \textcolor{keyword}{struct }Edge \{}
+\DoxyCodeLine{25         std::string dest; \textcolor{comment}{// Stop destination}}
+\DoxyCodeLine{26         \textcolor{keywordtype}{double} distance; \textcolor{comment}{// distance between stops}}
+\DoxyCodeLine{27         std::string lineCode;}
+\DoxyCodeLine{28         \textcolor{keywordtype}{bool} disabled = \textcolor{keyword}{false}; \textcolor{comment}{// for closing down lines}}
+\DoxyCodeLine{29     \};}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{34     \textcolor{keyword}{struct }Node \{}
+\DoxyCodeLine{35         \mbox{\hyperlink{class_stop}{Stop}}* stop; \textcolor{comment}{// Information about the stop}}
+\DoxyCodeLine{36         std::list<Edge> adj; \textcolor{comment}{// The list of outgoing edges (to adjacent nodes)}}
+\DoxyCodeLine{37         \textcolor{keywordtype}{bool} visited; \textcolor{comment}{// As the node been visited on a search?}}
+\DoxyCodeLine{38         std::string parentStopCodeDijkstra, parentStopCodeBFS, lineCodeDijkstra, lineCodeBFS; \textcolor{comment}{// used to create paths using the various}}
+\DoxyCodeLine{39         \textcolor{keywordtype}{double} distToSingleSource; \textcolor{comment}{// used in SSPS}}
+\DoxyCodeLine{40     \};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42     \textcolor{keywordtype}{int} n;}
+\DoxyCodeLine{43     \textcolor{keywordtype}{bool} hasDir; \textcolor{comment}{// false: undirect; true: directed}}
+\DoxyCodeLine{44     std::unordered\_map<std::string, Node> nodes; \textcolor{comment}{// The list of nodes being represented. For performance purposes, an unordered\_map is used over a normal map or linear collection}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{keyword}{public}:}
+\DoxyCodeLine{47     \textcolor{comment}{// Constructor: nr nodes and direction (default: directed)}}
+\DoxyCodeLine{48     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_graph_a8037abe2b5ebff1ca625ef75dfc75155}{Graph}}(\textcolor{keywordtype}{int} nodes, \textcolor{keywordtype}{bool} dir = \textcolor{keyword}{true});}
+\DoxyCodeLine{49     \mbox{\hyperlink{class_graph_a902c5b3eacb66d60752525ab23297a95}{\string~Graph}}();}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{57     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_graph_acb24bd50bd0ed2e38b5985e4c5dfc333}{addNode}}(\textcolor{keyword}{const} std::string\& stopCode, \mbox{\hyperlink{class_stop}{Stop}}* stop);}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{67     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_graph_af471b8176573aed07e2ddfdcff3246f6}{addEdge}}(\textcolor{keyword}{const} std::string\& oStop, \textcolor{keyword}{const} std::string\& dStop, \textcolor{keyword}{const} std::string\& lineCode);}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{77     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_graph_a82de56d9da9ffee22caeaed0aad9135f}{dfs}}(\textcolor{keyword}{const} std::string\& cStop, \textcolor{keywordtype}{bool} firstIteration = \textcolor{keyword}{true});}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{86     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_graph_a27529d92d2c91102d90de4e6d3b1da86}{bfs}}(\textcolor{keyword}{const} std::string\& cStop);}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{97     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_graph_a1f35d162f2491a3f22cfef1f0e1f98de}{dijkstraMinDistance}}(\textcolor{keyword}{const} std::string\& origin);}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{108     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_graph_a63e05b33b95b4627870d7ae3e6e4b5f9}{dijkstraMinZones}}(\textcolor{keyword}{const} std::string\& origin);}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{116     Node\& \mbox{\hyperlink{class_graph_af2bc720d1d9744e80013f624f006fd4c}{nodeAt}}(\textcolor{keyword}{const} std::string\& key);}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{123     std::set<std::string> \mbox{\hyperlink{class_graph_ab3db14bbd27e195afa204f736b49ab98}{getStopCodes}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{128     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_graph_a383fc5cb7ed7d3c2f6f6ba0d9781cb3f}{visitedFalse}}();}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{133     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_graph_ac6192a41101102ca8aa6acca607c84f3}{clear}}();}
+\DoxyCodeLine{134 \};}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//PROJECT2\_GRAPH\_H}}
+
+\end{DoxyCode}

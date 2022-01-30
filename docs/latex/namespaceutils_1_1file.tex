@@ -1,0 +1,26 @@
+\hypertarget{namespaceutils_1_1file}{}\doxysection{utils\+::file Namespace Reference}
+\label{namespaceutils_1_1file}\index{utils::file@{utils::file}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespaceutils_1_1file_a300491fd8a92e884ac83aa2468d297f4}{read\+File}} (const std\+::string \&file\+Path)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceutils_1_1file_a300491fd8a92e884ac83aa2468d297f4}\label{namespaceutils_1_1file_a300491fd8a92e884ac83aa2468d297f4}} 
+\index{utils::file@{utils::file}!readFile@{readFile}}
+\index{readFile@{readFile}!utils::file@{utils::file}}
+\doxysubsubsection{\texorpdfstring{readFile()}{readFile()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ utils\+::file\+::read\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{file\+Path }\end{DoxyParamCaption})}
+
+Reads a file at the specified path and returns its content as a collection of its lines. In the context of this project, and the dataset given (CSV files), the first line of each file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Path} & the path of the file to read \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a vector containing all the lines but the first of the given file 
+\end{DoxyReturn}
