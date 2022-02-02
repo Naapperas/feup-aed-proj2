@@ -1,7 +1,5 @@
 var class_graph =
 [
-    [ "Graph", "class_graph.html#a8037abe2b5ebff1ca625ef75dfc75155", null ],
-    [ "~Graph", "class_graph.html#a902c5b3eacb66d60752525ab23297a95", null ],
     [ "addEdge", "class_graph.html#af471b8176573aed07e2ddfdcff3246f6", null ],
     [ "addNode", "class_graph.html#acb24bd50bd0ed2e38b5985e4c5dfc333", null ],
     [ "bfs", "class_graph.html#a27529d92d2c91102d90de4e6d3b1da86", null ],

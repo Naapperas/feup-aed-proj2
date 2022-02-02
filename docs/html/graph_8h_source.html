@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>STCP: include/graph.h Source File</title>
+<title>My Project: /home/naapperas/workspace/uni/2-ano/aed/project2/include/graph.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">STCP
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -85,7 +85,7 @@ $(document).ready(function(){initNavTree('graph_8h_source.html',''); initResizab
   <div class="headertitle"><div class="title">graph.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="graph_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef PROJECT2_GRAPH_H</span></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef PROJECT2_GRAPH_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define PROJECT2_GRAPH_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;set&gt;</span></div>
@@ -94,9 +94,9 @@ $(document).ready(function(){initNavTree('graph_8h_source.html',''); initResizab
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;limits&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="stop_8h.html">stop.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;stop.h&quot;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="graph_8h.html#a12c2040f25d8e3a7b9e1c2024c618cb6">   12</a></span><span class="preprocessor">#define INF (std::numeric_limits&lt;double&gt;::max()/2)</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#define INF (std::numeric_limits&lt;double&gt;::max()/2)</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="class_graph.html">   20</a></span><span class="keyword">class </span><a class="code hl_class" href="class_graph.html">Graph</a> {</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">struct </span>Edge {</div>
@@ -120,8 +120,8 @@ $(document).ready(function(){initNavTree('graph_8h_source.html',''); initResizab
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="comment">// Constructor: nr nodes and direction (default: directed)</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keyword">explicit</span> <a class="code hl_function" href="class_graph.html#a8037abe2b5ebff1ca625ef75dfc75155">Graph</a>(<span class="keywordtype">int</span> nodes, <span class="keywordtype">bool</span> dir = <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_function" href="class_graph.html#a902c5b3eacb66d60752525ab23297a95">~Graph</a>();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keyword">explicit</span> <a class="code hl_class" href="class_graph.html">Graph</a>(<span class="keywordtype">int</span> nodes, <span class="keywordtype">bool</span> dir = <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_class" href="class_graph.html">~Graph</a>();</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_graph.html#acb24bd50bd0ed2e38b5985e4c5dfc333">addNode</a>(<span class="keyword">const</span> std::string&amp; stopCode, <a class="code hl_class" href="class_stop.html">Stop</a>* stop);</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
@@ -150,22 +150,19 @@ $(document).ready(function(){initNavTree('graph_8h_source.html',''); initResizab
 <div class="ttc" id="aclass_graph_html_a27529d92d2c91102d90de4e6d3b1da86"><div class="ttname"><a href="class_graph.html#a27529d92d2c91102d90de4e6d3b1da86">Graph::bfs</a></div><div class="ttdeci">void bfs(const std::string &amp;cStop)</div><div class="ttdef"><b>Definition:</b> graph.cpp:50</div></div>
 <div class="ttc" id="aclass_graph_html_a383fc5cb7ed7d3c2f6f6ba0d9781cb3f"><div class="ttname"><a href="class_graph.html#a383fc5cb7ed7d3c2f6f6ba0d9781cb3f">Graph::visitedFalse</a></div><div class="ttdeci">void visitedFalse()</div><div class="ttdef"><b>Definition:</b> graph.cpp:118</div></div>
 <div class="ttc" id="aclass_graph_html_a63e05b33b95b4627870d7ae3e6e4b5f9"><div class="ttname"><a href="class_graph.html#a63e05b33b95b4627870d7ae3e6e4b5f9">Graph::dijkstraMinZones</a></div><div class="ttdeci">void dijkstraMinZones(const std::string &amp;origin)</div><div class="ttdef"><b>Definition:</b> graph.cpp:136</div></div>
-<div class="ttc" id="aclass_graph_html_a8037abe2b5ebff1ca625ef75dfc75155"><div class="ttname"><a href="class_graph.html#a8037abe2b5ebff1ca625ef75dfc75155">Graph::Graph</a></div><div class="ttdeci">Graph(int nodes, bool dir=true)</div><div class="ttdef"><b>Definition:</b> graph.cpp:7</div></div>
 <div class="ttc" id="aclass_graph_html_a82de56d9da9ffee22caeaed0aad9135f"><div class="ttname"><a href="class_graph.html#a82de56d9da9ffee22caeaed0aad9135f">Graph::dfs</a></div><div class="ttdeci">void dfs(const std::string &amp;cStop, bool firstIteration=true)</div><div class="ttdef"><b>Definition:</b> graph.cpp:32</div></div>
-<div class="ttc" id="aclass_graph_html_a902c5b3eacb66d60752525ab23297a95"><div class="ttname"><a href="class_graph.html#a902c5b3eacb66d60752525ab23297a95">Graph::~Graph</a></div><div class="ttdeci">~Graph()</div><div class="ttdef"><b>Definition:</b> graph.cpp:9</div></div>
 <div class="ttc" id="aclass_graph_html_ab3db14bbd27e195afa204f736b49ab98"><div class="ttname"><a href="class_graph.html#ab3db14bbd27e195afa204f736b49ab98">Graph::getStopCodes</a></div><div class="ttdeci">std::set&lt; std::string &gt; getStopCodes() const</div><div class="ttdef"><b>Definition:</b> graph.cpp:126</div></div>
 <div class="ttc" id="aclass_graph_html_ac6192a41101102ca8aa6acca607c84f3"><div class="ttname"><a href="class_graph.html#ac6192a41101102ca8aa6acca607c84f3">Graph::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdef"><b>Definition:</b> graph.cpp:122</div></div>
 <div class="ttc" id="aclass_graph_html_acb24bd50bd0ed2e38b5985e4c5dfc333"><div class="ttname"><a href="class_graph.html#acb24bd50bd0ed2e38b5985e4c5dfc333">Graph::addNode</a></div><div class="ttdeci">void addNode(const std::string &amp;stopCode, Stop *stop)</div><div class="ttdef"><b>Definition:</b> graph.cpp:14</div></div>
 <div class="ttc" id="aclass_graph_html_af2bc720d1d9744e80013f624f006fd4c"><div class="ttname"><a href="class_graph.html#af2bc720d1d9744e80013f624f006fd4c">Graph::nodeAt</a></div><div class="ttdeci">Node &amp; nodeAt(const std::string &amp;key)</div><div class="ttdef"><b>Definition:</b> graph.cpp:114</div></div>
 <div class="ttc" id="aclass_graph_html_af471b8176573aed07e2ddfdcff3246f6"><div class="ttname"><a href="class_graph.html#af471b8176573aed07e2ddfdcff3246f6">Graph::addEdge</a></div><div class="ttdeci">void addEdge(const std::string &amp;oStop, const std::string &amp;dStop, const std::string &amp;lineCode)</div><div class="ttdef"><b>Definition:</b> graph.cpp:19</div></div>
 <div class="ttc" id="aclass_stop_html"><div class="ttname"><a href="class_stop.html">Stop</a></div><div class="ttdef"><b>Definition:</b> stop.h:13</div></div>
-<div class="ttc" id="astop_8h_html"><div class="ttname"><a href="stop_8h.html">stop.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="graph_8h.html">graph.h</a></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>graph.h</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
   </ul>
 </div>

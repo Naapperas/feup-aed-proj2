@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['operator_3c_3c_0',['operator&lt;&lt;',['../bus_line_8cpp.html#aee64c45ff83acff7f4107961a160f7bb',1,'operator&lt;&lt;(std::ostream &amp;out, const BusLine &amp;line):&#160;busLine.cpp'],['../stop_8cpp.html#a262c94ef9d966ee986d5d2c4bd264eb5',1,'operator&lt;&lt;(std::ostream &amp;out, const Stop &amp;stop):&#160;stop.cpp']]]
+  ['showadminmenu_0',['showAdminMenu',['../class_menu.html#ab35af53d6cbd32f6edb09203de657e9b',1,'Menu']]],
+  ['showclientmenu_1',['showClientMenu',['../class_menu.html#a33f7495ebfd9ea8a21c93b7494f911db',1,'Menu']]],
+  ['showinitialmenu_2',['showInitialMenu',['../class_menu.html#ae32b9bfb7d2e0eb2fda4cb6ffd949545',1,'Menu']]]
 ];

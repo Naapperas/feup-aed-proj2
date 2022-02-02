@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['parseline_0',['parseLine',['../class_bus_line.html#a0b0876226eae4191d7ba592be0b65f21',1,'BusLine::parseLine()'],['../class_stop.html#a90fedbb00a0fa3fefe163849c76014da',1,'Stop::parseLine()']]]
+  ['toggleline_0',['toggleLine',['../class_bus_line.html#a3b0d1f15b92325731bac0283b22b99a4',1,'BusLine']]],
+  ['togglestop_1',['toggleStop',['../class_stop.html#a9cb682adfc2d0f145d229ae795abd043',1,'Stop']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>STCP: Graph Class Reference</title>
+<title>My Project: Graph Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">STCP
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -94,10 +94,9 @@ $(document).ready(function(){initNavTree('class_graph.html',''); initResizable()
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8037abe2b5ebff1ca625ef75dfc75155"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a8037abe2b5ebff1ca625ef75dfc75155">Graph</a> (int nodes, bool dir=true)</td></tr>
+<tr class="memitem:a8037abe2b5ebff1ca625ef75dfc75155"><td class="memItemLeft" align="right" valign="top"><a id="a8037abe2b5ebff1ca625ef75dfc75155" name="a8037abe2b5ebff1ca625ef75dfc75155"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Graph</b> (int nodes, bool dir=true)</td></tr>
 <tr class="separator:a8037abe2b5ebff1ca625ef75dfc75155"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a902c5b3eacb66d60752525ab23297a95"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a902c5b3eacb66d60752525ab23297a95">~Graph</a> ()</td></tr>
-<tr class="separator:a902c5b3eacb66d60752525ab23297a95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb24bd50bd0ed2e38b5985e4c5dfc333"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#acb24bd50bd0ed2e38b5985e4c5dfc333">addNode</a> (const std::string &amp;stopCode, <a class="el" href="class_stop.html">Stop</a> *stop)</td></tr>
 <tr class="separator:acb24bd50bd0ed2e38b5985e4c5dfc333"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af471b8176573aed07e2ddfdcff3246f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#af471b8176573aed07e2ddfdcff3246f6">addEdge</a> (const std::string &amp;oStop, const std::string &amp;dStop, const std::string &amp;lineCode)</td></tr>
@@ -122,61 +121,7 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >A graph class. In the context of this program this is going to represent the STCP network.</p>
 <p >Due to the design choices made throughout the project, this class is a mix of the theoretical classes' "abstract" graph and a context-aware graph tailored to the STCP network. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a8037abe2b5ebff1ca625ef75dfc75155" name="a8037abe2b5ebff1ca625ef75dfc75155"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8037abe2b5ebff1ca625ef75dfc75155">&#9670;&nbsp;</a></span>Graph()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Graph::Graph </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nodes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>dir</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a902c5b3eacb66d60752525ab23297a95" name="a902c5b3eacb66d60752525ab23297a95"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a902c5b3eacb66d60752525ab23297a95">&#9670;&nbsp;</a></span>~Graph()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Graph::~Graph </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af471b8176573aed07e2ddfdcff3246f6" name="af471b8176573aed07e2ddfdcff3246f6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af471b8176573aed07e2ddfdcff3246f6">&#9670;&nbsp;</a></span>addEdge()</h2>
 
@@ -455,8 +400,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>include/<a class="el" href="graph_8h_source.html">graph.h</a></li>
-<li>src/<a class="el" href="graph_8cpp.html">graph.cpp</a></li>
+<li>/home/naapperas/workspace/uni/2-ano/aed/project2/include/<a class="el" href="graph_8h_source.html">graph.h</a></li>
+<li>/home/naapperas/workspace/uni/2-ano/aed/project2/src/graph.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

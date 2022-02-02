@@ -1,6 +1,6 @@
 \hypertarget{bus_company_8h_source}{}\doxysection{bus\+Company.\+h}
-\label{bus_company_8h_source}\index{include/busCompany.h@{include/busCompany.h}}
-\mbox{\hyperlink{bus_company_8h}{Go to the documentation of this file.}}
+\label{bus_company_8h_source}\index{/home/naapperas/workspace/uni/2-\/ano/aed/project2/include/busCompany.h@{/home/naapperas/workspace/uni/2-\/ano/aed/project2/include/busCompany.h}}
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{1 \textcolor{comment}{//}}
 \DoxyCodeLine{2 \textcolor{comment}{// Created by naapperas on 18/01/22.}}
@@ -9,13 +9,13 @@
 \DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef PROJECT2\_BUSCOMPANY\_H}}
 \DoxyCodeLine{6 \textcolor{preprocessor}{\#define PROJECT2\_BUSCOMPANY\_H}}
 \DoxyCodeLine{7 }
-\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{graph_8h}{graph.h}}"{}}}
-\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{bus_line_8h}{busLine.h}}"{}}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}graph.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}busLine.h"{}}}
 \DoxyCodeLine{10 }
 \DoxyCodeLine{14 \textcolor{keyword}{class }\mbox{\hyperlink{class_bus_company}{BusCompany}} \{}
 \DoxyCodeLine{15 }
 \DoxyCodeLine{16     \textcolor{keyword}{constexpr} \textcolor{keyword}{static} \textcolor{keywordtype}{double} MAX\_NEARBY\_DISTANCE = 0.05;}
-\DoxyCodeLine{17     \textcolor{keywordtype}{double} userWalkingDistance = \mbox{\hyperlink{class_stop_aabc22f97bcecb83e4088a2429f8e0eb1}{Stop::MAX\_WALKING\_DISTANCE}}; \textcolor{comment}{// set as default, to be changed later}}
+\DoxyCodeLine{17     \textcolor{keywordtype}{double} userWalkingDistance = Stop::MAX\_WALKING\_DISTANCE; \textcolor{comment}{// set as default, to be changed later}}
 \DoxyCodeLine{18 }
 \DoxyCodeLine{19     \mbox{\hyperlink{class_graph}{Graph}}* dayNetwork;}
 \DoxyCodeLine{20     \mbox{\hyperlink{class_graph}{Graph}}* nightNetwork;}
@@ -26,10 +26,10 @@
 \DoxyCodeLine{25     \textcolor{keywordtype}{bool} inputNightDay();}
 \DoxyCodeLine{26 }
 \DoxyCodeLine{27 \textcolor{keyword}{public}:}
-\DoxyCodeLine{28     \mbox{\hyperlink{class_bus_company_a1ca390c8d4be23f22ebdec2e90f7038f}{BusCompany}}(\textcolor{keyword}{const} std::string\& companyName);}
-\DoxyCodeLine{29     \mbox{\hyperlink{class_bus_company_a50c73b2ce526bca8ed5bcd9131a29291}{\string~BusCompany}}();}
+\DoxyCodeLine{28     \mbox{\hyperlink{class_bus_company}{BusCompany}}(\textcolor{keyword}{const} std::string\& companyName);}
+\DoxyCodeLine{29     \mbox{\hyperlink{class_bus_company}{\string~BusCompany}}();}
 \DoxyCodeLine{30 }
-\DoxyCodeLine{31     std::string \mbox{\hyperlink{class_bus_company_a9ea044bf4bb7aabfa188d38963986dfe}{getName}}()\{}
+\DoxyCodeLine{31     std::string getName()\{}
 \DoxyCodeLine{32         \textcolor{keywordflow}{return} companyName;}
 \DoxyCodeLine{33     \}}
 \DoxyCodeLine{34 }
@@ -56,20 +56,22 @@
 \DoxyCodeLine{155 }
 \DoxyCodeLine{161     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a6dddb299c9fb96218357d9e28b33ac84}{addWalkingEdges}}();}
 \DoxyCodeLine{162 }
-\DoxyCodeLine{163     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_afa18d49babae061148035d70fc3758b9}{listStops}}();}
-\DoxyCodeLine{164     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_aa3b50d3c7e9ec521b89c10d9b1d71554}{listLines}}();}
-\DoxyCodeLine{165     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a4700e46c2ddf7c0d0b9cb183257df62e}{travelMinDistance}}();}
-\DoxyCodeLine{166     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a9a638828f4a002aef8d76975658521c4}{travelMinDistanceCoord}}();}
-\DoxyCodeLine{167     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a7ca15d8a5d17603b3824167b7348cbf7}{travelMinStops}}();}
-\DoxyCodeLine{168     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a1fb44cb2b421f96e7a0b22f0fad10321}{travelMinStopsCoord}}();}
-\DoxyCodeLine{169     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a61c2cabb1d8023931b341e1c8fbc8260}{travelMinZones}}();}
-\DoxyCodeLine{170     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a2011486cc72bdfc78d0a41bc905ff0f0}{travelMinZonesCoord}}();}
-\DoxyCodeLine{171     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a248cc4e9bfab6cc9611d6f689ef7f970}{travelPossibleTicket}}();}
-\DoxyCodeLine{172     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_adb812b5f8280da8625e0820074601ce2}{changeWalkingDistance}}();}
-\DoxyCodeLine{173     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a7dbac7dca35389d8c94e672494c687b5}{toggleStop}}();}
-\DoxyCodeLine{174     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a7ec64bfe905e18d37f24124c81a266f8}{toggleLine}}();}
-\DoxyCodeLine{175 \};}
-\DoxyCodeLine{176 }
-\DoxyCodeLine{177 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//PROJECT2\_BUSCOMPANY\_H}}
+\DoxyCodeLine{166     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_bus_company_a2544c073382c627c193ee447ea5bb5ad}{processPath}}(\textcolor{keyword}{const} std::list<std::pair<const Stop*, std::string>>\&);}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168     \textcolor{keywordtype}{void} listStops();}
+\DoxyCodeLine{169     \textcolor{keywordtype}{void} listLines();}
+\DoxyCodeLine{170     \textcolor{keywordtype}{void} travelMinDistance();}
+\DoxyCodeLine{171     \textcolor{keywordtype}{void} travelMinDistanceCoord();}
+\DoxyCodeLine{172     \textcolor{keywordtype}{void} travelMinStops();}
+\DoxyCodeLine{173     \textcolor{keywordtype}{void} travelMinStopsCoord();}
+\DoxyCodeLine{174     \textcolor{keywordtype}{void} travelMinZones();}
+\DoxyCodeLine{175     \textcolor{keywordtype}{void} travelMinZonesCoord();}
+\DoxyCodeLine{176     \textcolor{keywordtype}{void} travelPossibleTicket();}
+\DoxyCodeLine{177     \textcolor{keywordtype}{void} changeWalkingDistance();}
+\DoxyCodeLine{178     \textcolor{keywordtype}{void} toggleStop();}
+\DoxyCodeLine{179     \textcolor{keywordtype}{void} toggleLine();}
+\DoxyCodeLine{180 \};}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//PROJECT2\_BUSCOMPANY\_H}}
 
 \end{DoxyCode}

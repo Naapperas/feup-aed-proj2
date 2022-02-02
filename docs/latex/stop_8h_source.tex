@@ -1,6 +1,6 @@
 \hypertarget{stop_8h_source}{}\doxysection{stop.\+h}
-\label{stop_8h_source}\index{include/stop.h@{include/stop.h}}
-\mbox{\hyperlink{stop_8h}{Go to the documentation of this file.}}
+\label{stop_8h_source}\index{/home/naapperas/workspace/uni/2-\/ano/aed/project2/include/stop.h@{/home/naapperas/workspace/uni/2-\/ano/aed/project2/include/stop.h}}
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef PROJECT2\_STOP\_H}}
 \DoxyCodeLine{2 \textcolor{preprocessor}{\#define PROJECT2\_STOP\_H}}
@@ -16,30 +16,30 @@
 \DoxyCodeLine{16 }
 \DoxyCodeLine{17     \textcolor{keywordtype}{bool} closed = \textcolor{keyword}{false};}
 \DoxyCodeLine{18 }
-\DoxyCodeLine{19     \textcolor{keyword}{friend} std::ostream\& \mbox{\hyperlink{class_stop_a262c94ef9d966ee986d5d2c4bd264eb5}{operator <<}}(std::ostream\& out ,\textcolor{keyword}{const} \mbox{\hyperlink{class_stop}{Stop}}\& stop);}
+\DoxyCodeLine{19     \textcolor{keyword}{friend} std::ostream\& operator <<(std::ostream\& out ,\textcolor{keyword}{const} \mbox{\hyperlink{class_stop}{Stop}}\& stop);}
 \DoxyCodeLine{20 }
 \DoxyCodeLine{21 \textcolor{keyword}{public}:}
-\DoxyCodeLine{22     \textcolor{keyword}{constexpr} \textcolor{keyword}{static} \textcolor{keywordtype}{double} \mbox{\hyperlink{class_stop_aabc22f97bcecb83e4088a2429f8e0eb1}{MAX\_WALKING\_DISTANCE}} = 0.100; \textcolor{comment}{// KMs}}
+\DoxyCodeLine{22     \textcolor{keyword}{constexpr} \textcolor{keyword}{static} \textcolor{keywordtype}{double} MAX\_WALKING\_DISTANCE = 0.100; \textcolor{comment}{// KMs}}
 \DoxyCodeLine{23 }
-\DoxyCodeLine{24     \mbox{\hyperlink{class_stop_a2d381c4212eedbb3a2be7ed9f81acbac}{Stop}}(\textcolor{keyword}{const} std::string\& stopCode, \textcolor{keyword}{const} std::string\& name, \textcolor{keyword}{const} std::string\& zone, \textcolor{keywordtype}{double} latitude, \textcolor{keywordtype}{double} longitude) : code(stopCode), name(name), zone(zone), latitude(latitude), longitude(longitude) \{\}}
+\DoxyCodeLine{24     \mbox{\hyperlink{class_stop}{Stop}}(\textcolor{keyword}{const} std::string\& stopCode, \textcolor{keyword}{const} std::string\& name, \textcolor{keyword}{const} std::string\& zone, \textcolor{keywordtype}{double} latitude, \textcolor{keywordtype}{double} longitude) : code(stopCode), name(name), zone(zone), latitude(latitude), longitude(longitude) \{\}}
 \DoxyCodeLine{25 }
-\DoxyCodeLine{26     \textcolor{keyword}{const} std::string\& \mbox{\hyperlink{class_stop_a252913974ffac0179ec3844f48fa3d24}{getName}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{26     \textcolor{keyword}{const} std::string\& getName()\textcolor{keyword}{ const }\{}
 \DoxyCodeLine{27         \textcolor{keywordflow}{return} name;}
 \DoxyCodeLine{28     \}}
 \DoxyCodeLine{29 }
-\DoxyCodeLine{30     \textcolor{keyword}{const} std::string\& \mbox{\hyperlink{class_stop_a344bb78eeb1b4004d09491d55a3210a9}{getZone}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{30     \textcolor{keyword}{const} std::string\& getZone()\textcolor{keyword}{ const }\{}
 \DoxyCodeLine{31         \textcolor{keywordflow}{return} zone;}
 \DoxyCodeLine{32     \}}
 \DoxyCodeLine{33 }
-\DoxyCodeLine{34     \textcolor{keyword}{const} std::string\& \mbox{\hyperlink{class_stop_a3c9e6e530e246212301e4574147373b7}{getStopCode}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{34     \textcolor{keyword}{const} std::string\& getStopCode()\textcolor{keyword}{ const }\{}
 \DoxyCodeLine{35         \textcolor{keywordflow}{return} code;}
 \DoxyCodeLine{36     \}}
 \DoxyCodeLine{37 }
-\DoxyCodeLine{38     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_stop_a9d10ee2761549c5d28f450d6841c8d09}{getLatitude}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{38     \textcolor{keywordtype}{double} getLatitude()\textcolor{keyword}{ const }\{}
 \DoxyCodeLine{39         \textcolor{keywordflow}{return} latitude;}
 \DoxyCodeLine{40     \}}
 \DoxyCodeLine{41 }
-\DoxyCodeLine{42     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_stop_adb957857f82251f8ae3faa69da9f5a8d}{getLongitude}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{42     \textcolor{keywordtype}{double} getLongitude()\textcolor{keyword}{ const }\{}
 \DoxyCodeLine{43         \textcolor{keywordflow}{return} longitude;}
 \DoxyCodeLine{44     \}}
 \DoxyCodeLine{45 }
@@ -48,7 +48,7 @@
 \DoxyCodeLine{51     \}}
 \DoxyCodeLine{52 }
 \DoxyCodeLine{53 }
-\DoxyCodeLine{54     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_stop_a01de205ef3594826c7191fa1c8eb604e}{isClosed}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{54     \textcolor{keywordtype}{bool} isClosed()\textcolor{keyword}{ const }\{}
 \DoxyCodeLine{55         \textcolor{keywordflow}{return} closed;}
 \DoxyCodeLine{56     \}}
 \DoxyCodeLine{57 }
